@@ -18,12 +18,13 @@ namespace Dominio
             Nombre = nombre;
             Alpha = alpha;
 
-            //Validar();
+            Validar();
         }
 
         public void Validar()
         {
             ValidarNombre();
+            ValidarAlpha();
         }
 
         public void ValidarNombre()
@@ -31,6 +32,14 @@ namespace Dominio
             if (string.IsNullOrEmpty(Nombre))
             {
                 throw new Exception("Se recibio el nombre sin datos");
+            }
+        }
+
+        public void ValidarAlpha()
+        {
+            if (Alpha.Length != 3)
+            {
+                throw new Exception("El codigo alpha debe constar de 3 caracteres");
             }
         }
 
