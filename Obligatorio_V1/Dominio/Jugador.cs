@@ -8,11 +8,12 @@ namespace Dominio
     {
         public int IDJugador { get; private set; }
         public string NombreCompleto { get; set; }
-        public int NroCamisa { get; set; }
+        public string NroCamisa { get; set; }
         public DateTime FechaNacimiento { get; set; }
-        public float Altura { get; set; }
+        public double Altura { get; set; }
         public string PieHabil { get; set; }
         public int ValorMercado { get; set; }
+        public string Moneda { get; set; }
         public Pais Pais { get; set; }
         public string Puesto { get; set; }
         public int MontoRef { get; set; }
@@ -24,15 +25,16 @@ namespace Dominio
             IDJugador = uldId++;
         }
 
-        public Jugador(string nombreCompleto, int nroCamisa, DateTime fechaNacimiento, float altura,string pieHabil, int valorMercado, string puesto, Pais pais)
+        public Jugador(int iDJugador, string nroCamisa, string nombreCompleto, DateTime fechaNacimiento, double altura,string pieHabil, int valorMercado, string moneda,Pais pais, string puesto)
         {
-            IDJugador = uldId++;
+            IDJugador = iDJugador;
             NombreCompleto = nombreCompleto;
             NroCamisa = nroCamisa;
             FechaNacimiento = fechaNacimiento;
             Altura = altura;
             PieHabil = pieHabil;
             ValorMercado = valorMercado;
+            Moneda = moneda;
             Puesto = puesto;
             Pais = pais;
 
@@ -50,7 +52,7 @@ namespace Dominio
             if (string.IsNullOrEmpty(NombreCompleto))
             {
                 throw new Exception("Se recibio el nombre sin datos");
-            } else if (NroCamisa == 0)
+            } else if (NroCamisa == "")
             {
                 throw new Exception("Debe ingresar un numero de camisa");
             } else if (DateTime.Compare(FechaNacimiento, new DateTime(1111, 1, 1, 1, 1, 1)) < 0)

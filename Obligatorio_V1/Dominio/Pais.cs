@@ -43,6 +43,12 @@ namespace Dominio
             }
         }
 
+        public override bool Equals(object obj)
+        {
+            Pais unP = (Pais)obj;
+            return Nombre == unP.Nombre;
+        }
+
         public override string ToString()
         {
             return $"Id {IDPais} - {Nombre} - {Alpha}";
