@@ -16,7 +16,7 @@ namespace Dominio
         public string Moneda { get; set; }
         public Pais Pais { get; set; }
         public string Puesto { get; set; }
-        public int MontoRef { get; set; }
+        public string Categoria { get; set; }
 
         private static int uldId;
 
@@ -37,11 +37,11 @@ namespace Dominio
             Moneda = moneda;
             Puesto = puesto;
             Pais = pais;
-
             Validar();
 
         }
-
+        //-------------------------------VALIDAR---------------------------------------------------------------------//
+        //----------------------------------------------------------------------------------------------------------//
         public void Validar()
         {
             ValidarDatos();
@@ -77,28 +77,36 @@ namespace Dominio
             }
         }
 
-        public string DetCategoria()
+        //-------------------------------CATEGORIA---------------------------------------------------------------------//
+        //----------------------------------------------------------------------------------------------------------//
+        public void DetCategoria(int MontoRef)
         {
             if (ValorMercado <= MontoRef)
             {
-                return "Estándar";
+                Categoria=  "Estándar";
             }
             else
             {
-                return "VIP";
+                Categoria = "VIP";
             }
         }
+
+        //-------------------------------TOSTRING---------------------------------------------------------------------//
+        //----------------------------------------------------------------------------------------------------------//
 
         public override string ToString()
         {
             string texto = $"ID: {IDJugador} \n";
-            texto += $"Nombre: {NombreCompleto} \n";
             texto += $"Numero de camisa: {NroCamisa} \n";
+            texto += $"Nombre: {NombreCompleto} \n";
             texto += $"Fecha de nacimiento: {FechaNacimiento} \n";
             texto += $"Altura: {Altura} \n";
+            texto += $"Pie hábil: {PieHabil} \n";
             texto += $"Valor en el mercado: {ValorMercado} \n";
+            texto += $"Moneda: {Moneda} \n";
             texto += $"Puesto: {Puesto} \n";
-            texto += $"Pais: {Pais} \n";
+            texto += $"Pais: {Pais.Nombre} \n";
+            texto += $"Categoria: {Categoria} \n";
 
             return texto;
         }

@@ -7,12 +7,11 @@ namespace Dominio
     public class Seleccion
     {
         public Pais Pais { get; private set; }
-        public List<Jugador> Jugadores { get; set; }
+        private List<Jugador> Jugadores = new List<Jugador>();
 
         public Seleccion(Pais pais)
         {
             Pais = pais;
-
             Validar();
         }
 
@@ -20,11 +19,11 @@ namespace Dominio
         {
             Pais = pais;
             Jugadores = jugadores;
-
-
             Validar();
         }
 
+        //-------------------------------VALIDAR---------------------------------------------------------------------//
+        //----------------------------------------------------------------------------------------------------------//
         public void Validar()
         {
             ValidarPais();
@@ -40,19 +39,26 @@ namespace Dominio
         }
         public void ValidarJugadores()
         {
-            if (Jugadores.Count < 11)
-            {
-                throw new Exception("Debe ingresar al menos 11 jugadores");
-            }
+            //if (Jugadores.Count < 11)
+            //{
+            //    throw new Exception("Debe ingresar al menos 11 jugadores");
+            //}
+        }
+
+        //-------------------------------GENERAL---------------------------------------------------------------------//
+        //----------------------------------------------------------------------------------------------------------//
+        public void AgregarJugador(Jugador jugador)
+        {
+            Jugadores.Add(jugador);
         }
         public override string ToString()
         {
-            string texto = $"{Pais}";
-            texto += $"Jugadores";
+            string texto = $"Pais: {Pais} \n";
+            texto += $"Jugadores: \n";
 
             foreach (Jugador item in Jugadores)
             {
-                texto += $"{item.NombreCompleto}";
+                texto += $"{item.NombreCompleto} \n";
             }
 
             return texto;
