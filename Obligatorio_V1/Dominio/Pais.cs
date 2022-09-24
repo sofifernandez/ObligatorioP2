@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Dominio
@@ -10,7 +11,7 @@ namespace Dominio
         public string Nombre { get; set; }
         public string Alpha { get; set; }
 
-        private static int uldId;
+        private static int uldId=0;
 
         public Pais(string nombre, string alpha)
         {
@@ -47,15 +48,21 @@ namespace Dominio
 
         //-------------------------------GENERAL---------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
+        //public bool Equals([AllowNull] Pais other)
+        //{
+        //    return Nombre == Nombre;
+        //}
+        public override string ToString()
+        {
+            return $"Id {IDPais} - {Nombre} - {Alpha}";
+        }
+
         public override bool Equals(object obj)
         {
             Pais unP = (Pais)obj;
             return Nombre == unP.Nombre;
         }
 
-        public override string ToString()
-        {
-            return $"Id {IDPais} - {Nombre} - {Alpha}";
-        }
+
     }
 }

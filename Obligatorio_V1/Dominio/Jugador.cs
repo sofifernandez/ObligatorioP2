@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Dominio
 {
-    public class Jugador
+    public class Jugador: IEquatable<Jugador>, IComparable<Jugador>
     {
         public int IDJugador { get; private set; }
         public string NombreCompleto { get; set; }
@@ -91,9 +92,23 @@ namespace Dominio
             }
         }
 
-        //-------------------------------TOSTRING---------------------------------------------------------------------//
+        //-------------------------------GENERALES---------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
 
+        public bool Equals([AllowNull] Jugador other)
+        {
+            return IDJugador.Equals(other.IDJugador);
+        }
+
+        public int CompareTo([AllowNull] Jugador other)
+        {
+            int orden = ValorMercado.CompareTo(other.ValorMercado) *-1;
+            if (orden == 0)
+            {
+                orden = NombreCompleto.CompareTo(other.NombreCompleto);
+            }
+            return orden;
+        }
         public override string ToString()
         {
             string texto = $"ID: {IDJugador} \n";
@@ -107,8 +122,9 @@ namespace Dominio
             texto += $"Puesto: {Puesto} \n";
             texto += $"Pais: {Pais.Nombre} \n";
             texto += $"Categoria: {Categoria} \n";
-
             return texto;
         }
+
+        
     }
 }

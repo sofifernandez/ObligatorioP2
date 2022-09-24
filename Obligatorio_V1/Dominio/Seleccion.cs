@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Dominio
 {
-    public class Seleccion
+    public class Seleccion: IEquatable<Seleccion>
     {
         public Pais Pais { get; private set; }
-        private List<Jugador> Jugadores = new List<Jugador>();
+        public List<Jugador> Jugadores = new List<Jugador>();
 
         public Seleccion(Pais pais)
         {
@@ -45,12 +46,22 @@ namespace Dominio
             //}
         }
 
-        //-------------------------------GENERAL---------------------------------------------------------------------//
+        //-------------------------------JUGADORES---------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
         public void AgregarJugador(Jugador jugador)
         {
             Jugadores.Add(jugador);
         }
+
+        //-------------------------------GENERALES---------------------------------------------------------------------//
+        //----------------------------------------------------------------------------------------------------------//
+
+        public bool Equals([AllowNull] Seleccion other)
+        {
+            return Pais.Nombre.Equals(other.Pais.Nombre);
+        }
+
+
         public override string ToString()
         {
             string texto = $"Pais: {Pais} \n";
@@ -63,5 +74,7 @@ namespace Dominio
 
             return texto;
         }
+
+        
     }
 }
