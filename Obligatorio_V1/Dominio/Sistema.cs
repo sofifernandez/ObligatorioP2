@@ -95,12 +95,13 @@ namespace Dominio
         {
             foreach (Pais p in _paises)
             {
-                Seleccion selnueva = new Seleccion(p);
+                
                 List<Jugador> misjugadores = JugadoresDe(p);
-                foreach (Jugador j in misjugadores)
-                {
-                    selnueva.AgregarJugador(j);
-                }
+                Seleccion selnueva = new Seleccion(p, misjugadores);
+                //foreach (Jugador j in misjugadores)
+                //{
+                //    selnueva.AgregarJugador(j);
+                //}
                 AltaSeleccion(selnueva);
             }
         }
@@ -109,9 +110,16 @@ namespace Dominio
         {
             Partido unP1 = new FaseGrupos('A', new DateTime(2022, 11, 21), GetSeleccion("Uruguay"), GetSeleccion("Catar"));
             Partido unP2 = new FaseGrupos('A', new DateTime(2022, 11, 22), GetSeleccion("Uruguay"), GetSeleccion("Ecuador"));
+            //partido 1
             unP1.AgregarIncidencia(new Incidencia("Roja", 50, GetJugador(38)));
             unP1.AgregarIncidencia(new Incidencia("Roja", 30, GetJugador(479)));
             unP1.AgregarIncidencia(new Incidencia("Roja", 30, GetJugador(480)));
+            unP1.AgregarIncidencia(new Incidencia("Gol", 25, GetJugador(479)));
+            //partido 2
+            unP2.AgregarIncidencia(new Incidencia("Gol", 25, GetJugador(479)));
+            unP2.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(479)));
+            unP2.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(476)));
+
             //unP1.AgregarIncidencia(new Incidencia("Roja", 50, GetJugador(476))); //--> ESTO NO FUNCIONA PORQUE ES UN JUGADOR DE ECUADOR Y EL PARTIDO ES URU VS QTAR
             AltaPartido(unP1);
             AltaPartido(unP2);
@@ -281,6 +289,24 @@ namespace Dominio
             return _misJugadores;
         }
 
+        public List<Jugador> JugadoresGoles()
+        {
+            List<Jugador> _misJugadores = new List<Jugador>();
+            foreach(Partido p in Partidos)
+            {
+                List<Incidencia> _misIncidencias = p.FiltrarIncidencias("Gol");
+                foreach(Incidencia i in _misIncidencias)
+                {
+                    if (!_misJugadores.Contains(i.UnJugador))
+                    {
+                        _misJugadores.Add(i.UnJugador);
+                    }
+                }
+
+            }
+            return _misJugadores;
+        }
+
         
         //-------------------------------FUNCIONALIDAD SELECCIONES------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
@@ -299,28 +325,28 @@ namespace Dominio
         }
 
         //todo terminar esto
-        private Partido PartidoMasGoles(string nombreSelc)
+        public (Partido, int) PartidoMasGoles(string nombreSelec)
         {
             //Seleccion unaS = GetSeleccion(nombreSelc);
             int masGoles = 0;
+            Partido partidoGoles = null;
             foreach(Partido p in Partidos)
             {
                 int cantGoles = 0;
-                List<Incidencia> _misIncidencias= p.FiltrarIncidencias("Gol");
+                List<Incidencia> _misIncidencias= p.FiltrarIncidencias("Gol", nombreSelec);
                 foreach(Incidencia i in _misIncidencias)
                 {
-                    if (i.UnJugador.Pais.Nombre == nombreSelc)
-                    {
-                        cantGoles++;
-                        if (cantGoles > masGoles)
-                        {
-                            masGoles = cantGoles;
-                            return p;
-                        }
-                    }
+                   
+                       cantGoles++;
+                    
+                }
+                if (cantGoles > masGoles)
+                {
+                    masGoles = cantGoles;
+                    partidoGoles = p;
                 }
             }
-            return null;
+            return (partidoGoles, masGoles);
         }
     }
 }

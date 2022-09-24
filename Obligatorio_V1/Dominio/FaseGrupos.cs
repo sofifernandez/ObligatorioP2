@@ -33,6 +33,7 @@ namespace Dominio
             {
                 throw new Exception("La incidencia no tiene datos");
             }
+
             bool estaJugador = false;
 
             //CHEQUEAR QUE EL JUGADOR ESTÉ EN ALGUNA DE LAS DOS SELECCIONES

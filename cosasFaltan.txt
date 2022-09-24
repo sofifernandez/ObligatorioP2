@@ -1,0 +1,6 @@
+COSAS QUE FALTAN
+
+1) Precarga de datos del sistema
+2) Agregar partidos, periodistas, etc
+3) TODOs
+4) Menu opciones

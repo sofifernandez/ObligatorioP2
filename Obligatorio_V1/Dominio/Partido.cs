@@ -62,6 +62,7 @@ namespace Dominio
         //-------------------------------FINALIZAR PARTIDO-----------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
 
+        //todo finalizar partido --> fase de grupos puede haber empate, pero en eliminatorias no.
 
 
         //-------------------------------RESEÑAS---------------------------------------------------------------------//
@@ -82,18 +83,41 @@ namespace Dominio
 
         public abstract void AgregarIncidencia(Incidencia incidencia);
 
-        public List<Incidencia> FiltrarIncidencias(string tipo)
+
+
+        public List<Incidencia> FiltrarIncidencias(string tipo, string nombrePais=null)
         {
             List<Incidencia> aux = new List<Incidencia>();
-            foreach (Incidencia item in _incidencias)
+            if(nombrePais==null)
             {
-                if (item.Tipo == tipo)
+                foreach (Incidencia item in _incidencias)
                 {
-                    aux.Add(item);
+                    if (item.Tipo == tipo)
+                    {
+                        aux.Add(item);
+                    }
                 }
+                
+            } else
+            {
+                foreach (Incidencia item in _incidencias)
+                {
+                    if (item.Tipo == tipo)
+                    {
+                        if (item.UnJugador.Pais.Nombre == nombrePais)
+                        {
+                            aux.Add(item);
+                        }
+                        
+                    }
+                }
+                
             }
             return aux;
+
         }
+
+
 
 
 

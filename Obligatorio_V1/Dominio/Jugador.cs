@@ -102,7 +102,7 @@ namespace Dominio
 
         public int CompareTo([AllowNull] Jugador other)
         {
-            int orden = ValorMercado.CompareTo(other.ValorMercado) *-1;
+            int orden = ValorMercado.CompareTo(other.ValorMercado) *-1; //--> descendente
             if (orden == 0)
             {
                 orden = NombreCompleto.CompareTo(other.NombreCompleto);

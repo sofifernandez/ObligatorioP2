@@ -43,6 +43,8 @@ namespace Dominio
                 throw new Exception("Faltan datos para guardar al periodista");
             }
         }
+
+        //todo arreglar que no aparezca mas de un @
         private void ValidarEmail()
         {
             int indice = Email.IndexOf('@');

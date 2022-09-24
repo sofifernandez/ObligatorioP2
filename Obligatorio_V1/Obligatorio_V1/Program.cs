@@ -12,9 +12,11 @@ namespace Obligatorio_V1
             //MostrarJugadores();
             //MostrarSelecciones();
             //MostrarPartidos();
-            //MostrarPeriodistas();
+            MostrarPeriodistas();
             MostrarPartidosJugador(38);
             MostrarJugadoresExpulsados();
+            MostrarPartidoMasGoles("Uruguay");
+            MostrarJugadoresGoles();
             Console.ReadKey();
         }
 
@@ -105,6 +107,23 @@ namespace Obligatorio_V1
                 Console.WriteLine(resp);
             }
             Console.WriteLine("------------------------------------------------------------------------------------------------------------------\n");
+        }
+
+        static void MostrarPartidoMasGoles(string nombrePais)
+        {
+            Console.WriteLine($"Partido con más goles de {nombrePais} \n");
+            (Partido partido, int goles) = unS.PartidoMasGoles(nombrePais);
+            Console.WriteLine(partido);
+            Console.WriteLine(goles);
+
+        }
+
+        static void MostrarJugadoresGoles()
+        {
+            foreach(Jugador i in unS.JugadoresGoles())
+            {
+                Console.WriteLine($"{i.NombreCompleto}- {i.ValorMercado} - {i.Categoria}");
+            }
         }
     }
 }
