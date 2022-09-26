@@ -27,10 +27,7 @@ namespace Dominio
 
         private Sistema()
         {
-            Console.WriteLine("Ingrese un monto de referencia para las categorias de los jugadores:");
-            int MontoRef = int.Parse(Console.ReadLine());
-            PrecargarDatos(MontoRef);
-
+            PrecargarDatos();
         }
 
         //-------------------------------LISTAS QUE ACCEDE EL SISTEMA------------------------------------------------//
@@ -62,13 +59,12 @@ namespace Dominio
 
         //-------------------------------PRECARGA---------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
-        private void PrecargarDatos(int MontoRef)
+        private void PrecargarDatos()
         {
             AltaPais(new Pais("Catar", "QAT"));
             AltaPais(new Pais("Uruguay", "URU"));
             AltaPais(new Pais("Ecuador", "ECU"));
             PrecargaJugadores();
-            AgregarCategoria(MontoRef);
             PrecargaSelecciones();
             PrecargaPartidos();
             AltaPeriodista(new Periodista("Pepito Garcia", "pepito@gmail.com", "jkshdfjksdhskjd"));
@@ -83,7 +79,13 @@ namespace Dominio
             AltaJugador(new Jugador(480, "23", "Sebastián Sosa", DateTime.Parse("1986-08-19"), 1.81, "derecho", 2000000, "EUR", GetPais("Uruguay"), "Portero"));
         }
 
-        private void AgregarCategoria(int MontoRef)
+        public string ArmarPeriodista(string nombreCompleto, string email, string password)
+        {
+            Periodista nuevoPeriodista = new Periodista(nombreCompleto, email, password);
+            return AltaPeriodista(nuevoPeriodista);
+        }
+
+        public void AgregarCategoria(int MontoRef)
         {
             foreach (Jugador item in Jugadores)
             {
@@ -186,7 +188,7 @@ namespace Dominio
             _partidos.Add(partido);
         }
 
-        public void AltaPeriodista(Periodista periodista)
+        public string AltaPeriodista(Periodista periodista)
         {
             if (periodista == null)
             {
@@ -197,6 +199,7 @@ namespace Dominio
                 throw new Exception($"El {periodista.NombreCompleto} ya existe en el sistema");
             }
             _periodistas.Add(periodista);
+            return "ok";
         }
 
         //-------------------------------FUNCIONALIDAD PAISES------------------------------------------------------//

@@ -121,7 +121,14 @@ namespace Dominio
             texto += $"Moneda: {Moneda} \n";
             texto += $"Puesto: {Puesto} \n";
             texto += $"Pais: {Pais.Nombre} \n";
-            texto += $"Categoria: {Categoria} \n";
+            if(string.IsNullOrEmpty(Categoria))
+            {
+                texto += $"Categoria: Debes establecer el monto de referencia en el menu (opcion 2) \n";
+            } else
+            {
+
+                texto += $"Categoria: {Categoria} \n";
+            }
             return texto;
         }
 

@@ -8,6 +8,128 @@ namespace Obligatorio_V1
         static Sistema unS = Sistema.Instancia;
         static void Main(string[] args)
         {
+            Menu();
+        }
+
+        static void Menu()
+        {
+            int opcion;
+            do
+            {
+                MostrarMenu();
+                opcion = PedirNumero();
+
+                switch (opcion)
+                {
+                    case 1:
+                        MenuAltaPeriodista();
+                        break;
+                    case 2:
+                        MenuAsignarValorReferencia();
+                        break;
+                    case 3:
+                        MenuPartidosDeJugador();
+                        break;
+                    case 4:
+                        MenuJugadoresExpuslados();
+                        break;
+                    case 5:
+                        MenuPartidoMasGoles();
+                        break;
+                    case 6:
+                        MenuJugadoresConGol();
+                        break;
+                }
+            } while (opcion != 0);
+
+        }
+
+        static void MostrarMenu()
+        {
+            Console.WriteLine("\n Ingrese una de las siguientes opciones: \n");
+            Console.WriteLine("" +
+                "1 - Dar de alta un periodista \n" +
+                "2 - Asignar valor de referencia para la categoria financiera de los jugadores \n" +
+                "3 - Listar todos partidos de un jugador \n" +
+                "4 - Listar los jugadores que han sido expulsados \n" +
+                "5 - Mostrar el partido con mas goles de una selección \n" +
+                "6 - Listar jugadores que han convertido gol \n" +
+                "0 - Salir \n"
+            );
+            Console.WriteLine("Ingrese su número a continuación:");        
+        }
+
+        static private int PedirNumero()
+        {
+            bool salir = false;
+            int numero = 0;
+
+            do
+            {
+                try
+                {
+                    numero = int.Parse(Console.ReadLine());
+                    salir = true;
+                }
+                catch (Exception)
+                {
+                    //MensajesError("Solo debe ingresar numeros");
+                    salir = false;
+                }
+            } while (!salir);
+
+            return numero;
+        }
+
+        static string MenuAltaPeriodista()
+        {
+            Console.WriteLine("Ingrese el nombre completo:");
+            string nombreCompleto = Console.ReadLine();
+
+            Console.WriteLine("Ingrese el email:");
+            string email = Console.ReadLine();
+
+            Console.WriteLine("Ingrese la contraseña:");
+            string password = Console.ReadLine();
+
+            return unS.ArmarPeriodista(nombreCompleto, email, password);
+        }
+
+        static void MenuAsignarValorReferencia()
+        {
+            Console.WriteLine("Ingrese un monto, el cual servirá de referencia para calcular la categoria financiera de los jugadores:");
+            int monto = int.Parse(Console.ReadLine());
+
+            unS.AgregarCategoria(monto);
+        }
+
+        static void MenuPartidosDeJugador()
+        {
+            Console.WriteLine("Ingrese el ID de un jugador para mostrar todos los partidos en los que ha participado:");
+            int id = int.Parse(Console.ReadLine());
+
+            MostrarPartidosJugador(id);
+        }
+
+        static void MenuJugadoresExpuslados()
+        {
+            MostrarJugadoresExpulsados();
+        }
+
+        static void MenuPartidoMasGoles()
+        {
+            Console.WriteLine("Ingrese el nombre de una selección:");
+            string nombreSeleccion = Console.ReadLine();
+            MostrarPartidoMasGoles(nombreSeleccion);
+        }
+
+        static void MenuJugadoresConGol()
+        {
+            MostrarJugadoresGoles();
+        }
+
+        static void FuncionesDePrueba()
+        {
             //MostrarPaises();
             //MostrarJugadores();
             //MostrarSelecciones();
@@ -76,9 +198,9 @@ namespace Obligatorio_V1
         static void MostrarPartidosJugador(int IDJugador)
         {
             Jugador unJ = unS.GetJugador(IDJugador);
-            if(unJ != null)
+            if (unJ != null)
             {
-                foreach(Partido p in unS.PartidosJugador(IDJugador))
+                foreach (Partido p in unS.PartidosJugador(IDJugador))
                 {
                     Console.WriteLine($"Partidos jugados por {unJ.NombreCompleto}:\n");
                     string resp = "";
@@ -99,7 +221,7 @@ namespace Obligatorio_V1
         static void MostrarJugadoresExpulsados()
         {
             Console.WriteLine("Jugadores Expulsados \n");
-            foreach(Jugador j in unS.JugadoresExpulsados())
+            foreach (Jugador j in unS.JugadoresExpulsados())
             {
                 string resp = "";
                 resp += $"Nombre: {j.NombreCompleto}\n";
@@ -120,7 +242,7 @@ namespace Obligatorio_V1
 
         static void MostrarJugadoresGoles()
         {
-            foreach(Jugador i in unS.JugadoresGoles())
+            foreach (Jugador i in unS.JugadoresGoles())
             {
                 Console.WriteLine($"{i.NombreCompleto}- {i.ValorMercado} - {i.Categoria}");
             }
