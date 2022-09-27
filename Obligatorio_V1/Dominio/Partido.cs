@@ -104,7 +104,7 @@ namespace Dominio
                 {
                     if (item.Tipo == tipo)
                     {
-                        if (item.UnJugador.Pais.Nombre == nombrePais)
+                        if (item.UnJugador.Pais.Nombre.ToLower() == nombrePais.ToLower())
                         {
                             aux.Add(item);
                         }

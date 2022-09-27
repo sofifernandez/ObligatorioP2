@@ -1,5 +1,6 @@
 ﻿using Dominio;
 using System;
+using System.Collections.Generic;
 
 namespace Obligatorio_V1
 {
@@ -15,22 +16,29 @@ namespace Obligatorio_V1
             }
             catch (Exception e)
             {
-
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"Hubo un error: {e.Message}");
+                Console.ForegroundColor = ConsoleColor.White;
+
                 Menu();
             }
         }
 
         static void MostrarDatosprecarga()
         {
-            Console.WriteLine("**********BIENVENIDOS*************************************");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("        /////////////////////////////////////////////////////////////////////////");
+            Console.WriteLine("    ///////////////////////////BIENVENIDOS///////////////////////////////////");
+            Console.WriteLine("///////////////////////////////////////////////////////////////////////// \n \n \n");
+
+            Console.ForegroundColor = ConsoleColor.White;
+
             string resp = "Datos actuales:\n";
             resp += $"Jugadores: {unS.Jugadores.Count}\n";
             resp += $"Selecciones: {unS.Selecciones.Count}\n";
             resp += $"Paises: {unS.Paises.Count}\n";
             resp += $"Partidos: {unS.Partidos.Count}\n";
             Console.WriteLine(resp);
-
         }
 
         static void Menu()
@@ -38,7 +46,10 @@ namespace Obligatorio_V1
             int opcion;
             do
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 MostrarMenu();
+                Console.ForegroundColor = ConsoleColor.White;
+
                 opcion = PedirNumero();
 
                 switch (opcion)
@@ -63,7 +74,6 @@ namespace Obligatorio_V1
                         break;
                 }
             } while (opcion != 0);
-
         }
 
         static void MostrarMenu()
@@ -96,8 +106,9 @@ namespace Obligatorio_V1
                 catch (Exception)
                 {
                     salir = false;
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write("Solo debe ingresar numeros. Intentalo de nuevo \n");
-                    
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
             } while (!salir);
 
@@ -223,14 +234,21 @@ namespace Obligatorio_V1
             Jugador unJ = unS.GetJugador(IDJugador);
             if (unJ != null)
             {
-                foreach (Partido p in unS.PartidosJugador(IDJugador))
+                List<Partido> partidosDelJugador = unS.PartidosJugador(IDJugador);
+                if (partidosDelJugador.Count > 1)
                 {
-                    Console.WriteLine($"Partidos jugados por {unJ.NombreCompleto}:\n");
-                    string resp = "";
-                    resp += $"Partido: {p.SeleccionA.Pais.Nombre} vs {p.SeleccionB.Pais.Nombre}\n";
-                    resp += $"Fecha: {p.FechaPartido}\n";
-                    resp += $"Incidencias: {p.Incidencias.Count}";
-                    Console.WriteLine(resp);
+                    foreach (Partido p in partidosDelJugador)
+                    {
+                        Console.WriteLine($"Partidos jugados por {unJ.NombreCompleto}:\n");
+                        string resp = "";
+                        resp += $"Partido: {p.SeleccionA.Pais.Nombre} vs {p.SeleccionB.Pais.Nombre}\n";
+                        resp += $"Fecha: {p.FechaPartido}\n";
+                        resp += $"Incidencias: {p.Incidencias.Count}";
+                        Console.WriteLine(resp);
+                    }
+                } else
+                {
+                    Console.WriteLine($"El Jugador {unJ.NombreCompleto} aún no ha jugado ningun partido \n");
                 }
             }
             else
