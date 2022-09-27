@@ -13,7 +13,6 @@ namespace Dominio
         {
             Alargue = false;
             Penales = false;
-            //ValidarGrupo();
         }
 
         //-------------------------------INCIDENCIAS----------------------------------------------------------------//

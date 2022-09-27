@@ -1,5 +1,1 @@
-- Se puede poner una lista como argumento de un constructor? Ejemplo, un partido con la lista que contenga a las dos selecciones que se enfrentan
-- Me da un error en Program, no me reconoce Sistema.
-- Como sería el camino para mostrar una reseña de un periodista?
-- El valor de una property de una clase, puede ser calculado a partir de un método de esa misma clase?
-
+- Lo de la clase abstracta

@@ -10,6 +10,7 @@ namespace Obligatorio_V1
         {
             try
             {
+                MostrarDatosprecarga();
                 Menu();
             }
             catch (Exception e)
@@ -18,6 +19,18 @@ namespace Obligatorio_V1
                 Console.WriteLine($"Hubo un error: {e.Message}");
                 Menu();
             }
+        }
+
+        static void MostrarDatosprecarga()
+        {
+            Console.WriteLine("**********BIENVENIDOS*************************************");
+            string resp = "Datos actuales:\n";
+            resp += $"Jugadores: {unS.Jugadores.Count}\n";
+            resp += $"Selecciones: {unS.Selecciones.Count}\n";
+            resp += $"Paises: {unS.Paises.Count}\n";
+            resp += $"Partidos: {unS.Partidos.Count}\n";
+            Console.WriteLine(resp);
+
         }
 
         static void Menu()

@@ -1,6 +1,10 @@
 COSAS QUE FALTAN
 
-1) Precarga de datos del sistema
-2) Agregar partidos, periodistas, etc
+1) Precarga de datos del sistema (CHECK)
+2) Agregar incidencias, periodistas, etc
 3) TODOs
 4) Menu opciones
+
+5) Arreglar el UML
+
+6) Documentacion?

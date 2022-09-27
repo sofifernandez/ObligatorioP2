@@ -63,7 +63,7 @@ namespace Dominio
             else if (string.IsNullOrEmpty(Puesto))
             {
                 throw new Exception("Se recibio el puesto sin datos");
-            } else if (Altura <= 0)
+            } else if (Altura < 0) //--> hay un par de alturas que son 0, así que pongo menor a 0
             {
                 throw new Exception("Debe ingresar una altura válida");
             } else if (string.IsNullOrEmpty(PieHabil))
@@ -72,7 +72,7 @@ namespace Dominio
             } else if (Pais == null)
             {
                 throw new Exception("Debe ingresar un país");
-            } else if (ValorMercado <= 0)
+            } else if (ValorMercado < 0) //--> hay un par de valores que son 0, así que pongo menor a 0
             {
                 throw new Exception("Debe ingresar valor de mercado válido");
             }
