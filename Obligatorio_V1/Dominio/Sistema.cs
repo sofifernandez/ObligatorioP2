@@ -1006,8 +1006,16 @@ namespace Dominio
 
         public string ArmarPeriodista(string nombreCompleto, string email, string password)
         {
-            Periodista nuevoPeriodista = new Periodista(nombreCompleto, email, password);
-            return AltaPeriodista(nuevoPeriodista);
+            try
+            {
+                Periodista nuevoPeriodista = new Periodista(nombreCompleto, email, password);
+                return AltaPeriodista(nuevoPeriodista);
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
         }
 
         public void AgregarCategoria(int MontoRef)
@@ -1070,6 +1078,10 @@ namespace Dominio
 
             //PARTIDO 6_G
 
+
+
+
+
             //PARTIDO 1_H
 
             //PARTIDO 2_H
@@ -1081,6 +1093,9 @@ namespace Dominio
             //PARTIDO 5_H
 
             //PARTIDO 6_H
+
+            // FASE ELIMINATORIAS--------------------------------- URUGUAY vs CAMERUN y PORTUGAL vs BRASIL
+            // INCIDENCIAS ---------------------------------------
 
         }
 
@@ -1149,7 +1164,7 @@ namespace Dominio
         {
             if (periodista == null)
             {
-                throw new Exception("Faltan datos del partido");
+                throw new Exception("Faltan datos del periodista");
             }
             if (_periodistas.Contains(periodista))
             {

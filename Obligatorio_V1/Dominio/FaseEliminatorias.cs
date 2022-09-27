@@ -46,7 +46,12 @@ namespace Dominio
                 throw new Exception("El jugador indicado no está en las selecciones que se enfrentan");
             }
 
-            
+            if (incidencia.Minuto < -1)
+            {
+                throw new Exception("El minuto ingresado no es correcto");
+            }
+
+
             Incidencias.Add(incidencia);
         }
 
