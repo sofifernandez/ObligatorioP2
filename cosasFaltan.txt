@@ -1,9 +1,9 @@
 COSAS QUE FALTAN
 
-1) Precarga de datos del sistema (CHECK)
-2) Agregar incidencias, periodistas, etc
+1) Agregar incidencias
+2) Agregar partidos eliminatorios -->incidencias
 3) TODOs
-4) Menu opciones
+
 
 5) Arreglar el UML
 

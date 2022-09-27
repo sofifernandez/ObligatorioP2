@@ -1,1 +1,2 @@
 - Lo de la clase abstracta
+- En la parte de precarga de datos, que dice 'no puede existir empate' -->es una condición para dar finalizar el partido?

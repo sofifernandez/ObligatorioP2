@@ -65,7 +65,7 @@ namespace Dominio
             PrecargaJugadores();
             PrecargaSelecciones();
             PrecargaPartidos();
-            //AltaPeriodista(new Periodista("Pepito Garcia", "pepito@gmail.com", "jkshdfjksdhskjd"));
+            AltaPeriodista(new Periodista("Pepito Garcia", "pepito@gmail.com", "jkshdfjksdhskjd"));
             
         }
 
@@ -1022,19 +1022,6 @@ namespace Dominio
 
         private void PrecargaPartidos()
         {
-            //PARTIDOS GRUPO H (Portugal, Gana, Uruguay, Corea)
-            Partido unP1_H = new FaseGrupos('H', new DateTime(2022, 11, 24), GetSeleccion("Portugal"), GetSeleccion("Ghana"));
-            Partido unP2_H = new FaseGrupos('H', new DateTime(2022, 11, 24), GetSeleccion("Uruguay"), GetSeleccion("Corea del Sur"));
-            Partido unP3_H = new FaseGrupos('H', new DateTime(2022, 11, 28), GetSeleccion("Uruguay"), GetSeleccion("Portugal"));
-            Partido unP4_H = new FaseGrupos('H', new DateTime(2022, 11, 28), GetSeleccion("Ghana"), GetSeleccion("Corea del Sur"));
-            Partido unP5_H = new FaseGrupos('H', new DateTime(2022, 12, 2), GetSeleccion("Portugal"), GetSeleccion("Corea del Sur"));
-            Partido unP6_H = new FaseGrupos('H', new DateTime(2022, 12, 2), GetSeleccion("Uruguay"), GetSeleccion("Ghana"));
-            AltaPartido(unP1_H);
-            AltaPartido(unP2_H);
-            AltaPartido(unP3_H);
-            AltaPartido(unP4_H);
-            AltaPartido(unP5_H);
-            AltaPartido(unP6_H);
             //PARTIDOS GRUPO G (Brasil, Serbia, Suiza, Camerún)
             Partido unP1_G = new FaseGrupos('G', new DateTime(2022, 11, 24), GetSeleccion("Brasil"), GetSeleccion("Serbia"));
             Partido unP2_G = new FaseGrupos('G', new DateTime(2022, 11, 24), GetSeleccion("Suiza"), GetSeleccion("Camerún"));
@@ -1049,25 +1036,59 @@ namespace Dominio
             AltaPartido(unP5_G);
             AltaPartido(unP6_G);
 
-            //partido 1
-            //unP1.AgregarIncidencia(new Incidencia("Roja", 50, GetJugador(38)));
-            //unP1.AgregarIncidencia(new Incidencia("Roja", 30, GetJugador(479)));
-            //unP1.AgregarIncidencia(new Incidencia("Roja", 30, GetJugador(480)));
-            //unP1.AgregarIncidencia(new Incidencia("Gol", 25, GetJugador(479)));
-            ////partido 2
-            //unP2.AgregarIncidencia(new Incidencia("Gol", 25, GetJugador(479)));
-            //unP2.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(479)));
-            //unP2.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(476)));
+            //PARTIDOS GRUPO H (Portugal, Gana, Uruguay, Corea)
+            Partido unP1_H = new FaseGrupos('H', new DateTime(2022, 11, 24), GetSeleccion("Portugal"), GetSeleccion("Ghana"));
+            Partido unP2_H = new FaseGrupos('H', new DateTime(2022, 11, 24), GetSeleccion("Uruguay"), GetSeleccion("Corea del Sur"));
+            Partido unP3_H = new FaseGrupos('H', new DateTime(2022, 11, 28), GetSeleccion("Uruguay"), GetSeleccion("Portugal"));
+            Partido unP4_H = new FaseGrupos('H', new DateTime(2022, 11, 28), GetSeleccion("Ghana"), GetSeleccion("Corea del Sur"));
+            Partido unP5_H = new FaseGrupos('H', new DateTime(2022, 12, 2), GetSeleccion("Portugal"), GetSeleccion("Corea del Sur"));
+            Partido unP6_H = new FaseGrupos('H', new DateTime(2022, 12, 2), GetSeleccion("Uruguay"), GetSeleccion("Ghana"));
+            AltaPartido(unP1_H);
+            AltaPartido(unP2_H);
+            AltaPartido(unP3_H);
+            AltaPartido(unP4_H);
+            AltaPartido(unP5_H);
+            AltaPartido(unP6_H);
+           
 
-            //unP1.AgregarIncidencia(new Incidencia("Roja", 50, GetJugador(476))); //--> ESTO NO FUNCIONA PORQUE ES UN JUGADOR DE ECUADOR Y EL PARTIDO ES URU VS QTAR
+            //------------------------------INCIDENCIAS------------------------------------//
 
-            //PartidosJugador(38);
+            //PARTIDO 1_G
+            unP1_G.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(129))); 
+            unP1_G.AgregarIncidencia(new Incidencia("Gol", 50, GetJugador(130)));
+            unP1_G.AgregarIncidencia(new Incidencia("Amarilla", 87, GetJugador(236)));
+            //PARTIDO 2_G
+            unP2_G.AgregarIncidencia(new Incidencia("Roja", 30, GetJugador(289)));
+            unP2_G.AgregarIncidencia(new Incidencia("Gol", 50, GetJugador(304)));
+            unP2_G.AgregarIncidencia(new Incidencia("Gol", 87, GetJugador(728)));
+
+            //PARTIDO 3_G
+
+            //PARTIDO 4_G
+
+            //PARTIDO 5_G
+
+            //PARTIDO 6_G
+
+            //PARTIDO 1_H
+
+            //PARTIDO 2_H
+
+            //PARTIDO 3_H
+
+            //PARTIDO 4_H
+
+            //PARTIDO 5_H
+
+            //PARTIDO 6_H
+
         }
+
+
 
         //-------------------------------ALTAS---------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
 
-        //todo : da un error aca, lo saco para poder seguir
         public void AltaSeleccion(Seleccion seleccion)
         {
             if (seleccion == null)
@@ -1098,24 +1119,16 @@ namespace Dominio
 
         public void AltaJugador(Jugador jugador)
         {
-            try
+            if (jugador == null)
             {
-                if (jugador == null)
-                {
-                    throw new Exception("El Jugaror recibido no tiene datos.");
-                }
-                jugador.Validar();
-                if (_jugadores.Contains(jugador))
-                {
-                    throw new Exception($"El jugador {jugador.IDJugador} ya existe");
-                }
-                _jugadores.Add(jugador);
+                throw new Exception("El Jugaror recibido no tiene datos.");
             }
-            catch (Exception)
+            jugador.Validar();
+            if (_jugadores.Contains(jugador))
             {
-
-                throw new Exception("Error al cargar UN JUGADOR");
+                throw new Exception($"El jugador {jugador.IDJugador} ya existe");
             }
+            _jugadores.Add(jugador);
         }
 
         public void AltaPartido(Partido partido)
