@@ -8,7 +8,16 @@ namespace Obligatorio_V1
         static Sistema unS = Sistema.Instancia;
         static void Main(string[] args)
         {
-            Menu();
+            try
+            {
+                Menu();
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine($"Hubo un error: {e.Message}");
+                Menu();
+            }
         }
 
         static void Menu()
@@ -61,8 +70,8 @@ namespace Obligatorio_V1
 
         static private int PedirNumero()
         {
-            bool salir = false;
-            int numero = 0;
+            bool salir;
+            int numero=0;
 
             do
             {
@@ -73,8 +82,9 @@ namespace Obligatorio_V1
                 }
                 catch (Exception)
                 {
-                    //MensajesError("Solo debe ingresar numeros");
                     salir = false;
+                    Console.Write("Solo debe ingresar numeros. Intentalo de nuevo \n");
+                    
                 }
             } while (!salir);
 
