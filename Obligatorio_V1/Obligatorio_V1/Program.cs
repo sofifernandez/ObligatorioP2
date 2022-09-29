@@ -229,7 +229,7 @@ namespace Obligatorio_V1
 
         }
 
-        static void MostrarPartidosJugador(int IDJugador)
+        static void MostrarPartidosJugador (int IDJugador)
         {
             Jugador unJ = unS.GetJugador(IDJugador);
             if (unJ != null)

@@ -1083,20 +1083,52 @@ namespace Dominio
 
 
             //PARTIDO 1_H
+            unP1_H.AgregarIncidencia(new Incidencia("Gol", 50, GetJugador(542)));
+            unP1_H.AgregarIncidencia(new Incidencia("Gol", 87, GetJugador(614)));
+            unP1_H.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(617)));
 
             //PARTIDO 2_H
+            unP2_H.AgregarIncidencia(new Incidencia("Amarilla",89, GetJugador(388)));
+            unP2_H.AgregarIncidencia(new Incidencia("Gol", 15, GetJugador(494)));
+            unP2_H.AgregarIncidencia(new Incidencia("Gol", 49, GetJugador(497)));
 
             //PARTIDO 3_H
+            unP3_H.AgregarIncidencia(new Incidencia("Amarilla", 20, GetJugador(598)));
+            unP3_H.AgregarIncidencia(new Incidencia("Gol", 88, GetJugador(490)));
+            unP3_H.AgregarIncidencia(new Incidencia("Amarilla", 53, GetJugador(498)));
 
             //PARTIDO 4_H
+            unP4_H.AgregarIncidencia(new Incidencia("Roja", 20, GetJugador(393)));
+            unP4_H.AgregarIncidencia(new Incidencia("Gol", 40, GetJugador(396)));
+            unP4_H.AgregarIncidencia(new Incidencia("Gol", 53, GetJugador(396)));
 
             //PARTIDO 5_H
+            unP5_H.AgregarIncidencia(new Incidencia("Amarilla", 23, GetJugador(375)));
+            unP5_H.AgregarIncidencia(new Incidencia("Amarilla", 88, GetJugador(378)));
+            unP5_H.AgregarIncidencia(new Incidencia("Gol", 23, GetJugador(611)));
 
             //PARTIDO 6_H
+            unP6_H.AgregarIncidencia(new Incidencia("Gol", 34, GetJugador(501)));
+            unP6_H.AgregarIncidencia(new Incidencia("Gol", 67, GetJugador(502)));
+            unP6_H.AgregarIncidencia(new Incidencia("Gol", 80, GetJugador(504)));
 
             // FASE ELIMINATORIAS--------------------------------- URUGUAY vs CAMERUN y PORTUGAL vs BRASIL
+            Partido unPE_1 = new FaseEliminatorias(new DateTime(2022, 12, 2), GetSeleccion("Uruguay"), GetSeleccion("Camerún"));
+            Partido unPE_2 = new FaseEliminatorias(new DateTime(2022, 12, 2), GetSeleccion("Portugal"), GetSeleccion("Brasil"));
+            AltaPartido(unPE_1);
+            AltaPartido(unPE_2);
+
             // INCIDENCIAS ---------------------------------------
 
+            // PARTIDO PE_1
+            unPE_1.AgregarIncidencia(new Incidencia("Gol", 34, GetJugador(506)));
+            unPE_1.AgregarIncidencia(new Incidencia("Gol", 34, GetJugador(501)));
+            unPE_1.AgregarIncidencia(new Incidencia("Amarilla", 34, GetJugador(501)));
+
+            // PARTIDO PE_2
+            unPE_2.AgregarIncidencia(new Incidencia("Gol", 34, GetJugador(124)));
+            unPE_2.AgregarIncidencia(new Incidencia("Gol", 34, GetJugador(123)));
+            unPE_2.AgregarIncidencia(new Incidencia("Roja", 34, GetJugador(601)));
         }
 
 
