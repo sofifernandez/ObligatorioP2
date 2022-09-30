@@ -1066,21 +1066,29 @@ namespace Dominio
             unP1_G.AgregarIncidencia(new Incidencia("Gol", 50, GetJugador(130)));
             unP1_G.AgregarIncidencia(new Incidencia("Amarilla", 87, GetJugador(236)));
             //PARTIDO 2_G
-            unP2_G.AgregarIncidencia(new Incidencia("Roja", 30, GetJugador(289)));
-            unP2_G.AgregarIncidencia(new Incidencia("Gol", 50, GetJugador(304)));
-            unP2_G.AgregarIncidencia(new Incidencia("Gol", 87, GetJugador(728)));
+            unP2_G.AgregarIncidencia(new Incidencia("Roja", 25, GetJugador(289)));
+            unP2_G.AgregarIncidencia(new Incidencia("Gol", 49, GetJugador(304)));
+            unP2_G.AgregarIncidencia(new Incidencia("Gol", 70, GetJugador(728)));
 
             //PARTIDO 3_G
+            unP3_G.AgregarIncidencia(new Incidencia("Amarilla", 15, GetJugador(297)));
+            unP3_G.AgregarIncidencia(new Incidencia("Gol", 20, GetJugador(105)));
+            unP3_G.AgregarIncidencia(new Incidencia("Gol", 80, GetJugador(111)));
 
-            //PARTIDO 4_G
+            ////PARTIDO 4_G
+            unP4_G.AgregarIncidencia(new Incidencia("Amarilla", 60, GetJugador(716)));
+            unP4_G.AgregarIncidencia(new Incidencia("Gol", 75, GetJugador(732)));
+            unP4_G.AgregarIncidencia(new Incidencia("Amarilla", 85, GetJugador(728)));
 
-            //PARTIDO 5_G
+            ////PARTIDO 5_G 
+            unP5_G.AgregarIncidencia(new Incidencia("Amarilla", 10, GetJugador(110)));
+            unP5_G.AgregarIncidencia(new Incidencia("Gol", 50, GetJugador(129)));
+            unP5_G.AgregarIncidencia(new Incidencia("Gol", 60, GetJugador(129)));
+            unP5_G.AgregarIncidencia(new Incidencia("Gol", 85, GetJugador(735)));
 
-            //PARTIDO 6_G
-
-
-
-
+            ////PARTIDO 6_G 
+            unP6_G.AgregarIncidencia(new Incidencia("Amarilla", 32, GetJugador(238)));
+            unP6_G.AgregarIncidencia(new Incidencia("Roja", 55, GetJugador(307)));
 
             //PARTIDO 1_H
             unP1_H.AgregarIncidencia(new Incidencia("Gol", 50, GetJugador(542)));
@@ -1105,30 +1113,30 @@ namespace Dominio
             //PARTIDO 5_H
             unP5_H.AgregarIncidencia(new Incidencia("Amarilla", 23, GetJugador(375)));
             unP5_H.AgregarIncidencia(new Incidencia("Amarilla", 88, GetJugador(378)));
-            unP5_H.AgregarIncidencia(new Incidencia("Gol", 23, GetJugador(611)));
+            unP5_H.AgregarIncidencia(new Incidencia("Gol", 34, GetJugador(611)));
 
             //PARTIDO 6_H
-            unP6_H.AgregarIncidencia(new Incidencia("Gol", 34, GetJugador(501)));
+            unP6_H.AgregarIncidencia(new Incidencia("Gol", 37, GetJugador(501)));
             unP6_H.AgregarIncidencia(new Incidencia("Gol", 67, GetJugador(502)));
             unP6_H.AgregarIncidencia(new Incidencia("Gol", 80, GetJugador(504)));
 
             // FASE ELIMINATORIAS--------------------------------- URUGUAY vs CAMERUN y PORTUGAL vs BRASIL
-            Partido unPE_1 = new FaseEliminatorias(new DateTime(2022, 12, 2), GetSeleccion("Uruguay"), GetSeleccion("Camerún"));
-            Partido unPE_2 = new FaseEliminatorias(new DateTime(2022, 12, 2), GetSeleccion("Portugal"), GetSeleccion("Brasil"));
+            Partido unPE_1 = new FaseEliminatorias(new DateTime(2022, 12, 6), GetSeleccion("Uruguay"), GetSeleccion("Camerún"));
+            Partido unPE_2 = new FaseEliminatorias(new DateTime(2022, 12, 6), GetSeleccion("Portugal"), GetSeleccion("Brasil"));
             AltaPartido(unPE_1);
             AltaPartido(unPE_2);
 
             // INCIDENCIAS ---------------------------------------
 
             // PARTIDO PE_1
-            unPE_1.AgregarIncidencia(new Incidencia("Gol", 34, GetJugador(506)));
-            unPE_1.AgregarIncidencia(new Incidencia("Gol", 34, GetJugador(501)));
-            unPE_1.AgregarIncidencia(new Incidencia("Amarilla", 34, GetJugador(501)));
+            unPE_1.AgregarIncidencia(new Incidencia("Gol", 60, GetJugador(506)));
+            unPE_1.AgregarIncidencia(new Incidencia("Gol", 75, GetJugador(501)));
+            unPE_1.AgregarIncidencia(new Incidencia("Amarilla", 80, GetJugador(501)));
 
             // PARTIDO PE_2
-            unPE_2.AgregarIncidencia(new Incidencia("Gol", 34, GetJugador(124)));
-            unPE_2.AgregarIncidencia(new Incidencia("Gol", 34, GetJugador(123)));
-            unPE_2.AgregarIncidencia(new Incidencia("Roja", 34, GetJugador(601)));
+            unPE_2.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(124)));
+            unPE_2.AgregarIncidencia(new Incidencia("Gol", 64, GetJugador(123)));
+            unPE_2.AgregarIncidencia(new Incidencia("Roja", 70, GetJugador(601)));
         }
 
 
