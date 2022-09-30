@@ -16,7 +16,7 @@ namespace Dominio
             Tipo = tipo;
             Minuto = minuto;
             UnJugador = jugador;
-            //ValidarIncidencia();
+            ValidarIncidencia();
         }
 
         public void ValidarIncidencia()

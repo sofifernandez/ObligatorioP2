@@ -32,23 +32,43 @@ namespace Dominio
         //----------------------------------------------------------------------------------------------------------//
         public void ValidarPeriodista()
         {
-            ValidarDatosGen();
+           
+            ValidarNombre();
             ValidarEmail();
             ValidarPassword();
-        }
-        private void ValidarDatosGen()
+            
+         }
+
+        private void ValidarNombre()
         {
-            if (string.IsNullOrEmpty(NombreCompleto) && string.IsNullOrEmpty(Email) && string.IsNullOrEmpty(Password))
+            if (string.IsNullOrEmpty(NombreCompleto))
             {
-                throw new Exception("Faltan datos para guardar al periodista");
+                throw new Exception("Faltan el nombre para guardar al periodista");
             }
         }
 
-        //todo arreglar que no aparezca mas de un @
         private void ValidarEmail()
         {
+            if (string.IsNullOrEmpty(Email))
+            {
+                throw new Exception("No ingresó mail");
+            }
             int indice = Email.IndexOf('@');
             if (indice <= 0 || indice >= Email.Length - 1)
+            {
+                throw new Exception("El formato del email es incorrecto");
+            }
+
+            int arrobas = 0;
+            foreach(char s in Email)
+            {
+                if (s == '@')
+                {
+                    arrobas++;
+                }
+            }
+
+            if (arrobas > 1)
             {
                 throw new Exception("El formato del email es incorrecto");
             }

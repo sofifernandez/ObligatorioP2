@@ -1004,12 +1004,12 @@ namespace Dominio
             }
         }
 
-        public string ArmarPeriodista(string nombreCompleto, string email, string password)
+        public void ArmarPeriodista(string nombreCompleto, string email, string password)
         {
             try
             {
                 Periodista nuevoPeriodista = new Periodista(nombreCompleto, email, password);
-                return AltaPeriodista(nuevoPeriodista);
+                AltaPeriodista(nuevoPeriodista);
             }
             catch (Exception e)
             {
@@ -1192,7 +1192,7 @@ namespace Dominio
             _partidos.Add(partido);
         }
 
-        public string AltaPeriodista(Periodista periodista)
+        public void AltaPeriodista(Periodista periodista)
         {
             if (periodista == null)
             {
@@ -1200,10 +1200,9 @@ namespace Dominio
             }
             if (_periodistas.Contains(periodista))
             {
-                throw new Exception($"El {periodista.NombreCompleto} ya existe en el sistema");
+                throw new Exception($"El mail {periodista.Email} ya existe en el sistema");
             }
             _periodistas.Add(periodista);
-            return "ok";
         }
 
         //-------------------------------FUNCIONALIDAD PAISES------------------------------------------------------//
@@ -1275,7 +1274,6 @@ namespace Dominio
             return _misPartidos; ;
         }
 
-        //todo : chequear que no se agreguen los jugadores más de una vez
         public List<Jugador> JugadoresExpulsados()
         {
             List<Jugador> _misJugadores = new List<Jugador>();
@@ -1318,12 +1316,11 @@ namespace Dominio
         //-------------------------------FUNCIONALIDAD SELECCIONES------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
 
-        //todo conviene hacer con == o con Contains para un string??
         private Seleccion GetSeleccion(string nombreSelec)
         {
             foreach (Seleccion item in _selecciones)
             {
-                if (item.Pais.Nombre==nombreSelec)
+                if (item.Pais.Nombre.ToLower()==nombreSelec.ToLower())
                 {
                     return item;
                 }
@@ -1331,10 +1328,13 @@ namespace Dominio
             return null;
         }
 
-        //todo terminar esto
         public (Partido, int) PartidoMasGoles(string nombreSelec)
         {
-            //Seleccion unaS = GetSeleccion(nombreSelc);
+            if (GetSeleccion(nombreSelec)==null)
+            {
+                throw new Exception("La selección ingresada no existe");
+            }
+
             int masGoles = 0;
             Partido partidoGoles = null;
             foreach(Partido p in Partidos)

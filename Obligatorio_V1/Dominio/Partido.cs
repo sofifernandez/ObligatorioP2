@@ -64,7 +64,6 @@ namespace Dominio
 
         //todo finalizar partido --> fase de grupos puede haber empate, pero en eliminatorias no.
 
-
         //-------------------------------RESEÑAS---------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
         public void AgregarResena(Reseña reseña)

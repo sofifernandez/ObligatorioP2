@@ -46,7 +46,7 @@ namespace Obligatorio_V1
             int opcion;
             do
             {
-                Console.ForegroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.Blue;
                 MostrarMenu();
                 Console.ForegroundColor = ConsoleColor.White;
 
@@ -115,32 +115,59 @@ namespace Obligatorio_V1
             return numero;
         }
 
-        static string MenuAltaPeriodista()
+        static void MenuAltaPeriodista()
         {
-            Console.WriteLine("Ingrese el nombre completo:");
-            string nombreCompleto = Console.ReadLine();
+            try
+            {
+                Console.WriteLine("Ingrese el nombre completo:");
+                string nombreCompleto = Console.ReadLine();
 
-            Console.WriteLine("Ingrese el email:");
-            string email = Console.ReadLine();
+                Console.WriteLine("Ingrese el email:");
+                string email = Console.ReadLine();
 
-            Console.WriteLine("Ingrese la contraseña:");
-            string password = Console.ReadLine();
+                Console.WriteLine("Ingrese la contraseña:");
+                string password = Console.ReadLine();
 
-            return unS.ArmarPeriodista(nombreCompleto, email, password);
+                unS.ArmarPeriodista(nombreCompleto, email, password);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Periodista agregado con éxito");
+                Console.ForegroundColor = ConsoleColor.White;
+
+            }
+            catch (Exception e)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(e.Message);
+                Console.ForegroundColor = ConsoleColor.White;
+
+            }
         }
 
         static void MenuAsignarValorReferencia()
         {
             Console.WriteLine("Ingrese un monto, el cual servirá de referencia para calcular la categoria financiera de los jugadores:");
-            int monto = int.Parse(Console.ReadLine());
+            //int monto = int.Parse(Console.ReadLine());
+            int monto = PedirNumero();
+            if (monto > 0)
+            {
+                unS.AgregarCategoria(monto);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"El monto ingresado fue de {monto}");
+                Console.ForegroundColor = ConsoleColor.White;
+            } else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Elije un numero mayor a 0");
+                Console.ForegroundColor = ConsoleColor.White;
+            }
 
-            unS.AgregarCategoria(monto);
+            
         }
 
         static void MenuPartidosDeJugador()
         {
             Console.WriteLine("Ingrese el ID de un jugador para mostrar todos los partidos en los que ha participado:");
-            int id = int.Parse(Console.ReadLine());
+            int id = PedirNumero();
 
             MostrarPartidosJugador(id);
         }
@@ -162,72 +189,11 @@ namespace Obligatorio_V1
             MostrarJugadoresGoles();
         }
 
-        static void FuncionesDePrueba()
-        {
-            //MostrarPaises();
-            //MostrarJugadores();
-            //MostrarSelecciones();
-            //MostrarPartidos();
-            MostrarPeriodistas();
-            MostrarPartidosJugador(38);
-            MostrarJugadoresExpulsados();
-            MostrarPartidoMasGoles("Uruguay");
-            MostrarJugadoresGoles();
-            Console.ReadKey();
-        }
+        
 
         //-------------------------------MOSTRAR DATA---------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
-        static void MostrarPaises()
-        {
-            Console.WriteLine("Paises:");
-            foreach (Pais item in unS.Paises)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------\n");
-        }
-
-        static void MostrarJugadores()
-        {
-            Console.WriteLine("Jugadores:");
-            foreach (Jugador item in unS.Jugadores)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine("------------------------------------------------------------------------------------------------------------------\n");
-        }
-
-        static void MostrarSelecciones()
-        {
-            Console.WriteLine("Selecciones:");
-            foreach (Seleccion item in unS.Selecciones)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine("------------------------------------------------------------------------------------------------------------------\n");
-        }
-
-        static void MostrarPartidos()
-        {
-            Console.WriteLine("Partidos:");
-            foreach (Partido item in unS.Partidos)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine("------------------------------------------------------------------------------------------------------------------\n");
-        }
-
-        static void MostrarPeriodistas()
-        {
-            Console.WriteLine("Periodistas:");
-            foreach (Periodista item in unS.Periodistas)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine("------------------------------------------------------------------------------------------------------------------\n");
-
-        }
+            
 
         static void MostrarPartidosJugador (int IDJugador)
         {
@@ -253,7 +219,9 @@ namespace Obligatorio_V1
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("El jugador seleccionado no existe");
+                Console.ForegroundColor = ConsoleColor.White;
             }
             Console.WriteLine("------------------------------------------------------------------------------------------------------------------\n");
 
@@ -274,10 +242,27 @@ namespace Obligatorio_V1
 
         static void MostrarPartidoMasGoles(string nombrePais)
         {
-            Console.WriteLine($"Partido con más goles de {nombrePais} \n");
-            (Partido partido, int goles) = unS.PartidoMasGoles(nombrePais);
-            Console.WriteLine(partido);
-            Console.WriteLine(goles);
+            try
+            {
+                Console.WriteLine($"Partido con más goles de {nombrePais} \n");
+                (Partido partido, int goles) = unS.PartidoMasGoles(nombrePais);
+                if (partido!=null)
+                {
+                    Console.WriteLine(partido);
+                    Console.WriteLine(goles);
+                }
+                else 
+                {
+                    Console.WriteLine($"La selección de {nombrePais} no ha jugado ningún partido");
+                }
+            }
+            catch (Exception e)
+            {
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(e.Message);
+                Console.ForegroundColor = ConsoleColor.White;
+            }
 
         }
 
@@ -285,7 +270,7 @@ namespace Obligatorio_V1
         {
             foreach (Jugador i in unS.JugadoresGoles())
             {
-                Console.WriteLine($"{i.NombreCompleto}- {i.ValorMercado} - {i.Categoria}");
+                Console.WriteLine($"{i.NombreCompleto}- {i.ValorMercado} - {(!string.IsNullOrEmpty(i.Categoria) ? i.Categoria : "Definir valor de referencia (opción 2) ")}");
             }
         }
     }

@@ -1,10 +1,9 @@
 COSAS QUE FALTAN
 
-1) Agregar incidencias
-2) Agregar partidos eliminatorios -->incidencias
-3) TODOs
+1) Agregar incidencias SOFIA
 
+2) Arreglar el UML
 
-5) Arreglar el UML
+3) Tabla de precargas nuestras
 
-6) Documentacion?
+4) Documentacion

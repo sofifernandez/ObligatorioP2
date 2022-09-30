@@ -65,12 +65,12 @@ namespace Dominio
         public override string ToString()
         {
             string texto = $"Pais: {Pais} \n";
-            texto += $"Jugadores: \n";
+            //texto += $"Jugadores: \n";
 
-            foreach (Jugador item in Jugadores)
-            {
-                texto += $"{item.NombreCompleto} \n";
-            }
+            //foreach (Jugador item in Jugadores)
+            //{
+            //    texto += $"{item.NombreCompleto} \n";
+            //}
 
             return texto;
         }
