@@ -40,10 +40,11 @@ namespace Dominio
         }
         public void ValidarJugadores()
         {
-            //if (Jugadores.Count < 11)
-            //{
-            //    throw new Exception("Debe ingresar al menos 11 jugadores");
-            //}
+
+            if (Jugadores.Count < 11)
+            {
+                throw new Exception("Debe ingresar al menos 11 jugadores");
+            }
         }
 
         //-------------------------------JUGADORES---------------------------------------------------------------------//
@@ -65,13 +66,7 @@ namespace Dominio
         public override string ToString()
         {
             string texto = $"Pais: {Pais} \n";
-            //texto += $"Jugadores: \n";
-
-            //foreach (Jugador item in Jugadores)
-            //{
-            //    texto += $"{item.NombreCompleto} \n";
-            //}
-
+            texto += $"Jugadores: {Jugadores.Count}\n";
             return texto;
         }
 

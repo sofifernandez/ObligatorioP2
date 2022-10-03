@@ -62,7 +62,7 @@ namespace Dominio
         //-------------------------------FINALIZAR PARTIDO-----------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
 
-        //todo finalizar partido --> fase de grupos puede haber empate, pero en eliminatorias no.
+        //Finalizar partido --> fase de grupos puede haber empate, pero en eliminatorias no. Va a ser una función abstracta
 
         //-------------------------------RESEÑAS---------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
@@ -72,7 +72,6 @@ namespace Dominio
             {
                 throw new Exception("La reseña no tiene datos");
             }
-            //telefono.Validar();
             _reseñas.Add(reseña);
 
         }
@@ -80,11 +79,11 @@ namespace Dominio
         //-------------------------------INCIDENCIAS----------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
 
-        public abstract void AgregarIncidencia(Incidencia incidencia);
+        public abstract void AgregarIncidencia(Incidencia incidencia); //--> funci'n abstracta ver cada clasificación
 
 
 
-        public List<Incidencia> FiltrarIncidencias(string tipo, string nombrePais=null)
+        public List<Incidencia> FiltrarIncidencias(string tipo, string nombrePais=null) //--> filtrar incidencia segú tipo y selección si es que se indica
         {
             List<Incidencia> aux = new List<Incidencia>();
             if(nombrePais==null)

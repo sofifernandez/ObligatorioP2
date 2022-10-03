@@ -53,14 +53,14 @@ namespace Dominio
             {
                 throw new Exception("No ingresó mail");
             }
-            int indice = Email.IndexOf('@');
+            int indice = Email.IndexOf('@'); //--> chequear que el @ no esté al comienzo o al final
             if (indice <= 0 || indice >= Email.Length - 1)
             {
                 throw new Exception("El formato del email es incorrecto");
             }
 
             int arrobas = 0;
-            foreach(char s in Email)
+            foreach(char s in Email) //--> chequear que el @ no esté más de una vez
             {
                 if (s == '@')
                 {
@@ -81,7 +81,7 @@ namespace Dominio
             }
         }
 
-        //-------------------------------ToString-------------------------------------------------------------------//
+        //-------------------------------GENERALES-------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
 
         public bool Equals([AllowNull] Periodista other)

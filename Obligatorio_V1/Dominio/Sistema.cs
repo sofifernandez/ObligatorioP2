@@ -30,8 +30,10 @@ namespace Dominio
             PrecargarDatos();
         }
 
+        //------------------------------------------------------------------------------------------------------------//
         //-------------------------------LISTAS QUE ACCEDE EL SISTEMA------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
+
         public List<Pais> Paises
         {
             get { return _paises; }
@@ -56,7 +58,7 @@ namespace Dominio
             get { return _periodistas; }
         }
 
-
+        //-------------------------------------------------------------------------------------------------------------//
         //-------------------------------PRECARGA---------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
         private void PrecargarDatos()
@@ -996,38 +998,11 @@ namespace Dominio
 
                 List<Jugador> misjugadores = JugadoresDe(p);
                 Seleccion selnueva = new Seleccion(p, misjugadores);
-                //foreach (Jugador j in misjugadores)
-                //{
-                //    selnueva.AgregarJugador(j);
-                //}
                 AltaSeleccion(selnueva);
             }
         }
 
-        public void ArmarPeriodista(string nombreCompleto, string email, string password)
-        {
-            try
-            {
-                Periodista nuevoPeriodista = new Periodista(nombreCompleto, email, password);
-                AltaPeriodista(nuevoPeriodista);
-            }
-            catch (Exception e)
-            {
-
-                throw new Exception(e.Message);
-            }
-        }
-
-        public void AgregarCategoria(int MontoRef)
-        {
-            foreach (Jugador item in Jugadores)
-            {
-                item.DetCategoria(MontoRef);
-            }
-        }
-
         
-
         private void PrecargaPartidos()
         {
             //PARTIDOS GRUPO G (Brasil, Serbia, Suiza, Camerún)
@@ -1120,13 +1095,13 @@ namespace Dominio
             unP6_H.AgregarIncidencia(new Incidencia("Gol", 67, GetJugador(502)));
             unP6_H.AgregarIncidencia(new Incidencia("Gol", 80, GetJugador(504)));
 
-            // FASE ELIMINATORIAS--------------------------------- URUGUAY vs CAMERUN y PORTUGAL vs BRASIL
+            // FASE ELIMINATORIAS----- URUGUAY vs CAMERUN y PORTUGAL vs BRASIL
             Partido unPE_1 = new FaseEliminatorias(new DateTime(2022, 12, 6), GetSeleccion("Uruguay"), GetSeleccion("Camerún"));
             Partido unPE_2 = new FaseEliminatorias(new DateTime(2022, 12, 6), GetSeleccion("Portugal"), GetSeleccion("Brasil"));
             AltaPartido(unPE_1);
             AltaPartido(unPE_2);
 
-            // INCIDENCIAS ---------------------------------------
+            // INCIDENCIAS ----
 
             // PARTIDO PE_1
             unPE_1.AgregarIncidencia(new Incidencia("Gol", 60, GetJugador(506)));
@@ -1140,17 +1115,18 @@ namespace Dominio
         }
 
 
-
-        //-------------------------------ALTAS---------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
+        //-------------------------------ALTAS---------------------------------------------------------------------//
+        //--------------------------------------------------------------------------------------------------------//
 
+       
         public void AltaSeleccion(Seleccion seleccion)
         {
             if (seleccion == null)
             {
                 throw new Exception("La seleccion recibida no tiene datos.");
             }
-            if (_selecciones.Contains(seleccion))
+            if (_selecciones.Contains(seleccion)) //--> evaluar que no exista ya en la lista según Nombre
             {
                 throw new Exception($"La seleccion ya existe!");
             }
@@ -1164,7 +1140,7 @@ namespace Dominio
             {
                 throw new Exception("El pais recibido no tiene datos.");
             }
-            if (_paises.Contains(pais))
+            if (_paises.Contains(pais)) //--> evaluar que no exista ya en la lista según Nombre
             {
                 throw new Exception($"El pais {pais.IDPais} ya existe");
             }
@@ -1178,8 +1154,7 @@ namespace Dominio
             {
                 throw new Exception("El Jugaror recibido no tiene datos.");
             }
-            jugador.Validar();
-            if (_jugadores.Contains(jugador))
+            if (_jugadores.Contains(jugador)) //--> evaluar que no exista ya en la lista según ID
             {
                 throw new Exception($"El jugador {jugador.IDJugador} ya existe");
             }
@@ -1193,11 +1168,25 @@ namespace Dominio
                 throw new Exception("Faltan datos del partido");
             }
 
-            if (_partidos.Contains(partido))
+            if (_partidos.Contains(partido)) //--> evaluar que no exista ya en la lista según Seleccion A, Seleccion B y fecha
             {
                 throw new Exception($"El partido {partido.SeleccionA.Pais.Nombre} vs {partido.SeleccionB.Pais.Nombre} con fecha {partido.FechaPartido}  ya existe");
             }
             _partidos.Add(partido);
+        }
+
+        public void ArmarPeriodista(string nombreCompleto, string email, string password)
+        {
+            try
+            {
+                Periodista nuevoPeriodista = new Periodista(nombreCompleto, email, password);
+                AltaPeriodista(nuevoPeriodista);
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
         }
 
         public void AltaPeriodista(Periodista periodista)
@@ -1206,15 +1195,16 @@ namespace Dominio
             {
                 throw new Exception("Faltan datos del periodista");
             }
-            if (_periodistas.Contains(periodista))
+            if (_periodistas.Contains(periodista)) //--> evaluar que no exista ya en la lista según email
             {
                 throw new Exception($"El mail {periodista.Email} ya existe en el sistema");
             }
             _periodistas.Add(periodista);
         }
 
-        //-------------------------------FUNCIONALIDAD PAISES------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
+        //-------------------------------FUNCIONALIDAD PAISES------------------------------------------------------//
+        //--------------------------------------------------------------------------------------------------------//
 
         private Pais GetPais(string nombrePais)
         {
@@ -1228,10 +1218,18 @@ namespace Dominio
             return null;
         }
 
-        //-------------------------------FUNCIONALIDAD JUGADORES---------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
+        //-------------------------------FUNCIONALIDAD JUGADORES---------------------------------------------------//
+        //--------------------------------------------------------------------------------------------------------//
 
-        private List<Jugador> JugadoresDe(Pais p)
+        public void AgregarCategoria(int MontoRef) //--> agregar categoría a los jugadores
+        {
+            foreach (Jugador item in Jugadores)
+            {
+                item.DetCategoria(MontoRef);
+            }
+        }
+        private List<Jugador> JugadoresDe(Pais p) //--> lista de jugadores de un determinado país
         {
             List<Jugador> _misJugadores = new List<Jugador>();
             foreach (Jugador j in Jugadores)
@@ -1245,7 +1243,7 @@ namespace Dominio
             return _misJugadores;
         }
 
-        public Jugador GetJugador(int ID)
+        public Jugador GetJugador(int ID) //--> obtener el jugador según ID
         {
             foreach(Jugador j in Jugadores)
             {
@@ -1257,12 +1255,12 @@ namespace Dominio
             return null;
         }
 
-        public List<Partido> PartidosJugador(int IDJugador)
+        public List<Partido> PartidosJugador(int IDJugador) //--> Obtener todos los partidos que jugó un jugador
         {
             List<Partido> _misPartidos = new List<Partido>();
-            foreach (Partido p in Partidos)
+            foreach (Partido p in Partidos) //--> buscarlo en cada partido y en ambas selecciones que se enfrentan
             {
-                foreach(Jugador j in p.SeleccionA.Jugadores)
+                foreach(Jugador j in p.SeleccionA.Jugadores) 
                 {
                     if(j.IDJugador== IDJugador)
                     {
@@ -1282,27 +1280,27 @@ namespace Dominio
             return _misPartidos; ;
         }
 
-        public List<Jugador> JugadoresExpulsados()
+        public List<Jugador> JugadoresExpulsados() //--> todos los jugadores que han sigo expulsado
         {
             List<Jugador> _misJugadores = new List<Jugador>();
-            foreach (Partido p in Partidos)
+            foreach (Partido p in Partidos) //--> buscarlo en las rojas de cada partido
             {
                 foreach(Incidencia i in p.Incidencias)
                 {
                     if (i.Tipo == "Roja")
                     {
-                        if (!_misJugadores.Contains(i.UnJugador))
+                        if (!_misJugadores.Contains(i.UnJugador)) //--> chequear que no exista ya en la lista
                         {
                             _misJugadores.Add(i.UnJugador);
                         }
                     }
                 }
             }
-            _misJugadores.Sort();
+            _misJugadores.Sort(); //--> ordenar según valor de mercado (descendente) y nombre (ascendente)
             return _misJugadores;
         }
 
-        public List<Jugador> JugadoresGoles()
+        public List<Jugador> JugadoresGoles() //--> listar los jugadores que han hecho goles
         {
             List<Jugador> _misJugadores = new List<Jugador>();
             foreach(Partido p in Partidos)
@@ -1310,7 +1308,7 @@ namespace Dominio
                 List<Incidencia> _misIncidencias = p.FiltrarIncidencias("Gol");
                 foreach(Incidencia i in _misIncidencias)
                 {
-                    if (!_misJugadores.Contains(i.UnJugador))
+                    if (!_misJugadores.Contains(i.UnJugador)) //--> chequear que no exista en la lista
                     {
                         _misJugadores.Add(i.UnJugador);
                     }
@@ -1320,11 +1318,12 @@ namespace Dominio
             return _misJugadores;
         }
 
-        
-        //-------------------------------FUNCIONALIDAD SELECCIONES------------------------------------------------------//
+
+        //------------------------------------------------------------------------------------------------------------//
+        //-------------------------------FUNCIONALIDAD SELECCIONES---------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
 
-        private Seleccion GetSeleccion(string nombreSelec)
+        private Seleccion GetSeleccion(string nombreSelec) //--> buscar una selección según nombre
         {
             foreach (Seleccion item in _selecciones)
             {
@@ -1336,7 +1335,7 @@ namespace Dominio
             return null;
         }
 
-        public (Partido, int) PartidoMasGoles(string nombreSelec)
+        public (Partido, int) PartidoMasGoles(string nombreSelec) //-> Partido en el cuál hizo más goles una selección
         {
             if (GetSeleccion(nombreSelec)==null)
             {
@@ -1345,7 +1344,7 @@ namespace Dominio
 
             int masGoles = 0;
             Partido partidoGoles = null;
-            foreach(Partido p in Partidos)
+            foreach(Partido p in Partidos) //--> Lógica: buscar los partidos en los cuales la selección jugó, sumar la cantidad de goles e ir comparando de a uno
             {
                 int cantGoles = 0;
                 List<Incidencia> _misIncidencias= p.FiltrarIncidencias("Gol", nombreSelec);

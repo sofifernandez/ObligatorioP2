@@ -9,7 +9,6 @@ namespace Dominio
         public string Tipo { get; set; }
         public int Minuto { get; set; }
         public Jugador UnJugador { get; set; }
-        //public Seleccion UnaSeleccion { get; set; }
 
         public Incidencia(string tipo, int minuto, Jugador jugador)
         {

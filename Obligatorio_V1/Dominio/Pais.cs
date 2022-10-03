@@ -48,10 +48,7 @@ namespace Dominio
 
         //-------------------------------GENERAL---------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
-        //public bool Equals([AllowNull] Pais other)
-        //{
-        //    return Nombre == Nombre;
-        //}
+
         public override string ToString()
         {
             return $"Id {IDPais} - {Nombre} - {Alpha}";

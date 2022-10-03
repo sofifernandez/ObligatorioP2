@@ -46,7 +46,7 @@ namespace Dominio
                 throw new Exception("El jugador indicado no está en las selecciones que se enfrentan");
             }
 
-            if (incidencia.Minuto < -1)
+            if (incidencia.Minuto < -1) //--> en eliminatorias puede ser -1, por la definición por penales, pero no menor
             {
                 throw new Exception("El minuto ingresado no es correcto");
             }

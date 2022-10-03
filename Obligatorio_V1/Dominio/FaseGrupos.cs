@@ -57,9 +57,9 @@ namespace Dominio
                 throw new Exception("El jugador indicado no está en las selecciones que se enfrentan");
             }
 
-            if (incidencia.Minuto < 0)
+            if (incidencia.Minuto < 0)// --> no hay definición por penales en fase de grupos así que el minuto no puede ser menor a 0
             {
-                throw new Exception("No hay penales en Fase de Grupos");
+                throw new Exception("El tiempo ingresado es incorrecto");
             }
 
             Incidencias.Add(incidencia);

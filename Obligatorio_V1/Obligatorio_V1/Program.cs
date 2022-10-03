@@ -41,7 +41,10 @@ namespace Obligatorio_V1
             Console.WriteLine(resp);
         }
 
-        static void Menu()
+        //-------------------------------FUNCIONES DEL MENÚ----------------------------------------------------------//
+        //----------------------------------------------------------------------------------------------------------//
+
+        static void Menu() //Menú y opciones
         {
             int opcion;
             do
@@ -91,7 +94,7 @@ namespace Obligatorio_V1
             Console.WriteLine("Ingrese su número a continuación:");        
         }
 
-        static private int PedirNumero()
+        static private int PedirNumero() //--> pedir número y controlar ingreso de letras
         {
             bool salir;
             int numero=0;
@@ -146,7 +149,6 @@ namespace Obligatorio_V1
         static void MenuAsignarValorReferencia()
         {
             Console.WriteLine("Ingrese un monto, el cual servirá de referencia para calcular la categoria financiera de los jugadores:");
-            //int monto = int.Parse(Console.ReadLine());
             int monto = PedirNumero();
             if (monto > 0)
             {
@@ -191,7 +193,7 @@ namespace Obligatorio_V1
 
         
 
-        //-------------------------------MOSTRAR DATA---------------------------------------------------------------------//
+        //-------------------------------MOSTRAR DATA----------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
             
 
