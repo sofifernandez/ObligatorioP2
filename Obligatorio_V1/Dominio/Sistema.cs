@@ -27,7 +27,7 @@ namespace Dominio
 
         private Sistema()
         {
-            PrecargarDatos();
+            //PrecargarDatos();
         }
 
         //------------------------------------------------------------------------------------------------------------//
@@ -61,7 +61,7 @@ namespace Dominio
         //-------------------------------------------------------------------------------------------------------------//
         //-------------------------------PRECARGA---------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
-        private void PrecargarDatos()
+        public void PrecargarDatos()
         {
             PrecargaPaises();
             PrecargaJugadores();
@@ -1032,7 +1032,12 @@ namespace Dominio
             AltaPartido(unP4_H);
             AltaPartido(unP5_H);
             AltaPartido(unP6_H);
-           
+
+            //----------------------------JUGADORES----------------------------------------//
+            //unP1_H.AgregarJugador(GetJugador(123));
+            List<int> jugadoresunP5_H = new List<int>() { 375, 378 };
+            AgregarJugadoresPartidos(unP5_H, jugadoresunP5_H);
+
 
             //------------------------------INCIDENCIAS------------------------------------//
 
@@ -1112,6 +1117,8 @@ namespace Dominio
             unPE_2.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(124)));
             unPE_2.AgregarIncidencia(new Incidencia("Gol", 64, GetJugador(123)));
             unPE_2.AgregarIncidencia(new Incidencia("Roja", 70, GetJugador(601)));
+
+            
         }
 
 
@@ -1258,22 +1265,11 @@ namespace Dominio
         public List<Partido> PartidosJugador(int IDJugador) //--> Obtener todos los partidos que jugó un jugador
         {
             List<Partido> _misPartidos = new List<Partido>();
-            foreach (Partido p in Partidos) //--> buscarlo en cada partido y en ambas selecciones que se enfrentan
+            foreach (Partido p in Partidos) //--> buscarlo en la lista de jugadores de cada partido
             {
-                foreach(Jugador j in p.SeleccionA.Jugadores) 
+                if (p.Jugadores.Contains(GetJugador(IDJugador)))
                 {
-                    if(j.IDJugador== IDJugador)
-                    {
-                        _misPartidos.Add(p);
-                    }
-                }
-
-                foreach (Jugador j in p.SeleccionB.Jugadores)
-                {
-                    if (j.IDJugador == IDJugador)
-                    {
-                        _misPartidos.Add(p);
-                    }
+                    _misPartidos.Add(p);
                 }
 
             }
@@ -1362,5 +1358,27 @@ namespace Dominio
             }
             return (partidoGoles, masGoles);
         }
+
+        //------------------------------------------------------------------------------------------------------------//
+        //-------------------------------FUNCIONALIDAD PARTIDOS---------------------------------------------------//
+        //----------------------------------------------------------------------------------------------------------//
+
+        public void AgregarJugadoresPartidos(Partido partido, List <int> IDs)
+        {
+            foreach(int id in IDs)
+            {
+                try
+                {
+                    partido.AgregarJugador(GetJugador(id));
+                }
+                catch (Exception e)
+                {
+
+                    throw new Exception(e.Message);
+                }
+            }
+        }
+        
+        
     }
 }

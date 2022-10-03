@@ -17,10 +17,16 @@ namespace Dominio
 
         private List<Incidencia> _incidencias = new List<Incidencia>();
         private List<Reseña> _reseñas = new List<Reseña>();
+        private List<Jugador> _jugadores = new List<Jugador>();
 
         public List<Incidencia> Incidencias
         {
             get { return _incidencias; }
+        }
+
+        public List<Jugador> Jugadores
+        {
+            get { return _jugadores; }
         }
 
         private static int uldId;
@@ -63,6 +69,32 @@ namespace Dominio
         //----------------------------------------------------------------------------------------------------------//
 
         //Finalizar partido --> fase de grupos puede haber empate, pero en eliminatorias no. Va a ser una función abstracta
+
+
+        //-------------------------------JUGADOR---------------------------------------------------------------------//
+        //----------------------------------------------------------------------------------------------------------//
+
+        public void AgregarJugador(Jugador unJugador)
+        {
+            bool esta=false;
+            if (SeleccionA.Jugadores.Contains(unJugador))
+            {
+                _jugadores.Add(unJugador);
+                esta = true;
+            }
+
+            if (SeleccionB.Jugadores.Contains(unJugador))
+            {
+                _jugadores.Add(unJugador);
+                esta = true;
+            }
+
+            if (!esta)
+            {
+                throw new Exception($"El jugador {unJugador.NombreCompleto} no está en {SeleccionA.Pais.Nombre} vs {SeleccionB.Pais.Nombre}");
+            }
+        }
+
 
         //-------------------------------RESEÑAS---------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//

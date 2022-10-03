@@ -11,6 +11,7 @@ namespace Obligatorio_V1
         {
             try
             {
+                unS.PrecargarDatos();
                 MostrarDatosprecarga();
                 Menu();
             }
@@ -203,7 +204,7 @@ namespace Obligatorio_V1
             if (unJ != null)
             {
                 List<Partido> partidosDelJugador = unS.PartidosJugador(IDJugador);
-                if (partidosDelJugador.Count > 1)
+                if (partidosDelJugador.Count > 0)
                 {
                     foreach (Partido p in partidosDelJugador)
                     {
