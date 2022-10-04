@@ -150,19 +150,35 @@ namespace Obligatorio_V1
         static void MenuAsignarValorReferencia()
         {
             Console.WriteLine("Ingrese un monto, el cual servirá de referencia para calcular la categoria financiera de los jugadores:");
-            int monto = PedirNumero();
-            if (monto > 0)
+            decimal monto;
+
+            try
             {
-                unS.AgregarCategoria(monto);
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"El monto ingresado fue de {monto}");
-                Console.ForegroundColor = ConsoleColor.White;
-            } else
+                monto = Convert.ToDecimal(Console.ReadLine()); // INGRESAR VALOR CON COMA, NO PUNTO PARA DECIMALES
+                if (monto > 0)
+                {
+                    unS.AgregarCategoria(monto);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"El monto ingresado fue de {monto}");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Elije un numero mayor a 0");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+            catch (Exception)
             {
+
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Elije un numero mayor a 0");
+                Console.Write("Solo debe ingresar numeros. Intentalo de nuevo \n");
                 Console.ForegroundColor = ConsoleColor.White;
             }
+
+
+            
 
             
         }
@@ -189,7 +205,9 @@ namespace Obligatorio_V1
 
         static void MenuJugadoresConGol()
         {
-            MostrarJugadoresGoles();
+            Console.WriteLine("Ingrese el ID de un partido:");
+            int IDPartido = PedirNumero();
+            MostrarJugadoresGoles(IDPartido);
         }
 
         
@@ -269,12 +287,21 @@ namespace Obligatorio_V1
 
         }
 
-        static void MostrarJugadoresGoles()
+        static void MostrarJugadoresGoles(int IDPartido)
         {
-            foreach (Jugador i in unS.JugadoresGoles())
+            List<Jugador> jugadores = unS.JugadoresGoles(IDPartido);
+            if (jugadores.Count == 0)
             {
-                Console.WriteLine($"{i.NombreCompleto}- {i.ValorMercado} - {(!string.IsNullOrEmpty(i.Categoria) ? i.Categoria : "Definir valor de referencia (opción 2) ")}");
+                Console.WriteLine($"El partido {unS.GetPartido(IDPartido).SeleccionA.Pais.Nombre} vs {unS.GetPartido(IDPartido).SeleccionB.Pais.Nombre} no tuvo goles");
             }
+            else
+            {
+                foreach (Jugador i in jugadores)
+                {
+                    Console.WriteLine($"{i.NombreCompleto}- {i.ValorMercado} - {(!string.IsNullOrEmpty(i.Categoria) ? i.Categoria : "Definir valor de referencia (opción 2) ")}");
+                }
+            }
+            
         }
     }
 }

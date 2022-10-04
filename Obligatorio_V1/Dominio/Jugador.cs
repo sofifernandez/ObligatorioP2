@@ -19,12 +19,7 @@ namespace Dominio
         public string Puesto { get; set; }
         public string Categoria { get; set; }
 
-        private static int uldId;
-
-        public Jugador()
-        {
-            IDJugador = uldId++;
-        }
+        
 
         public Jugador(int iDJugador, string nroCamisa, string nombreCompleto, DateTime fechaNacimiento, double altura,string pieHabil, int valorMercado, string moneda,Pais pais, string puesto)
         {
@@ -80,7 +75,7 @@ namespace Dominio
 
         //-------------------------------CATEGORIA---------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
-        public void DetCategoria(int MontoRef) //--> definir categoría de cada jugador según el monto ingresado en el programa
+        public void DetCategoria(decimal MontoRef) //--> definir categoría de cada jugador según el monto ingresado en el programa
         {
             if (ValorMercado <= MontoRef)
             {

@@ -1242,7 +1242,7 @@ namespace Dominio
         //-------------------------------FUNCIONALIDAD JUGADORES---------------------------------------------------//
         //--------------------------------------------------------------------------------------------------------//
 
-        public void AgregarCategoria(int MontoRef) //--> agregar categoría a los jugadores
+        public void AgregarCategoria(decimal MontoRef) //--> agregar categoría a los jugadores
         {
             foreach (Jugador item in Jugadores)
             {
@@ -1309,21 +1309,28 @@ namespace Dominio
             return _misJugadores;
         }
 
-        public List<Jugador> JugadoresGoles() //--> listar los jugadores que han hecho goles
+        public List<Jugador> JugadoresGoles(int IDPartido) //--> listar los jugadores que han hecho goles
         {
             List<Jugador> _misJugadores = new List<Jugador>();
-            foreach(Partido p in Partidos)
+            
+            Partido partido = GetPartido(IDPartido);
+            if (partido != null)
             {
-                List<Incidencia> _misIncidencias = p.FiltrarIncidencias("Gol");
-                foreach(Incidencia i in _misIncidencias)
+                List<Incidencia> _misIncidencias = partido.FiltrarIncidencias("Gol");
+                foreach (Incidencia i in _misIncidencias)
                 {
                     if (!_misJugadores.Contains(i.UnJugador)) //--> chequear que no exista en la lista
                     {
                         _misJugadores.Add(i.UnJugador);
                     }
                 }
-
             }
+            else
+            {
+                throw new Exception("El partido ingresado no existe");
+            }
+            
+
             return _misJugadores;
         }
 
@@ -1396,6 +1403,18 @@ namespace Dominio
                 }
 
             }
+        }
+
+        public Partido GetPartido(int IDPartido)
+        {
+            foreach(Partido p in Partidos)
+            {
+                if (p.IDPartido == IDPartido)
+                {
+                    return p;
+                }
+            }
+            return null;
         }
        
         

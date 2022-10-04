@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Dominio
 {
-    public class Pais
+    public class Pais: IEquatable<Pais>
     {
         public int IDPais { get; private set; }
         public string Nombre { get; set; }
@@ -54,12 +54,10 @@ namespace Dominio
             return $"Id {IDPais} - {Nombre} - {Alpha}";
         }
 
-        public override bool Equals(object obj)
+
+        public bool Equals([AllowNull] Pais other)
         {
-            Pais unP = (Pais)obj;
-            return Nombre == unP.Nombre;
+            return Nombre.Equals(other.Nombre);
         }
-
-
     }
 }

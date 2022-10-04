@@ -12,7 +12,11 @@ namespace Dominio
         public string Email { get; set; }
         public string Password { get; set; }
 
+        public List<Reseña> Reseñas = new List<Reseña>();
+
         private static int uldIdPer;
+
+        
 
         public Periodista()
         {
@@ -79,6 +83,13 @@ namespace Dominio
             {
                 throw new Exception("Contraseña con insuficiente cantidad de caracteres");
             }
+        }
+        //-------------------------------RESEÑAS (no implementado)--------------------------------------------------//
+        //----------------------------------------------------------------------------------------------------------//
+
+        public void AgregarResena(Reseña resena) //--> no implementado en esta entrega
+        {
+            Reseñas.Add(resena);
         }
 
         //-------------------------------GENERALES-------------------------------------------------------------------//
