@@ -1033,10 +1033,31 @@ namespace Dominio
             AltaPartido(unP5_H);
             AltaPartido(unP6_H);
 
+            // FASE ELIMINATORIAS----- URUGUAY vs CAMERUN y PORTUGAL vs BRASIL
+            Partido unPE_1 = new FaseEliminatorias(new DateTime(2022, 12, 6), GetSeleccion("Uruguay"), GetSeleccion("Camerún"));
+            Partido unPE_2 = new FaseEliminatorias(new DateTime(2022, 12, 6), GetSeleccion("Portugal"), GetSeleccion("Brasil"));
+            AltaPartido(unPE_1);
+            AltaPartido(unPE_2);
+
             //----------------------------JUGADORES----------------------------------------//
-            //unP1_H.AgregarJugador(GetJugador(123));
-            List<int> jugadoresunP5_H = new List<int>() { 375, 378 };
-            AgregarJugadoresPartidos(unP5_H, jugadoresunP5_H);
+            AgregarJugadoresPartido(unP1_G);
+            AgregarJugadoresPartido(unP2_G);
+            AgregarJugadoresPartido(unP3_G);
+            AgregarJugadoresPartido(unP4_G);
+            AgregarJugadoresPartido(unP5_G);
+            AgregarJugadoresPartido(unP6_G);
+
+            AgregarJugadoresPartido(unP1_H);
+            AgregarJugadoresPartido(unP2_H);
+            AgregarJugadoresPartido(unP3_H);
+            AgregarJugadoresPartido(unP4_H);
+            AgregarJugadoresPartido(unP5_H);
+            AgregarJugadoresPartido(unP6_H);
+
+            AgregarJugadoresPartido(unPE_1);
+            AgregarJugadoresPartido(unPE_2);
+
+
 
 
             //------------------------------INCIDENCIAS------------------------------------//
@@ -1099,14 +1120,6 @@ namespace Dominio
             unP6_H.AgregarIncidencia(new Incidencia("Gol", 37, GetJugador(501)));
             unP6_H.AgregarIncidencia(new Incidencia("Gol", 67, GetJugador(502)));
             unP6_H.AgregarIncidencia(new Incidencia("Gol", 80, GetJugador(504)));
-
-            // FASE ELIMINATORIAS----- URUGUAY vs CAMERUN y PORTUGAL vs BRASIL
-            Partido unPE_1 = new FaseEliminatorias(new DateTime(2022, 12, 6), GetSeleccion("Uruguay"), GetSeleccion("Camerún"));
-            Partido unPE_2 = new FaseEliminatorias(new DateTime(2022, 12, 6), GetSeleccion("Portugal"), GetSeleccion("Brasil"));
-            AltaPartido(unPE_1);
-            AltaPartido(unPE_2);
-
-            // INCIDENCIAS ----
 
             // PARTIDO PE_1
             unPE_1.AgregarIncidencia(new Incidencia("Gol", 60, GetJugador(506)));
@@ -1363,22 +1376,28 @@ namespace Dominio
         //-------------------------------FUNCIONALIDAD PARTIDOS---------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
 
-        public void AgregarJugadoresPartidos(Partido partido, List <int> IDs)
+        //PARA SIMPLIFICAR EN ESTA ENTREGA PUSIMOS QUE SE JUGARÁN SOLO LOS PRIMEROS 11 JUGADORES DE CADA SELECCIÓN
+        public void AgregarJugadoresPartido(Partido partido)
         {
-            foreach(int id in IDs)
-            {
-                try
+           for (int i = 0; i < 11; i++)
+           {
+                if (!partido.Jugadores.Contains(partido.SeleccionA.Jugadores[i]))
                 {
-                    partido.AgregarJugador(GetJugador(id));
+                    partido.AgregarJugador(partido.SeleccionA.Jugadores[i]);
                 }
-                catch (Exception e)
-                {
+                
+           }
 
-                    throw new Exception(e.Message);
+            for (int i = 0; i < 11; i++)
+            {
+                if (!partido.Jugadores.Contains(partido.SeleccionB.Jugadores[i]))
+                {
+                    partido.AgregarJugador(partido.SeleccionB.Jugadores[i]);
                 }
+
             }
         }
-        
+       
         
     }
 }

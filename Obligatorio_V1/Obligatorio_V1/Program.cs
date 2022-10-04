@@ -39,7 +39,7 @@ namespace Obligatorio_V1
             resp += $"Selecciones: {unS.Selecciones.Count}\n";
             resp += $"Paises: {unS.Paises.Count}\n";
             resp += $"Partidos: {unS.Partidos.Count}\n";
-            Console.WriteLine(resp);
+            Console.WriteLine(resp);            
         }
 
         //-------------------------------FUNCIONES DEL MENÚ----------------------------------------------------------//

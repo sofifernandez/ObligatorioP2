@@ -68,7 +68,10 @@ namespace Dominio
         //-------------------------------FINALIZAR PARTIDO-----------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
 
-        //Finalizar partido --> fase de grupos puede haber empate, pero en eliminatorias no. Va a ser una función abstracta
+        // Observaciones para próxima entrega:
+        // Fase de grupos puede haber empate, pero en eliminatorias no. Va a ser una función abstracta
+        // Chequear que las incidencias de goles hayan sido de jugadores que efectivamente estuvieron en cancha (lista final de jugadores del partido)
+        // Al menos 11 jugadores de cada selección.
 
 
         //-------------------------------JUGADOR---------------------------------------------------------------------//
@@ -95,18 +98,6 @@ namespace Dominio
             }
         }
 
-
-        //-------------------------------RESEÑAS---------------------------------------------------------------------//
-        //----------------------------------------------------------------------------------------------------------//
-        public void AgregarResena(Reseña reseña)
-        {
-            if (reseña == null)
-            {
-                throw new Exception("La reseña no tiene datos");
-            }
-            _reseñas.Add(reseña);
-
-        }
 
         //-------------------------------INCIDENCIAS----------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
