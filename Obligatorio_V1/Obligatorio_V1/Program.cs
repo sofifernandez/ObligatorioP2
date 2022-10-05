@@ -89,7 +89,7 @@ namespace Obligatorio_V1
                 "3 - Listar todos partidos de un jugador \n" +
                 "4 - Listar los jugadores que han sido expulsados \n" +
                 "5 - Mostrar el partido con mas goles de una selección \n" +
-                "6 - Listar jugadores que han convertido gol \n" +
+                "6 - Listar jugadores que han convertido gol en un partido dado\n" +
                 "0 - Salir \n"
             );
             Console.WriteLine("Ingrese su número a continuación:");        
@@ -154,7 +154,7 @@ namespace Obligatorio_V1
 
             try
             {
-                monto = Convert.ToDecimal(Console.ReadLine()); // INGRESAR VALOR CON COMA, NO PUNTO PARA DECIMALES
+                monto = Convert.ToDecimal(Console.ReadLine(), System.Globalization.CultureInfo.InvariantCulture); // INGRESAR VALOR CON PUNTO PARA DECIMALES
                 if (monto > 0)
                 {
                     unS.AgregarCategoria(monto);
