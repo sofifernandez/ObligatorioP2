@@ -1063,29 +1063,29 @@ namespace Dominio
             //------------------------------INCIDENCIAS------------------------------------//
 
             //PARTIDO 1_G
-            unP1_G.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(129))); 
-            unP1_G.AgregarIncidencia(new Incidencia("Gol", 50, GetJugador(130)));
+            unP1_G.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(113))); 
+            unP1_G.AgregarIncidencia(new Incidencia("Gol", 50, GetJugador(114)));
             unP1_G.AgregarIncidencia(new Incidencia("Amarilla", 87, GetJugador(236)));
             //PARTIDO 2_G
             unP2_G.AgregarIncidencia(new Incidencia("Roja", 25, GetJugador(289)));
-            unP2_G.AgregarIncidencia(new Incidencia("Gol", 49, GetJugador(304)));
-            unP2_G.AgregarIncidencia(new Incidencia("Gol", 70, GetJugador(728)));
+            unP2_G.AgregarIncidencia(new Incidencia("Gol", 49, GetJugador(299)));
+            unP2_G.AgregarIncidencia(new Incidencia("Gol", 70, GetJugador(721)));
 
             //PARTIDO 3_G
             unP3_G.AgregarIncidencia(new Incidencia("Amarilla", 15, GetJugador(297)));
-            unP3_G.AgregarIncidencia(new Incidencia("Gol", 20, GetJugador(105)));
-            unP3_G.AgregarIncidencia(new Incidencia("Gol", 80, GetJugador(111)));
+            unP3_G.AgregarIncidencia(new Incidencia("Gol", 20, GetJugador(112)));
+            unP3_G.AgregarIncidencia(new Incidencia("Gol", 80, GetJugador(113)));
 
             ////PARTIDO 4_G
             unP4_G.AgregarIncidencia(new Incidencia("Amarilla", 60, GetJugador(716)));
-            unP4_G.AgregarIncidencia(new Incidencia("Gol", 75, GetJugador(732)));
+            unP4_G.AgregarIncidencia(new Incidencia("Gol", 75, GetJugador(720)));
             unP4_G.AgregarIncidencia(new Incidencia("Amarilla", 85, GetJugador(728)));
 
             ////PARTIDO 5_G 
             unP5_G.AgregarIncidencia(new Incidencia("Amarilla", 10, GetJugador(110)));
-            unP5_G.AgregarIncidencia(new Incidencia("Gol", 50, GetJugador(129)));
-            unP5_G.AgregarIncidencia(new Incidencia("Gol", 60, GetJugador(129)));
-            unP5_G.AgregarIncidencia(new Incidencia("Gol", 85, GetJugador(735)));
+            unP5_G.AgregarIncidencia(new Incidencia("Gol", 50, GetJugador(111)));
+            unP5_G.AgregarIncidencia(new Incidencia("Gol", 60, GetJugador(113)));
+            unP5_G.AgregarIncidencia(new Incidencia("Gol", 85, GetJugador(721))); 
 
             ////PARTIDO 6_G 
             unP6_G.AgregarIncidencia(new Incidencia("Amarilla", 32, GetJugador(238)));
@@ -1093,42 +1093,42 @@ namespace Dominio
 
             //PARTIDO 1_H
             unP1_H.AgregarIncidencia(new Incidencia("Gol", 50, GetJugador(542)));
-            unP1_H.AgregarIncidencia(new Incidencia("Gol", 87, GetJugador(614)));
-            unP1_H.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(617)));
+            unP1_H.AgregarIncidencia(new Incidencia("Gol", 87, GetJugador(605)));
+            unP1_H.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(605)));
 
             //PARTIDO 2_H
             unP2_H.AgregarIncidencia(new Incidencia("Amarilla",89, GetJugador(388)));
-            unP2_H.AgregarIncidencia(new Incidencia("Gol", 15, GetJugador(494)));
-            unP2_H.AgregarIncidencia(new Incidencia("Gol", 49, GetJugador(497)));
+            unP2_H.AgregarIncidencia(new Incidencia("Gol", 15, GetJugador(489)));
+            unP2_H.AgregarIncidencia(new Incidencia("Gol", 49, GetJugador(488)));
 
             //PARTIDO 3_H
             unP3_H.AgregarIncidencia(new Incidencia("Amarilla", 20, GetJugador(598)));
-            unP3_H.AgregarIncidencia(new Incidencia("Gol", 88, GetJugador(490)));
+            unP3_H.AgregarIncidencia(new Incidencia("Gol", 88, GetJugador(488)));
             unP3_H.AgregarIncidencia(new Incidencia("Amarilla", 53, GetJugador(498)));
 
             //PARTIDO 4_H
             unP4_H.AgregarIncidencia(new Incidencia("Roja", 20, GetJugador(393)));
-            unP4_H.AgregarIncidencia(new Incidencia("Gol", 40, GetJugador(396)));
-            unP4_H.AgregarIncidencia(new Incidencia("Gol", 53, GetJugador(396)));
+            unP4_H.AgregarIncidencia(new Incidencia("Gol", 40, GetJugador(383)));
+            unP4_H.AgregarIncidencia(new Incidencia("Gol", 53, GetJugador(383)));
 
             //PARTIDO 5_H
             unP5_H.AgregarIncidencia(new Incidencia("Amarilla", 23, GetJugador(375)));
             unP5_H.AgregarIncidencia(new Incidencia("Amarilla", 88, GetJugador(378)));
-            unP5_H.AgregarIncidencia(new Incidencia("Gol", 34, GetJugador(611)));
+            unP5_H.AgregarIncidencia(new Incidencia("Gol", 34, GetJugador(605)));// check
 
             //PARTIDO 6_H
-            unP6_H.AgregarIncidencia(new Incidencia("Gol", 37, GetJugador(501)));
-            unP6_H.AgregarIncidencia(new Incidencia("Gol", 67, GetJugador(502)));
-            unP6_H.AgregarIncidencia(new Incidencia("Gol", 80, GetJugador(504)));
+            unP6_H.AgregarIncidencia(new Incidencia("Gol", 37, GetJugador(484)));
+            unP6_H.AgregarIncidencia(new Incidencia("Gol", 67, GetJugador(485)));
+            unP6_H.AgregarIncidencia(new Incidencia("Gol", 80, GetJugador(489)));
 
             // PARTIDO PE_1
-            unPE_1.AgregarIncidencia(new Incidencia("Gol", 60, GetJugador(506)));
-            unPE_1.AgregarIncidencia(new Incidencia("Gol", 75, GetJugador(501)));
+            unPE_1.AgregarIncidencia(new Incidencia("Gol", 60, GetJugador(487)));
+            unPE_1.AgregarIncidencia(new Incidencia("Gol", 75, GetJugador(488)));
             unPE_1.AgregarIncidencia(new Incidencia("Amarilla", 80, GetJugador(501)));
 
             // PARTIDO PE_2
-            unPE_2.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(124)));
-            unPE_2.AgregarIncidencia(new Incidencia("Gol", 64, GetJugador(123)));
+            unPE_2.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(112)));
+            unPE_2.AgregarIncidencia(new Incidencia("Gol", 64, GetJugador(114)));
             unPE_2.AgregarIncidencia(new Incidencia("Roja", 70, GetJugador(601)));
 
             
@@ -1351,16 +1351,17 @@ namespace Dominio
             return null;
         }
 
-        public (Partido, int) PartidoMasGoles(string nombreSelec) //-> Partido en el cuál hizo más goles una selección
+        public (List <Partido>, int) PartidoMasGoles(string nombreSelec) //-> Partido en el cuál hizo más goles una selección
         {
             if (GetSeleccion(nombreSelec)==null)
             {
                 throw new Exception("La selección ingresada no existe");
             }
 
-            int masGoles = 0;
-            Partido partidoGoles = null;
-            foreach(Partido p in Partidos) //--> Lógica: buscar los partidos en los cuales la selección jugó, sumar la cantidad de goles e ir comparando de a uno
+            int masGoles = 1;
+            //Partido partidoGoles = null;
+            List<Partido> _partidoGoles = new List<Partido>();
+            foreach (Partido p in Partidos) //--> Lógica: buscar los partidos en los cuales la selección jugó, sumar la cantidad de goles e ir comparando de a uno
             {
                 int cantGoles = 0;
                 List<Incidencia> _misIncidencias= p.FiltrarIncidencias("Gol", nombreSelec);
@@ -1370,13 +1371,19 @@ namespace Dominio
                        cantGoles++;
                     
                 }
+                if (cantGoles == masGoles)
+                {
+                    _partidoGoles.Add(p);
+                }
+
                 if (cantGoles > masGoles)
                 {
                     masGoles = cantGoles;
-                    partidoGoles = p;
+                    _partidoGoles.Clear();
+                    _partidoGoles.Add(p);
                 }
             }
-            return (partidoGoles, masGoles);
+            return (_partidoGoles, masGoles);
         }
 
         //------------------------------------------------------------------------------------------------------------//

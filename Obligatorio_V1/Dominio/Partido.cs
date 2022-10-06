@@ -153,12 +153,12 @@ namespace Dominio
         public override string ToString()
         {
             string respuesta = "";
-            respuesta += $"ID {IDPartido} \n";
-            respuesta += $"Fecha {FechaPartido} \n";
-            respuesta += $"Seleccion A {SeleccionA} \n";
-            respuesta += $"Seleccion B {SeleccionB} \n";
-            respuesta += $"Finalizado {Finalizado} \n";
-            respuesta += $"Resultado {Resultado} \n";
+            respuesta += $"ID: {IDPartido} \n";
+            respuesta += $"Fecha: {FechaPartido} \n";
+            respuesta += $"Seleccion A: {SeleccionA.Pais.Nombre} \n";
+            respuesta += $"Seleccion B: {SeleccionB.Pais.Nombre} \n";
+            respuesta += $"Finalizado: {Finalizado} \n";
+            respuesta += $"Resultado: {Resultado} \n";
             respuesta += "------------------------------------ \n";
             if (_incidencias.Count > 0)
             {

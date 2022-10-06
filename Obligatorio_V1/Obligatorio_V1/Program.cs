@@ -266,15 +266,20 @@ namespace Obligatorio_V1
             try
             {
                 Console.WriteLine($"Partido con más goles de {nombrePais} \n");
-                (Partido partido, int goles) = unS.PartidoMasGoles(nombrePais);
-                if (partido!=null)
+                (List<Partido> _partido, int goles) = unS.PartidoMasGoles(nombrePais);
+                if (_partido.Count>0)
                 {
-                    Console.WriteLine(partido);
-                    Console.WriteLine(goles);
+                    foreach(Partido p in _partido)
+                    {
+                        Console.WriteLine(p);
+                        Console.WriteLine("-----------------------------------------------");
+                        Console.WriteLine($"Goles convertidos por {nombrePais}: {goles}");
+                    }
+                    
                 }
                 else 
                 {
-                    Console.WriteLine($"La selección de {nombrePais} no ha jugado ningún partido");
+                    Console.WriteLine($"La selección de {nombrePais} no ha convertido goles aún");
                 }
             }
             catch (Exception e)
