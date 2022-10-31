@@ -1,0 +1,19 @@
+﻿@using Dominio;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<h1>Partidos</h1>
+<div>
+    @foreach (Partido item in ViewBag.Partidos)
+    {
+    <p>@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</p>
+    }
+</div>
+
+
