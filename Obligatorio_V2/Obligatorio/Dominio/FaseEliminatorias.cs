@@ -55,6 +55,11 @@ namespace Dominio
             Incidencias.Add(incidencia);
         }
 
+        //public override void FinalizarPartido()
+        //{
+
+        //}
+
         //-------------------------------FUNCIONES GENERALES---------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
         public override string ToString()

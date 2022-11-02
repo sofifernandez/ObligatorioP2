@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Dominio
 {
-    public class Seleccion: IEquatable<Seleccion>
+    public class Seleccion: IEquatable<Seleccion>, IComparable<Seleccion>
     {
         public Pais Pais { get; private set; }
         public List<Jugador> Jugadores = new List<Jugador>();
@@ -70,6 +70,9 @@ namespace Dominio
             return texto;
         }
 
-        
+        public int CompareTo([AllowNull] Seleccion other)
+        {
+            return Pais.Nombre.CompareTo(other.Pais.Nombre);
+        }
     }
 }

@@ -27,6 +27,23 @@ namespace Obligatorio.Controllers
             return View();
         }
 
+        public IActionResult VerSelecciones()
+        {
+            //unS.PrecargarDatos();
+            List<Seleccion> selec = unS.Selecciones;
+            selec.Sort();
+            ViewBag.Selecciones = selec;
+            return View();
+        }
+
+        public IActionResult VerPartidos()
+        {
+            (List<Partido> partidosFinalizados, List<Partido> partidosPorJugar) = unS.ClasificarPartidos();
+            ViewBag.PartidosFinalizados = partidosFinalizados;
+            ViewBag.PartidosPorJugar = partidosPorJugar;
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

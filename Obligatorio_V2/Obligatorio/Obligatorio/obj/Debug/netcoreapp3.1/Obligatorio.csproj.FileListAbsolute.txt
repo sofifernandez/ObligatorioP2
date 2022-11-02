@@ -38,3 +38,5 @@ C:\Users\sofia\OneDrive\ORT\Semestre2\P2\Obligatorio\Obligatorio_V2\Obligatorio\
 C:\Users\sofia\OneDrive\ORT\Semestre2\P2\Obligatorio\Obligatorio_V2\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Obligatorio.dll
 C:\Users\sofia\OneDrive\ORT\Semestre2\P2\Obligatorio\Obligatorio_V2\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Obligatorio.pdb
 C:\Users\sofia\OneDrive\ORT\Semestre2\P2\Obligatorio\Obligatorio_V2\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Obligatorio.genruntimeconfig.cache
+C:\Users\sofia\OneDrive\ORT\Semestre2\P2\Obligatorio\Obligatorio_V2\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Home\VerSelecciones.cshtml.g.cs
+C:\Users\sofia\OneDrive\ORT\Semestre2\P2\Obligatorio\Obligatorio_V2\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Home\VerPartidos.cshtml.g.cs

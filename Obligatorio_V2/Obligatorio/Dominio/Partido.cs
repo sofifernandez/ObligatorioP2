@@ -73,6 +73,8 @@ namespace Dominio
         // Chequear que las incidencias de goles hayan sido de jugadores que efectivamente estuvieron en cancha (lista final de jugadores del partido)
         // Al menos 11 jugadores de cada selección.
 
+        //public abstract void FinalizarPartido();
+
 
         //-------------------------------JUGADOR---------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//

@@ -1423,6 +1423,24 @@ namespace Dominio
             }
             return null;
         }
+
+        public (List<Partido>, List<Partido>) ClasificarPartidos()
+        {
+            List<Partido> partidosFinalizados = new List<Partido>();
+            List<Partido> partidosPorJugar = new List<Partido>();
+            foreach (Partido p in Partidos)
+            {
+                if (p.Finalizado)
+                {
+                    partidosFinalizados.Add(p);
+                }
+                else
+                {
+                    partidosPorJugar.Add(p);
+                }
+            }
+            return (partidosFinalizados, partidosPorJugar);
+        }
        
         
     }
