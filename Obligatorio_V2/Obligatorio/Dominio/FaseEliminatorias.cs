@@ -55,10 +55,43 @@ namespace Dominio
             Incidencias.Add(incidencia);
         }
 
-        //public override void FinalizarPartido()
-        //{
+        public override void FinalizarPartido()
+        {
+            List<Incidencia> golesA = FiltrarIncidencias("Gol", SeleccionA.Pais.Nombre);
+            List<Incidencia> golesB = FiltrarIncidencias("Gol", SeleccionB.Pais.Nombre);
+            bool penales=false;
+            foreach(Incidencia item in golesA) //que mire solo una lista de incidencias, si ya hay un gol en -1 es porque fueron a penales
+            {
+                if (item.Minuto < 0)
+                {
+                    penales = true;
+                }
+            }
 
-        //}
+            if (penales)
+            {
+                if (golesA.Count > golesB.Count)
+                {
+                    Resultado = $"Empate en tiempo de juego. Ganador {SeleccionA.Pais.Nombre} en tanda de penales";
+                }
+                else
+                {
+                    Resultado = $"Empate en tiempo de juego. Ganador {SeleccionB.Pais.Nombre} en tanda de penales";
+                }
+            }
+            else
+            {
+                if (golesA.Count > golesB.Count)
+                {
+                    Resultado = $"Ganador: {SeleccionA.Pais.Nombre}";
+                }
+                else
+                {
+                    Resultado = $"Ganador: {SeleccionB.Pais.Nombre}";
+                }
+            }
+            Finalizado = true;
+        }
 
         //-------------------------------FUNCIONES GENERALES---------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//

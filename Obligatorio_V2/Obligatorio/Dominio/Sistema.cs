@@ -1126,12 +1126,21 @@ namespace Dominio
             unPE_1.AgregarIncidencia(new Incidencia("Gol", 75, GetJugador(488)));
             unPE_1.AgregarIncidencia(new Incidencia("Amarilla", 80, GetJugador(501)));
 
-            // PARTIDO PE_2
-            unPE_2.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(112)));
-            unPE_2.AgregarIncidencia(new Incidencia("Gol", 64, GetJugador(114)));
+            // PARTIDO PE_2 (Empate y definición por penales)
+            unPE_2.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(112))); //brasil
+            unPE_2.AgregarIncidencia(new Incidencia("Gol", 64, GetJugador(603))); //portugal
             unPE_2.AgregarIncidencia(new Incidencia("Roja", 70, GetJugador(601)));
+            //penalesBrasil:
+            unPE_2.AgregarIncidencia(new Incidencia("Gol", -1, GetJugador(109)));
+            unPE_2.AgregarIncidencia(new Incidencia("Gol", -1, GetJugador(110)));
+            unPE_2.AgregarIncidencia(new Incidencia("Gol", -1, GetJugador(111)));
+            unPE_2.AgregarIncidencia(new Incidencia("Gol", -1, GetJugador(112)));
+            //penalesPortugal:
+            unPE_2.AgregarIncidencia(new Incidencia("Gol", -1, GetJugador(600)));
+            unPE_2.AgregarIncidencia(new Incidencia("Gol", -1, GetJugador(602)));
 
-            
+
+
         }
 
 
@@ -1426,22 +1435,48 @@ namespace Dominio
 
         public (List<Partido>, List<Partido>) ClasificarPartidos()
         {
-            List<Partido> partidosFinalizados = new List<Partido>();
-            List<Partido> partidosPorJugar = new List<Partido>();
-            foreach (Partido p in Partidos)
+            //List<Partido> partidosFinalizados = new List<Partido>();
+            //List<Partido> partidosPorJugar = new List<Partido>();
+            //foreach (Partido p in Partidos)
+            //{
+            //    if (p.Finalizado)
+            //    {
+            //        partidosFinalizados.Add(p);
+            //    }
+            //    else
+            //    {
+            //        partidosPorJugar.Add(p);
+            //    }
+            //}
+            //return (partidosFinalizados, partidosPorJugar);
+            List<Partido> partidosGrupo = new List<Partido>();
+            List<Partido> partidosEliminatoria = new List<Partido>();
+            foreach (Partido item in Partidos)
             {
-                if (p.Finalizado)
+                if(item is FaseEliminatorias)
                 {
-                    partidosFinalizados.Add(p);
+                    partidosEliminatoria.Add(item);
                 }
                 else
                 {
-                    partidosPorJugar.Add(p);
+                    partidosGrupo.Add(item);
                 }
             }
-            return (partidosFinalizados, partidosPorJugar);
+
+            return (partidosGrupo, partidosEliminatoria);
+        } 
+
+        public void FinalizarPartido(int IDPartido)
+        {
+            foreach(Partido item in Partidos)
+            {
+                if (item.IDPartido == IDPartido)
+                {
+                    item.FinalizarPartido();
+                }
+            }
         }
-       
-        
+
+
     }
 }

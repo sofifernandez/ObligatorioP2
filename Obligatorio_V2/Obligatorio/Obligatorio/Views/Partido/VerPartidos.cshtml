@@ -1,0 +1,77 @@
+﻿@using Dominio;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>Partidos</h1>
+<div>
+    <h2>Partidos Fase de Grupos</h2>
+    <div>
+        <h3>Finalizados</h3>
+        @foreach (Partido item in ViewBag.PartidosGrupo)
+        {
+            if (item.Finalizado)
+            {
+                <div class="mt-4">
+                    <h3>@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</h3>
+                    <p>@item.FechaPartido.ToShortDateString()</p>
+                    <p>@item.Resultado</p>
+                    <hr />
+                </div>
+            }
+        }
+    </div>
+
+    <div>
+        <h3>Por finalizar</h3>
+        @foreach (Partido item in ViewBag.PartidosGrupo)
+        {
+                if (!item.Finalizado)
+                {
+                    <div class="mt-4">
+                        <h3>@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</h3>
+                        <p>@item.FechaPartido.ToShortDateString()</p>
+                        <button class="btn-info"><a href="/Partido/FinalizarPartido?id=@item.IDPartido">Finalizar</a></button>
+                        <hr />
+                    </div>
+                }
+        }
+    </div>
+</div>
+
+<div>
+    <h2>Partidos Fase Eliminatorias</h2>
+    <div>
+        <h3>Finalizados</h3>
+        @foreach (Partido item in ViewBag.PartidosEliminatoria)
+        {
+            if (item.Finalizado)
+            {
+                <div class="mt-4">
+                    <h3>@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</h3>
+                    <p>@item.FechaPartido.ToShortDateString()</p>
+                    <p>@item.Resultado</p>
+                    <hr />
+                </div>
+            }
+        }
+    </div>
+
+    <div>
+        <h3>Por finalizar</h3>
+        @foreach (Partido item in ViewBag.PartidosEliminatoria)
+        {
+            if (!item.Finalizado)
+            {
+                <div class="mt-4">
+                    <h3>@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</h3>
+                    <p>@item.FechaPartido.ToShortDateString()</p>
+                    <button class="btn-info"><a href="/Partido/FinalizarPartido?id=@item.IDPartido">Finalizar</a></button>
+                    <hr />
+                </div>
+            }
+        }
+    </div>
+</div>

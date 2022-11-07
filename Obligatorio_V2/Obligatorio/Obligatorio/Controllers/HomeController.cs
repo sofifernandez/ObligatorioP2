@@ -36,13 +36,7 @@ namespace Obligatorio.Controllers
             return View();
         }
 
-        public IActionResult VerPartidos()
-        {
-            (List<Partido> partidosFinalizados, List<Partido> partidosPorJugar) = unS.ClasificarPartidos();
-            ViewBag.PartidosFinalizados = partidosFinalizados;
-            ViewBag.PartidosPorJugar = partidosPorJugar;
-            return View();
-        }
+       
 
         public IActionResult Privacy()
         {
