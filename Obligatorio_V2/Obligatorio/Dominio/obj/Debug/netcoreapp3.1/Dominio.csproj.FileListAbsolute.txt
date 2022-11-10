@@ -48,3 +48,13 @@ C:\Users\sofia\Desktop\Obligatorio\Dominio\obj\Debug\netcoreapp3.1\Dominio.Assem
 C:\Users\sofia\Desktop\Obligatorio\Dominio\obj\Debug\netcoreapp3.1\Dominio.csproj.CoreCompileInputs.cache
 C:\Users\sofia\Desktop\Obligatorio\Dominio\obj\Debug\netcoreapp3.1\Dominio.dll
 C:\Users\sofia\Desktop\Obligatorio\Dominio\obj\Debug\netcoreapp3.1\Dominio.pdb
+C:\Users\santi\Desktop\developORT\ObligatorioP2\Obligatorio_V2\Obligatorio\Dominio\bin\Debug\netcoreapp3.1\Dominio.deps.json
+C:\Users\santi\Desktop\developORT\ObligatorioP2\Obligatorio_V2\Obligatorio\Dominio\bin\Debug\netcoreapp3.1\Dominio.dll
+C:\Users\santi\Desktop\developORT\ObligatorioP2\Obligatorio_V2\Obligatorio\Dominio\bin\Debug\netcoreapp3.1\Dominio.pdb
+C:\Users\santi\Desktop\developORT\ObligatorioP2\Obligatorio_V2\Obligatorio\Dominio\obj\Debug\netcoreapp3.1\Dominio.csproj.AssemblyReference.cache
+C:\Users\santi\Desktop\developORT\ObligatorioP2\Obligatorio_V2\Obligatorio\Dominio\obj\Debug\netcoreapp3.1\Dominio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\santi\Desktop\developORT\ObligatorioP2\Obligatorio_V2\Obligatorio\Dominio\obj\Debug\netcoreapp3.1\Dominio.AssemblyInfoInputs.cache
+C:\Users\santi\Desktop\developORT\ObligatorioP2\Obligatorio_V2\Obligatorio\Dominio\obj\Debug\netcoreapp3.1\Dominio.AssemblyInfo.cs
+C:\Users\santi\Desktop\developORT\ObligatorioP2\Obligatorio_V2\Obligatorio\Dominio\obj\Debug\netcoreapp3.1\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\santi\Desktop\developORT\ObligatorioP2\Obligatorio_V2\Obligatorio\Dominio\obj\Debug\netcoreapp3.1\Dominio.dll
+C:\Users\santi\Desktop\developORT\ObligatorioP2\Obligatorio_V2\Obligatorio\Dominio\obj\Debug\netcoreapp3.1\Dominio.pdb

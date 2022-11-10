@@ -1,0 +1,9 @@
+﻿@using Dominio
+
+<h1>Periodista</h1>
+
+
+@foreach (Periodista item in ViewBag.Periodistas)
+{
+    <p>@item.NombreCompleto</p>
+}

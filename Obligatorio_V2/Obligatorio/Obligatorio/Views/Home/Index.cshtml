@@ -3,16 +3,30 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div>
+    <h1 class="display-4">Bienvenido</h1>
+    <p>Por favor, inicie sesión</p>
+</div>
+<div>
+    <form class="">
+        <div class="form-group">
+            <label for="iniciarSesionUsuario">Usuario</label>
+            <input type="text" id="iniciarSesionUsuario" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="iniciarSesionPassword">Contraseña</label>
+            <input type="password" id="iniciarSesionPassword" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+    </form>
+    <a href="/periodista/CrearPeriodista">Registrarse como periodista.</a>
 </div>
 
 <h1>Partidos</h1>
 <div>
     @foreach (Partido item in ViewBag.Partidos)
     {
-    <p>@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</p>
+        <p>@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</p>
     }
 </div>
 
