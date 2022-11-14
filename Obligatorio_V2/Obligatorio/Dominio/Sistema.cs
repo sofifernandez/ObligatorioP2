@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Dominio
 {
@@ -8,6 +9,7 @@ namespace Dominio
         private static Sistema _instancia;
         private List<Partido> _partidos = new List<Partido>();
         private List<Periodista> _periodistas = new List<Periodista>();
+        private List<Operador> _operadores = new List<Operador>();
         private List<Jugador> _jugadores = new List<Jugador>();
         private List<Pais> _paises = new List<Pais>();
         private List<Seleccion> _selecciones = new List<Seleccion>();
@@ -27,7 +29,7 @@ namespace Dominio
 
         private Sistema()
         {
-            //PrecargarDatos();
+            PrecargarDatos();
         }
 
         //------------------------------------------------------------------------------------------------------------//
@@ -58,6 +60,11 @@ namespace Dominio
             get { return _periodistas; }
         }
 
+        public List<Operador> Operadores
+        {
+            get { return _operadores; }
+        }
+
         //-------------------------------------------------------------------------------------------------------------//
         //-------------------------------PRECARGA---------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
@@ -68,7 +75,7 @@ namespace Dominio
             PrecargaSelecciones();
             PrecargaPartidos();
             AltaPeriodista(new Periodista("Pepito Garcia", "pepito@gmail.com", "jkshdfjksdhskjd"));
-            
+            AltaOperador(new Operador("Juan Lopez", "juan@gmail.com", "12345678", new DateTime(2022, 11, 10)));
         }
 
         private void PrecargaJugadores()
@@ -1231,6 +1238,36 @@ namespace Dominio
             _periodistas.Add(periodista);
         }
 
+        public void AltaOperador(Operador operador)
+        {
+            if (operador == null)
+            {
+                throw new Exception("Faltan datos del operador");
+            }
+            if (_operadores.Contains(operador)) //--> evaluar que no exista ya en la lista según email
+            {
+                throw new Exception($"El mail {operador.Email} ya existe en el sistema");
+            }
+            _operadores.Add(operador);
+        }
+
+        public bool Login(string email, string password)
+        {
+            foreach (Periodista p in _periodistas)
+            {
+                if (p.Email == email)
+                {
+                    if (p.Password == password)
+                    {
+                        return true;
+                    }
+                    throw new Exception("El email y la contraseña no coinciden");
+                }
+            }
+
+            throw new Exception("El email es incorrecto");
+        }
+
         //----------------------------------------------------------------------------------------------------------//
         //-------------------------------FUNCIONALIDAD PAISES------------------------------------------------------//
         //--------------------------------------------------------------------------------------------------------//
@@ -1477,6 +1514,49 @@ namespace Dominio
             }
         }
 
+        //------------------------------------------------------------------------------------------------------------//
+        //-------------------------------FUNCIONALIDAD USUARIOS---------------------------------------------------//
+        //----------------------------------------------------------------------------------------------------------//
+
+        public string GetRol (string email)
+        {
+            foreach(Periodista p in _periodistas)
+            {
+                if (p.Email == email)
+                {
+                    return "PERIODISTA";
+                }
+            }
+
+            return "OPERADOR";
+        }
+
+        public Periodista GetPeriodistaPorEmail(string email)
+        {
+            foreach (Periodista p in _periodistas)
+            {
+                if (p.Email == email)
+                {
+                    return p;
+                }
+            }
+
+            return null;
+        }
+
+        public Periodista GetOperadorPorEmail(string email)
+        {
+            foreach (Operador o in _operadores)
+            {
+                if (o.Email == email)
+                {
+                    return o;
+                }
+            }
+
+            return null;
+        }
 
     }
+
 }

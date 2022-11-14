@@ -125,3 +125,4 @@ C:\Users\santi\Desktop\developORT\ObligatorioP2\Obligatorio_V2\Obligatorio\Oblig
 C:\Users\santi\Desktop\developORT\ObligatorioP2\Obligatorio_V2\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Obligatorio.dll
 C:\Users\santi\Desktop\developORT\ObligatorioP2\Obligatorio_V2\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Obligatorio.pdb
 C:\Users\santi\Desktop\developORT\ObligatorioP2\Obligatorio_V2\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Obligatorio.genruntimeconfig.cache
+C:\Users\santi\Desktop\developORT\ObligatorioP2\Obligatorio_V2\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Login\Index.cshtml.g.cs

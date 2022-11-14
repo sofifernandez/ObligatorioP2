@@ -1,0 +1,39 @@
+﻿@using Dominio;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <h1 class="display-4">Bienvenido</h1>
+    <p>Por favor, inicie sesión</p>
+</div>
+<div>
+    @if (@ViewBag.Error != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.Error
+        </div>
+    }
+    <form method="post">
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <input type="text" name="email" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="Password">Contraseña</label>
+            <input type="password" name="password" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+    </form>
+    <a href="/periodista/CrearPeriodista">Registrarse como periodista.</a>
+</div>
+
+<h1>Partidos</h1>
+<div>
+    @foreach (Partido item in ViewBag.Partidos)
+    {
+        <p>@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</p>
+    }
+</div>
+
+

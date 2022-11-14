@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Dominio;
+using Microsoft.AspNetCore.Http;
 
 namespace Obligatorio.Controllers
 {
@@ -14,6 +15,7 @@ namespace Obligatorio.Controllers
     {
         Sistema unS = Sistema.Instancia;
         private readonly ILogger<HomeController> _logger;
+        public bool sePrecargo = false;
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -22,9 +24,11 @@ namespace Obligatorio.Controllers
 
         public IActionResult Index()
         {
-            unS.PrecargarDatos();
-            ViewBag.Partidos = unS.Partidos;
+            string rol = HttpContext.Session.GetString("rol");
+            ViewBag.Rol = rol;
             return View();
+            
+           
         }
 
         public IActionResult VerSelecciones()
