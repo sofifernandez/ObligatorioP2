@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Dominio
 {
-    internal class Operador
+    public class Operador
     {
         public int IDOperador { get; private set; }
         public string NombreCompleto { get; set; }

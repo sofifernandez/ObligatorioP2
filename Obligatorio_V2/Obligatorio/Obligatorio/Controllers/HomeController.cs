@@ -37,6 +37,7 @@ namespace Obligatorio.Controllers
             List<Seleccion> selec = unS.Selecciones;
             selec.Sort();
             ViewBag.Selecciones = selec;
+
             return View();
         }
 

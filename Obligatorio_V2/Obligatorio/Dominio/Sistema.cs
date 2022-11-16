@@ -1244,10 +1244,10 @@ namespace Dominio
             {
                 throw new Exception("Faltan datos del operador");
             }
-            if (_operadores.Contains(operador)) //--> evaluar que no exista ya en la lista según email
-            {
-                throw new Exception($"El mail {operador.Email} ya existe en el sistema");
-            }
+            //if (_operadores.Contains(operador)) //--> evaluar que no exista ya en la lista según email
+            //{
+            //    throw new Exception($"El mail {operador.Email} ya existe en el sistema");
+            //}
             _operadores.Add(operador);
         }
 
@@ -1528,7 +1528,15 @@ namespace Dominio
                 }
             }
 
-            return "OPERADOR";
+            foreach (Operador o in _operadores)
+            {
+                if (o.Email == email)
+                {
+                    return "OPERADOR";
+                }
+            }
+
+            return "NULL";
         }
 
         public Periodista GetPeriodistaPorEmail(string email)
@@ -1544,7 +1552,7 @@ namespace Dominio
             return null;
         }
 
-        public Periodista GetOperadorPorEmail(string email)
+        public Operador GetOperadorPorEmail(string email)
         {
             foreach (Operador o in _operadores)
             {
