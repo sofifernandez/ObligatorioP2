@@ -1,5 +1,25 @@
-﻿<h1>Home</h1>
+﻿@using Microsoft.AspNetCore.Http
+@using Dominio;
 
+<h1>Hola!</h1>
 <h2>
-    @ViewBag.Rol
+    @ViewBag.email
 </h2>
+
+@if (Context.Session.GetString("rol") == "OPERADOR")
+{
+    <div>
+        <a href="/Partido/VerPartidos">Todos los partidos</a>
+        <a href="/Partido/InfoPartidos">Información de partidos</a>
+        <a href="/Home/VerPeriodistas">Periodistas</a>
+    </div>
+}
+
+
+@if (Context.Session.GetString("rol") == "PERIODISTA")
+{
+    <div>
+        <a  href="/Partido/VerPartidos">Partidos finalizados</a>
+        <a href="/Resenia/VerResenias">Reseñas anteriores</a>
+    </div>
+}

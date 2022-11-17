@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Net;
 
 namespace Obligatorio.Controllers
@@ -11,6 +12,9 @@ namespace Obligatorio.Controllers
         Sistema unS = Sistema.Instancia;
         public IActionResult Index()
         {
+            List<Seleccion> selec = unS.Selecciones;
+            selec.Sort();
+            ViewBag.Selecciones = selec;
             ViewBag.Partidos = unS.Partidos;
             return View();
         }
@@ -32,6 +36,13 @@ namespace Obligatorio.Controllers
                 ViewBag.Partidos = unS.Partidos;
                 return View("index");
             }
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("index");
+
         }
     }
 }

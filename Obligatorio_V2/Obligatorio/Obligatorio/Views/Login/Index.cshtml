@@ -28,11 +28,22 @@
     <a href="/periodista/CrearPeriodista">Registrarse como periodista.</a>
 </div>
 
-<h1>Partidos</h1>
+
+<h1>Selecciones</h1>
 <div>
-    @foreach (Partido item in ViewBag.Partidos)
+    @foreach (Seleccion item in ViewBag.Selecciones)
     {
-        <p>@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</p>
+        <div class="mt-3">
+            <hr />
+            <h2>@item.Pais.Nombre (@item.Pais.Alpha)</h2>
+            <div class="d-flex row container-fluid justify-content-evenly">
+                @foreach (Jugador jugador in item.Jugadores)
+                {
+                    <p class="col-4">@jugador.NombreCompleto</p>
+                }
+            </div>
+        </div>
+
     }
 </div>
 

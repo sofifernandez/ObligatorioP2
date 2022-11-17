@@ -65,6 +65,86 @@ namespace Dominio
             get { return _operadores; }
         }
 
+
+        //-------------------------------------------------------------------------------------------------------------//
+        //-------------------------------LOGIN---------------------------------------------------------------------//
+        //----------------------------------------------------------------------------------------------------------//
+        public bool Login(string email, string password)
+        {
+            foreach (Periodista p in _periodistas)
+            {
+                if (p.Email == email)
+                {
+                    if (p.Password == password)
+                    {
+                        return true;
+                    }
+                    throw new Exception("El email y la contraseña no coinciden");
+                }
+            }
+
+            foreach (Operador p in _operadores)
+            {
+                if (p.Email == email)
+                {
+                    if (p.Password == password)
+                    {
+                        return true;
+                    }
+                    throw new Exception("El email y la contraseña no coinciden");
+                }
+            }
+
+            throw new Exception("El email es incorrecto");
+        }
+
+        public string GetRol(string email)
+        {
+            foreach (Periodista p in _periodistas)
+            {
+                if (p.Email == email)
+                {
+                    return "PERIODISTA";
+                }
+            }
+
+            foreach (Operador o in _operadores)
+            {
+                if (o.Email == email)
+                {
+                    return "OPERADOR";
+                }
+            }
+
+            return "";
+        }
+
+        public Periodista GetPeriodistaPorEmail(string email)
+        {
+            foreach (Periodista p in _periodistas)
+            {
+                if (p.Email == email)
+                {
+                    return p;
+                }
+            }
+
+            return null;
+        }
+
+        public Operador GetOperadorPorEmail(string email)
+        {
+            foreach (Operador o in _operadores)
+            {
+                if (o.Email == email)
+                {
+                    return o;
+                }
+            }
+
+            return null;
+        }
+
         //-------------------------------------------------------------------------------------------------------------//
         //-------------------------------PRECARGA---------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
@@ -74,9 +154,356 @@ namespace Dominio
             PrecargaJugadores();
             PrecargaSelecciones();
             PrecargaPartidos();
-            AltaPeriodista(new Periodista("Pepito Garcia", "pepito@gmail.com", "jkshdfjksdhskjd"));
-            AltaOperador(new Operador("Juan Lopez", "juan@gmail.com", "12345678", new DateTime(2022, 11, 10)));
+            PrecargaUsuarios();
         }
+
+        private void PrecargaUsuarios()
+        {
+            Periodista unPer1 = new Periodista("Pepito Garcia", "pepito@gmail.com", "qwertyui");
+            AltaPeriodista(unPer1);
+            unPer1.AgregarResena(new Reseña("Titulo 1", "BlaBla", new DateTime(2022, 11, 10),unPer1, GetPartido(1)));
+            Periodista unPer2 = new Periodista("Ana Perez", "ana@gmail.com", "dfsdfsdfs");
+            unPer2.AgregarResena(new Reseña("Titulo 2", "BlaBla", new DateTime(2022, 11, 10), unPer1, GetPartido(2)));
+            AltaPeriodista(unPer2);
+
+            AltaOperador(new Operador("Juan Lopez", "juan@gmail.com", "hgfhfghdf", new DateTime(2022, 11, 10)));
+        }
+      
+        //----------------------------------------------------------------------------------------------------------//
+        //-------------------------------ALTAS---------------------------------------------------------------------//
+        //--------------------------------------------------------------------------------------------------------//
+
+       
+        public void AltaSeleccion(Seleccion seleccion)
+        {
+            if (seleccion == null)
+            {
+                throw new Exception("La seleccion recibida no tiene datos.");
+            }
+            if (_selecciones.Contains(seleccion)) //--> evaluar que no exista ya en la lista según Nombre
+            {
+                throw new Exception($"La seleccion ya existe!");
+            }
+            _selecciones.Add(seleccion);
+        }
+
+
+        public void AltaPais(Pais pais)
+        {
+            if (pais == null)
+            {
+                throw new Exception("El pais recibido no tiene datos.");
+            }
+            if (_paises.Contains(pais)) //--> evaluar que no exista ya en la lista según Nombre
+            {
+                throw new Exception($"El pais {pais.IDPais} ya existe");
+            }
+            _paises.Add(pais);
+
+        }
+
+        public void AltaJugador(Jugador jugador)
+        {
+            if (jugador == null)
+            {
+                throw new Exception("El Jugaror recibido no tiene datos.");
+            }
+            if (_jugadores.Contains(jugador)) //--> evaluar que no exista ya en la lista según ID
+            {
+                throw new Exception($"El jugador {jugador.IDJugador} ya existe");
+            }
+            _jugadores.Add(jugador);
+        }
+
+        public void AltaPartido(Partido partido)
+        {
+            if (partido == null)
+            {
+                throw new Exception("Faltan datos del partido");
+            }
+
+            if (_partidos.Contains(partido)) //--> evaluar que no exista ya en la lista según Seleccion A, Seleccion B y fecha
+            {
+                throw new Exception($"El partido {partido.SeleccionA.Pais.Nombre} vs {partido.SeleccionB.Pais.Nombre} con fecha {partido.FechaPartido}  ya existe");
+            }
+            _partidos.Add(partido);
+        }
+
+        public void ArmarPeriodista(string nombreCompleto, string email, string password)
+        {
+            try
+            {
+                Periodista nuevoPeriodista = new Periodista(nombreCompleto, email, password);
+                AltaPeriodista(nuevoPeriodista);
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+
+        public void AltaPeriodista(Periodista periodista)
+        {
+            if (periodista == null)
+            {
+                throw new Exception("Faltan datos del periodista");
+            }
+            if (_periodistas.Contains(periodista)) //--> evaluar que no exista ya en la lista según email
+            {
+                throw new Exception($"El mail {periodista.Email} ya existe en el sistema");
+            }
+            _periodistas.Add(periodista);
+        }
+
+        public void AltaOperador(Operador operador)
+        {
+            if (operador == null)
+            {
+                throw new Exception("Faltan datos del operador");
+            }
+            //if (_operadores.Contains(operador)) //--> evaluar que no exista ya en la lista según email
+            //{
+            //    throw new Exception($"El mail {operador.Email} ya existe en el sistema");
+            //}
+            _operadores.Add(operador);
+        }
+
+        
+
+        //----------------------------------------------------------------------------------------------------------//
+        //-------------------------------FUNCIONALIDAD PAISES------------------------------------------------------//
+        //--------------------------------------------------------------------------------------------------------//
+
+        private Pais GetPais(string nombrePais)
+        {
+            foreach (Pais item in _paises)
+            {
+                if (item.Nombre.Contains(nombrePais))
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
+
+        //----------------------------------------------------------------------------------------------------------//
+        //-------------------------------FUNCIONALIDAD JUGADORES---------------------------------------------------//
+        //--------------------------------------------------------------------------------------------------------//
+
+        public void AgregarCategoria(decimal MontoRef) //--> agregar categoría a los jugadores
+        {
+            foreach (Jugador item in Jugadores)
+            {
+                item.DetCategoria(MontoRef);
+            }
+        }
+        private List<Jugador> JugadoresDe(Pais p) //--> lista de jugadores de un determinado país
+        {
+            List<Jugador> _misJugadores = new List<Jugador>();
+            foreach (Jugador j in Jugadores)
+            {
+
+                if (j.Pais.Nombre.Equals(p.Nombre))
+                {
+                    _misJugadores.Add(j);
+                }
+            }
+            return _misJugadores;
+        }
+
+        public Jugador GetJugador(int ID) //--> obtener el jugador según ID
+        {
+            foreach(Jugador j in Jugadores)
+            {
+                if (j.IDJugador == ID)
+                {
+                    return j;
+                }
+            }
+            return null;
+        }
+
+        public List<Partido> PartidosJugador(int IDJugador) //--> Obtener todos los partidos que jugó un jugador
+        {
+            List<Partido> _misPartidos = new List<Partido>();
+            foreach (Partido p in Partidos) //--> buscarlo en la lista de jugadores de cada partido
+            {
+                if (p.Jugadores.Contains(GetJugador(IDJugador)))
+                {
+                    _misPartidos.Add(p);
+                }
+
+            }
+            return _misPartidos; ;
+        }
+
+        public List<Jugador> JugadoresExpulsados() //--> todos los jugadores que han sigo expulsado
+        {
+            List<Jugador> _misJugadores = new List<Jugador>();
+            foreach (Partido p in Partidos) //--> buscarlo en las rojas de cada partido
+            {
+                foreach(Incidencia i in p.Incidencias)
+                {
+                    if (i.Tipo == "Roja")
+                    {
+                        if (!_misJugadores.Contains(i.UnJugador)) //--> chequear que no exista ya en la lista
+                        {
+                            _misJugadores.Add(i.UnJugador);
+                        }
+                    }
+                }
+            }
+            _misJugadores.Sort(); //--> ordenar según valor de mercado (descendente) y nombre (ascendente)
+            return _misJugadores;
+        }
+
+        public List<Jugador> JugadoresGoles(int IDPartido) //--> listar los jugadores que han hecho goles
+        {
+            List<Jugador> _misJugadores = new List<Jugador>();
+            
+            Partido partido = GetPartido(IDPartido);
+            if (partido != null)
+            {
+                List<Incidencia> _misIncidencias = partido.FiltrarIncidencias("Gol");
+                foreach (Incidencia i in _misIncidencias)
+                {
+                    if (!_misJugadores.Contains(i.UnJugador)) //--> chequear que no exista en la lista
+                    {
+                        _misJugadores.Add(i.UnJugador);
+                    }
+                }
+            }
+            else
+            {
+                throw new Exception("El partido ingresado no existe");
+            }
+            
+
+            return _misJugadores;
+        }
+
+
+        //------------------------------------------------------------------------------------------------------------//
+        //-------------------------------FUNCIONALIDAD SELECCIONES---------------------------------------------------//
+        //----------------------------------------------------------------------------------------------------------//
+
+        private Seleccion GetSeleccion(string nombreSelec) //--> buscar una selección según nombre
+        {
+            foreach (Seleccion item in _selecciones)
+            {
+                if (item.Pais.Nombre.ToLower()==nombreSelec.ToLower())
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
+
+        public (List <Partido>, int) PartidoMasGoles(string nombreSelec) //-> Partido en el cuál hizo más goles una selección
+        {
+            if (GetSeleccion(nombreSelec)==null)
+            {
+                throw new Exception("La selección ingresada no existe");
+            }
+
+            int masGoles = 1;
+            List<Partido> _partidoGoles = new List<Partido>();
+            foreach (Partido p in Partidos) //--> Lógica: buscar los partidos en los cuales la selección jugó, sumar la cantidad de goles e ir comparando de a uno
+            {
+                int cantGoles = 0;
+                List<Incidencia> _misIncidencias= p.FiltrarIncidencias("Gol", nombreSelec);
+                foreach(Incidencia i in _misIncidencias)
+                {
+                   
+                       cantGoles++;
+                    
+                }
+                if (cantGoles == masGoles)
+                {
+                    _partidoGoles.Add(p);
+                }
+
+                if (cantGoles > masGoles)
+                {
+                    masGoles = cantGoles;
+                    _partidoGoles.Clear();
+                    _partidoGoles.Add(p);
+                }
+            }
+            return (_partidoGoles, masGoles);
+        }
+
+        //------------------------------------------------------------------------------------------------------------//
+        //-------------------------------FUNCIONALIDAD PARTIDOS---------------------------------------------------//
+        //----------------------------------------------------------------------------------------------------------//
+
+        //PARA SIMPLIFICAR EN ESTA ENTREGA PUSIMOS QUE SE JUGARÁN SOLO LOS PRIMEROS 11 JUGADORES DE CADA SELECCIÓN
+        public void AgregarJugadoresPartido(Partido partido)
+        {
+           for (int i = 0; i < 11; i++)
+           {
+                if (!partido.Jugadores.Contains(partido.SeleccionA.Jugadores[i]))
+                {
+                    partido.AgregarJugador(partido.SeleccionA.Jugadores[i]);
+                }
+                
+           }
+
+            for (int i = 0; i < 11; i++)
+            {
+                if (!partido.Jugadores.Contains(partido.SeleccionB.Jugadores[i]))
+                {
+                    partido.AgregarJugador(partido.SeleccionB.Jugadores[i]);
+                }
+
+            }
+        }
+
+        public Partido GetPartido(int IDPartido)
+        {
+            foreach(Partido p in Partidos)
+            {
+                if (p.IDPartido == IDPartido)
+                {
+                    return p;
+                }
+            }
+            return null;
+        }
+
+        public (List<Partido>, List<Partido>) ClasificarPartidos()
+        {
+            List<Partido> partidosGrupo = new List<Partido>();
+            List<Partido> partidosEliminatoria = new List<Partido>();
+            foreach (Partido item in Partidos)
+            {
+                if(item is FaseEliminatorias)
+                {
+                    partidosEliminatoria.Add(item);
+                }
+                else
+                {
+                    partidosGrupo.Add(item);
+                }
+            }
+            return (partidosGrupo, partidosEliminatoria);
+        } 
+
+        public void FinalizarPartido(int IDPartido)
+        {
+            foreach(Partido item in Partidos)
+            {
+                if (item.IDPartido == IDPartido)
+                {
+                    item.FinalizarPartido();
+                }
+            }
+        }
+
+        //----------------------------------------------------------------------------------------------------------//
+        //-------------------------------DATOS---------------------------------------------------------------------//
+        //--------------------------------------------------------------------------------------------------------//
 
         private void PrecargaJugadores()
         {
@@ -1009,7 +1436,7 @@ namespace Dominio
             }
         }
 
-        
+
         private void PrecargaPartidos()
         {
             //PARTIDOS GRUPO G (Brasil, Serbia, Suiza, Camerún)
@@ -1070,7 +1497,7 @@ namespace Dominio
             //------------------------------INCIDENCIAS------------------------------------//
 
             //PARTIDO 1_G
-            unP1_G.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(113))); 
+            unP1_G.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(113)));
             unP1_G.AgregarIncidencia(new Incidencia("Gol", 50, GetJugador(114)));
             unP1_G.AgregarIncidencia(new Incidencia("Amarilla", 87, GetJugador(236)));
             //PARTIDO 2_G
@@ -1092,7 +1519,7 @@ namespace Dominio
             unP5_G.AgregarIncidencia(new Incidencia("Amarilla", 10, GetJugador(110)));
             unP5_G.AgregarIncidencia(new Incidencia("Gol", 50, GetJugador(111)));
             unP5_G.AgregarIncidencia(new Incidencia("Gol", 60, GetJugador(113)));
-            unP5_G.AgregarIncidencia(new Incidencia("Gol", 85, GetJugador(721))); 
+            unP5_G.AgregarIncidencia(new Incidencia("Gol", 85, GetJugador(721)));
 
             ////PARTIDO 6_G 
             unP6_G.AgregarIncidencia(new Incidencia("Amarilla", 32, GetJugador(238)));
@@ -1104,7 +1531,7 @@ namespace Dominio
             unP1_H.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(605)));
 
             //PARTIDO 2_H
-            unP2_H.AgregarIncidencia(new Incidencia("Amarilla",89, GetJugador(388)));
+            unP2_H.AgregarIncidencia(new Incidencia("Amarilla", 89, GetJugador(388)));
             unP2_H.AgregarIncidencia(new Incidencia("Gol", 15, GetJugador(489)));
             unP2_H.AgregarIncidencia(new Incidencia("Gol", 49, GetJugador(488)));
 
@@ -1148,421 +1575,6 @@ namespace Dominio
 
 
 
-        }
-
-
-        //----------------------------------------------------------------------------------------------------------//
-        //-------------------------------ALTAS---------------------------------------------------------------------//
-        //--------------------------------------------------------------------------------------------------------//
-
-       
-        public void AltaSeleccion(Seleccion seleccion)
-        {
-            if (seleccion == null)
-            {
-                throw new Exception("La seleccion recibida no tiene datos.");
-            }
-            if (_selecciones.Contains(seleccion)) //--> evaluar que no exista ya en la lista según Nombre
-            {
-                throw new Exception($"La seleccion ya existe!");
-            }
-            _selecciones.Add(seleccion);
-        }
-
-
-        public void AltaPais(Pais pais)
-        {
-            if (pais == null)
-            {
-                throw new Exception("El pais recibido no tiene datos.");
-            }
-            if (_paises.Contains(pais)) //--> evaluar que no exista ya en la lista según Nombre
-            {
-                throw new Exception($"El pais {pais.IDPais} ya existe");
-            }
-            _paises.Add(pais);
-
-        }
-
-        public void AltaJugador(Jugador jugador)
-        {
-            if (jugador == null)
-            {
-                throw new Exception("El Jugaror recibido no tiene datos.");
-            }
-            if (_jugadores.Contains(jugador)) //--> evaluar que no exista ya en la lista según ID
-            {
-                throw new Exception($"El jugador {jugador.IDJugador} ya existe");
-            }
-            _jugadores.Add(jugador);
-        }
-
-        public void AltaPartido(Partido partido)
-        {
-            if (partido == null)
-            {
-                throw new Exception("Faltan datos del partido");
-            }
-
-            if (_partidos.Contains(partido)) //--> evaluar que no exista ya en la lista según Seleccion A, Seleccion B y fecha
-            {
-                throw new Exception($"El partido {partido.SeleccionA.Pais.Nombre} vs {partido.SeleccionB.Pais.Nombre} con fecha {partido.FechaPartido}  ya existe");
-            }
-            _partidos.Add(partido);
-        }
-
-        public void ArmarPeriodista(string nombreCompleto, string email, string password)
-        {
-            try
-            {
-                Periodista nuevoPeriodista = new Periodista(nombreCompleto, email, password);
-                AltaPeriodista(nuevoPeriodista);
-            }
-            catch (Exception e)
-            {
-
-                throw new Exception(e.Message);
-            }
-        }
-
-        public void AltaPeriodista(Periodista periodista)
-        {
-            if (periodista == null)
-            {
-                throw new Exception("Faltan datos del periodista");
-            }
-            if (_periodistas.Contains(periodista)) //--> evaluar que no exista ya en la lista según email
-            {
-                throw new Exception($"El mail {periodista.Email} ya existe en el sistema");
-            }
-            _periodistas.Add(periodista);
-        }
-
-        public void AltaOperador(Operador operador)
-        {
-            if (operador == null)
-            {
-                throw new Exception("Faltan datos del operador");
-            }
-            //if (_operadores.Contains(operador)) //--> evaluar que no exista ya en la lista según email
-            //{
-            //    throw new Exception($"El mail {operador.Email} ya existe en el sistema");
-            //}
-            _operadores.Add(operador);
-        }
-
-        public bool Login(string email, string password)
-        {
-            foreach (Periodista p in _periodistas)
-            {
-                if (p.Email == email)
-                {
-                    if (p.Password == password)
-                    {
-                        return true;
-                    }
-                    throw new Exception("El email y la contraseña no coinciden");
-                }
-            }
-
-            throw new Exception("El email es incorrecto");
-        }
-
-        //----------------------------------------------------------------------------------------------------------//
-        //-------------------------------FUNCIONALIDAD PAISES------------------------------------------------------//
-        //--------------------------------------------------------------------------------------------------------//
-
-        private Pais GetPais(string nombrePais)
-        {
-            foreach (Pais item in _paises)
-            {
-                if (item.Nombre.Contains(nombrePais))
-                {
-                    return item;
-                }
-            }
-            return null;
-        }
-
-        //----------------------------------------------------------------------------------------------------------//
-        //-------------------------------FUNCIONALIDAD JUGADORES---------------------------------------------------//
-        //--------------------------------------------------------------------------------------------------------//
-
-        public void AgregarCategoria(decimal MontoRef) //--> agregar categoría a los jugadores
-        {
-            foreach (Jugador item in Jugadores)
-            {
-                item.DetCategoria(MontoRef);
-            }
-        }
-        private List<Jugador> JugadoresDe(Pais p) //--> lista de jugadores de un determinado país
-        {
-            List<Jugador> _misJugadores = new List<Jugador>();
-            foreach (Jugador j in Jugadores)
-            {
-
-                if (j.Pais.Nombre.Equals(p.Nombre))
-                {
-                    _misJugadores.Add(j);
-                }
-            }
-            return _misJugadores;
-        }
-
-        public Jugador GetJugador(int ID) //--> obtener el jugador según ID
-        {
-            foreach(Jugador j in Jugadores)
-            {
-                if (j.IDJugador == ID)
-                {
-                    return j;
-                }
-            }
-            return null;
-        }
-
-        public List<Partido> PartidosJugador(int IDJugador) //--> Obtener todos los partidos que jugó un jugador
-        {
-            List<Partido> _misPartidos = new List<Partido>();
-            foreach (Partido p in Partidos) //--> buscarlo en la lista de jugadores de cada partido
-            {
-                if (p.Jugadores.Contains(GetJugador(IDJugador)))
-                {
-                    _misPartidos.Add(p);
-                }
-
-            }
-            return _misPartidos; ;
-        }
-
-        public List<Jugador> JugadoresExpulsados() //--> todos los jugadores que han sigo expulsado
-        {
-            List<Jugador> _misJugadores = new List<Jugador>();
-            foreach (Partido p in Partidos) //--> buscarlo en las rojas de cada partido
-            {
-                foreach(Incidencia i in p.Incidencias)
-                {
-                    if (i.Tipo == "Roja")
-                    {
-                        if (!_misJugadores.Contains(i.UnJugador)) //--> chequear que no exista ya en la lista
-                        {
-                            _misJugadores.Add(i.UnJugador);
-                        }
-                    }
-                }
-            }
-            _misJugadores.Sort(); //--> ordenar según valor de mercado (descendente) y nombre (ascendente)
-            return _misJugadores;
-        }
-
-        public List<Jugador> JugadoresGoles(int IDPartido) //--> listar los jugadores que han hecho goles
-        {
-            List<Jugador> _misJugadores = new List<Jugador>();
-            
-            Partido partido = GetPartido(IDPartido);
-            if (partido != null)
-            {
-                List<Incidencia> _misIncidencias = partido.FiltrarIncidencias("Gol");
-                foreach (Incidencia i in _misIncidencias)
-                {
-                    if (!_misJugadores.Contains(i.UnJugador)) //--> chequear que no exista en la lista
-                    {
-                        _misJugadores.Add(i.UnJugador);
-                    }
-                }
-            }
-            else
-            {
-                throw new Exception("El partido ingresado no existe");
-            }
-            
-
-            return _misJugadores;
-        }
-
-
-        //------------------------------------------------------------------------------------------------------------//
-        //-------------------------------FUNCIONALIDAD SELECCIONES---------------------------------------------------//
-        //----------------------------------------------------------------------------------------------------------//
-
-        private Seleccion GetSeleccion(string nombreSelec) //--> buscar una selección según nombre
-        {
-            foreach (Seleccion item in _selecciones)
-            {
-                if (item.Pais.Nombre.ToLower()==nombreSelec.ToLower())
-                {
-                    return item;
-                }
-            }
-            return null;
-        }
-
-        public (List <Partido>, int) PartidoMasGoles(string nombreSelec) //-> Partido en el cuál hizo más goles una selección
-        {
-            if (GetSeleccion(nombreSelec)==null)
-            {
-                throw new Exception("La selección ingresada no existe");
-            }
-
-            int masGoles = 1;
-            //Partido partidoGoles = null;
-            List<Partido> _partidoGoles = new List<Partido>();
-            foreach (Partido p in Partidos) //--> Lógica: buscar los partidos en los cuales la selección jugó, sumar la cantidad de goles e ir comparando de a uno
-            {
-                int cantGoles = 0;
-                List<Incidencia> _misIncidencias= p.FiltrarIncidencias("Gol", nombreSelec);
-                foreach(Incidencia i in _misIncidencias)
-                {
-                   
-                       cantGoles++;
-                    
-                }
-                if (cantGoles == masGoles)
-                {
-                    _partidoGoles.Add(p);
-                }
-
-                if (cantGoles > masGoles)
-                {
-                    masGoles = cantGoles;
-                    _partidoGoles.Clear();
-                    _partidoGoles.Add(p);
-                }
-            }
-            return (_partidoGoles, masGoles);
-        }
-
-        //------------------------------------------------------------------------------------------------------------//
-        //-------------------------------FUNCIONALIDAD PARTIDOS---------------------------------------------------//
-        //----------------------------------------------------------------------------------------------------------//
-
-        //PARA SIMPLIFICAR EN ESTA ENTREGA PUSIMOS QUE SE JUGARÁN SOLO LOS PRIMEROS 11 JUGADORES DE CADA SELECCIÓN
-        public void AgregarJugadoresPartido(Partido partido)
-        {
-           for (int i = 0; i < 11; i++)
-           {
-                if (!partido.Jugadores.Contains(partido.SeleccionA.Jugadores[i]))
-                {
-                    partido.AgregarJugador(partido.SeleccionA.Jugadores[i]);
-                }
-                
-           }
-
-            for (int i = 0; i < 11; i++)
-            {
-                if (!partido.Jugadores.Contains(partido.SeleccionB.Jugadores[i]))
-                {
-                    partido.AgregarJugador(partido.SeleccionB.Jugadores[i]);
-                }
-
-            }
-        }
-
-        public Partido GetPartido(int IDPartido)
-        {
-            foreach(Partido p in Partidos)
-            {
-                if (p.IDPartido == IDPartido)
-                {
-                    return p;
-                }
-            }
-            return null;
-        }
-
-        public (List<Partido>, List<Partido>) ClasificarPartidos()
-        {
-            //List<Partido> partidosFinalizados = new List<Partido>();
-            //List<Partido> partidosPorJugar = new List<Partido>();
-            //foreach (Partido p in Partidos)
-            //{
-            //    if (p.Finalizado)
-            //    {
-            //        partidosFinalizados.Add(p);
-            //    }
-            //    else
-            //    {
-            //        partidosPorJugar.Add(p);
-            //    }
-            //}
-            //return (partidosFinalizados, partidosPorJugar);
-            List<Partido> partidosGrupo = new List<Partido>();
-            List<Partido> partidosEliminatoria = new List<Partido>();
-            foreach (Partido item in Partidos)
-            {
-                if(item is FaseEliminatorias)
-                {
-                    partidosEliminatoria.Add(item);
-                }
-                else
-                {
-                    partidosGrupo.Add(item);
-                }
-            }
-
-            return (partidosGrupo, partidosEliminatoria);
-        } 
-
-        public void FinalizarPartido(int IDPartido)
-        {
-            foreach(Partido item in Partidos)
-            {
-                if (item.IDPartido == IDPartido)
-                {
-                    item.FinalizarPartido();
-                }
-            }
-        }
-
-        //------------------------------------------------------------------------------------------------------------//
-        //-------------------------------FUNCIONALIDAD USUARIOS---------------------------------------------------//
-        //----------------------------------------------------------------------------------------------------------//
-
-        public string GetRol (string email)
-        {
-            foreach(Periodista p in _periodistas)
-            {
-                if (p.Email == email)
-                {
-                    return "PERIODISTA";
-                }
-            }
-
-            foreach (Operador o in _operadores)
-            {
-                if (o.Email == email)
-                {
-                    return "OPERADOR";
-                }
-            }
-
-            return "NULL";
-        }
-
-        public Periodista GetPeriodistaPorEmail(string email)
-        {
-            foreach (Periodista p in _periodistas)
-            {
-                if (p.Email == email)
-                {
-                    return p;
-                }
-            }
-
-            return null;
-        }
-
-        public Operador GetOperadorPorEmail(string email)
-        {
-            foreach (Operador o in _operadores)
-            {
-                if (o.Email == email)
-                {
-                    return o;
-                }
-            }
-
-            return null;
         }
 
     }

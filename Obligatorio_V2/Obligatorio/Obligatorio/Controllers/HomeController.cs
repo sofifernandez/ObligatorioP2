@@ -24,20 +24,22 @@ namespace Obligatorio.Controllers
 
         public IActionResult Index()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("rol")))
+            {
+                return Redirect("/login/index");
+            }
+            string email = HttpContext.Session.GetString("email");
             string rol = HttpContext.Session.GetString("rol");
-            ViewBag.Rol = rol;
+            ViewBag.email = email;
+            ViewBag.rol = rol;
             return View();
-            
-           
         }
 
         public IActionResult VerSelecciones()
         {
-            //unS.PrecargarDatos();
             List<Seleccion> selec = unS.Selecciones;
             selec.Sort();
             ViewBag.Selecciones = selec;
-
             return View();
         }
 

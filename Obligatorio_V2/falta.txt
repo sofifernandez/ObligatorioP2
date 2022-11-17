@@ -1,0 +1,24 @@
+NO REGISTRADO
+- (check) hacer login
+- (check) lista de selecciones y jugadores
+
+OPERADOR
+- (check) lista de selecciones y jugadores
+- (check) lista de partidos
+- (check) finalizar partido 
+- lista partidos TERMINADOS entre dos fechas (selecciones, goles, amarillas y rojas)
+- lista periodistas (ordenados, info de c/u, link para ver reseñas)
+
+PERIODISTA
+- (check) lista de partidos TERMINADOS
+- realizar reseña sobre partidos TERMINADOS
+- listar reseñas propias
+
+PARTIDO CONTROLER
+verPartidos
+FinalizarPartidos
+
+RESENAS CONTROLER
+ver propias (PERIODISTA)
+ver todas (OPERADOR)
+agregar

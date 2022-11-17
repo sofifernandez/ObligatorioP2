@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\santi\\Desktop\\developORT\\ObligatorioP2\\Obligatorio_V2\\Obligatorio\\Obligatorio\\Obligatorio.csproj": {}
+    "C:\\Users\\sofia\\OneDrive\\ORT\\Semestre2\\P2\\Obligatorio\\Obligatorio_V2\\Obligatorio\\Obligatorio\\Obligatorio.csproj": {}
   },
   "projects": {
-    "C:\\Users\\santi\\Desktop\\developORT\\ObligatorioP2\\Obligatorio_V2\\Obligatorio\\Dominio\\Dominio.csproj": {
+    "C:\\Users\\sofia\\OneDrive\\ORT\\Semestre2\\P2\\Obligatorio\\Obligatorio_V2\\Obligatorio\\Dominio\\Dominio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\santi\\Desktop\\developORT\\ObligatorioP2\\Obligatorio_V2\\Obligatorio\\Dominio\\Dominio.csproj",
+        "projectUniqueName": "C:\\Users\\sofia\\OneDrive\\ORT\\Semestre2\\P2\\Obligatorio\\Obligatorio_V2\\Obligatorio\\Dominio\\Dominio.csproj",
         "projectName": "Dominio",
-        "projectPath": "C:\\Users\\santi\\Desktop\\developORT\\ObligatorioP2\\Obligatorio_V2\\Obligatorio\\Dominio\\Dominio.csproj",
-        "packagesPath": "C:\\Users\\santi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\santi\\Desktop\\developORT\\ObligatorioP2\\Obligatorio_V2\\Obligatorio\\Dominio\\obj\\",
+        "projectPath": "C:\\Users\\sofia\\OneDrive\\ORT\\Semestre2\\P2\\Obligatorio\\Obligatorio_V2\\Obligatorio\\Dominio\\Dominio.csproj",
+        "packagesPath": "C:\\Users\\sofia\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sofia\\OneDrive\\ORT\\Semestre2\\P2\\Obligatorio\\Obligatorio_V2\\Obligatorio\\Dominio\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\santi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\sofia\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -45,8 +45,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -55,21 +54,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.411\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\santi\\Desktop\\developORT\\ObligatorioP2\\Obligatorio_V2\\Obligatorio\\Obligatorio\\Obligatorio.csproj": {
+    "C:\\Users\\sofia\\OneDrive\\ORT\\Semestre2\\P2\\Obligatorio\\Obligatorio_V2\\Obligatorio\\Obligatorio\\Obligatorio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\santi\\Desktop\\developORT\\ObligatorioP2\\Obligatorio_V2\\Obligatorio\\Obligatorio\\Obligatorio.csproj",
+        "projectUniqueName": "C:\\Users\\sofia\\OneDrive\\ORT\\Semestre2\\P2\\Obligatorio\\Obligatorio_V2\\Obligatorio\\Obligatorio\\Obligatorio.csproj",
         "projectName": "Obligatorio",
-        "projectPath": "C:\\Users\\santi\\Desktop\\developORT\\ObligatorioP2\\Obligatorio_V2\\Obligatorio\\Obligatorio\\Obligatorio.csproj",
-        "packagesPath": "C:\\Users\\santi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\santi\\Desktop\\developORT\\ObligatorioP2\\Obligatorio_V2\\Obligatorio\\Obligatorio\\obj\\",
+        "projectPath": "C:\\Users\\sofia\\OneDrive\\ORT\\Semestre2\\P2\\Obligatorio\\Obligatorio_V2\\Obligatorio\\Obligatorio\\Obligatorio.csproj",
+        "packagesPath": "C:\\Users\\sofia\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sofia\\OneDrive\\ORT\\Semestre2\\P2\\Obligatorio\\Obligatorio_V2\\Obligatorio\\Obligatorio\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\santi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\sofia\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -83,8 +82,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\santi\\Desktop\\developORT\\ObligatorioP2\\Obligatorio_V2\\Obligatorio\\Dominio\\Dominio.csproj": {
-                "projectPath": "C:\\Users\\santi\\Desktop\\developORT\\ObligatorioP2\\Obligatorio_V2\\Obligatorio\\Dominio\\Dominio.csproj"
+              "C:\\Users\\sofia\\OneDrive\\ORT\\Semestre2\\P2\\Obligatorio\\Obligatorio_V2\\Obligatorio\\Dominio\\Dominio.csproj": {
+                "projectPath": "C:\\Users\\sofia\\OneDrive\\ORT\\Semestre2\\P2\\Obligatorio\\Obligatorio_V2\\Obligatorio\\Dominio\\Dominio.csproj"
               }
             }
           }
@@ -104,8 +103,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -117,7 +115,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.411\\RuntimeIdentifierGraph.json"
         }
       }
     }
