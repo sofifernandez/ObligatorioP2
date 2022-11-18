@@ -5,33 +5,28 @@ using System.Text;
 
 namespace Dominio
 {
-    public class Operador
+    public class Operador : Usuario
     {
-        public int IDOperador { get; private set; }
-        public string NombreCompleto { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+
         public DateTime FechaEmpTrabajar { get; set; }
-
-        private static int uldIdPer;
-
-
         public Operador()
         {
-            IDOperador = uldIdPer++;
+            
         }
-        public Operador(string nombre, string email, string password, DateTime fechaEmpTrabajar)
+        public Operador(string nombre, string apellido, string email, string password, DateTime fechaEmpTrabajar) : base(nombre, apellido, email, password)
         {
-            IDOperador = uldIdPer++;
-            NombreCompleto = nombre;
+
+            Nombre = nombre;
+            Apellido = apellido;
             Email = email;
             Password = password;
             FechaEmpTrabajar = fechaEmpTrabajar;
         }
 
-        public bool Equals([AllowNull] Periodista other)
+
+        public override List<Reseña> GetResenias()
         {
-            return Email.Equals(other.Email);
+            return null;
         }
     }
 }

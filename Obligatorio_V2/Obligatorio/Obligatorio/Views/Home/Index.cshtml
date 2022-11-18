@@ -1,10 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Http
 @using Dominio;
 
-<h1>Hola!</h1>
-<h2>
-    @ViewBag.email
-</h2>
+
+<h1>Hola @ViewBag.nombre!</h1>
 
 @if (Context.Session.GetString("rol") == "OPERADOR")
 {

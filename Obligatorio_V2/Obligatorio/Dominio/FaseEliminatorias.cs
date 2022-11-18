@@ -9,7 +9,7 @@ namespace Dominio
         public bool Alargue { get; set; }
         public bool Penales { get; set; }
 
-        public FaseEliminatorias( DateTime fechaPartido, Seleccion seleccionA, Seleccion seleccionB) : base(fechaPartido, seleccionA, seleccionB)
+        public FaseEliminatorias( DateTime fechaPartido, Seleccion seleccionA, Seleccion seleccionB, bool finalizado) : base(fechaPartido, seleccionA, seleccionB, finalizado)
         {
             Alargue = false;
             Penales = false;

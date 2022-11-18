@@ -1,0 +1,15 @@
+﻿@using Dominio;
+
+<div>
+    @foreach (Reseña item in ViewBag.resenias)
+    {
+        <div>Fecha: @item.PartidoRes.FechaPartido</div>
+        @if (item.PartidoRes is FaseGrupos)
+        {
+            <div>Grupo: ver cómo</div>
+        }
+        <div>Selección A: @item.PartidoRes.SeleccionA.Pais.Nombre</div>
+        <div>Selección B: @item.PartidoRes.SeleccionB.Pais.Nombre</div>
+        <div>Contenido: @item.Contenido</div>
+    }
+</div>

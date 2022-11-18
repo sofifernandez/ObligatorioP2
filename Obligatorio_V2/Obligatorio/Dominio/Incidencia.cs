@@ -27,6 +27,11 @@ namespace Dominio
             
         }
 
+        public override string ToString()
+        {
+            return $"Tipo";
+        }
+
 
     }
 }

@@ -8,8 +8,9 @@ namespace Dominio
     {
         private static Sistema _instancia;
         private List<Partido> _partidos = new List<Partido>();
-        private List<Periodista> _periodistas = new List<Periodista>();
-        private List<Operador> _operadores = new List<Operador>();
+        //private List<Periodista> _periodistas = new List<Periodista>();
+        //private List<Operador> _operadores = new List<Operador>();
+        private List<Usuario> _usuarios = new List<Usuario>();
         private List<Jugador> _jugadores = new List<Jugador>();
         private List<Pais> _paises = new List<Pais>();
         private List<Seleccion> _selecciones = new List<Seleccion>();
@@ -55,41 +56,29 @@ namespace Dominio
         {
             get { return _partidos; }
         }
-        public List<Periodista> Periodistas
+        public List<Usuario> Usuarios
         {
-            get { return _periodistas; }
+            get { return _usuarios; }
         }
 
-        public List<Operador> Operadores
-        {
-            get { return _operadores; }
-        }
 
 
         //-------------------------------------------------------------------------------------------------------------//
-        //-------------------------------LOGIN---------------------------------------------------------------------//
+        //-------------------------------FUNCIONALIDAD USUARIOS---------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
-        public bool Login(string email, string password)
+        public string Login(string email, string password)
         {
-            foreach (Periodista p in _periodistas)
+            foreach (Usuario u in _usuarios)
             {
-                if (p.Email == email)
+                if (u.Email == email)
                 {
-                    if (p.Password == password)
+                    if (u.Password == password)
                     {
-                        return true;
-                    }
-                    throw new Exception("El email y la contraseña no coinciden");
-                }
-            }
-
-            foreach (Operador p in _operadores)
-            {
-                if (p.Email == email)
-                {
-                    if (p.Password == password)
-                    {
-                        return true;
+                        if(u is Periodista)
+                        {
+                            return "PERIODISTA";
+                        }
+                        return "OPERADOR";
                     }
                     throw new Exception("El email y la contraseña no coinciden");
                 }
@@ -98,51 +87,36 @@ namespace Dominio
             throw new Exception("El email es incorrecto");
         }
 
-        public string GetRol(string email)
+        public Usuario GetUsuarioPorEmail(string email)
         {
-            foreach (Periodista p in _periodistas)
+            foreach (Usuario u in _usuarios)
             {
-                if (p.Email == email)
+                if (u.Email == email)
                 {
-                    return "PERIODISTA";
-                }
-            }
-
-            foreach (Operador o in _operadores)
-            {
-                if (o.Email == email)
-                {
-                    return "OPERADOR";
-                }
-            }
-
-            return "";
-        }
-
-        public Periodista GetPeriodistaPorEmail(string email)
-        {
-            foreach (Periodista p in _periodistas)
-            {
-                if (p.Email == email)
-                {
-                    return p;
+                    return u;
                 }
             }
 
             return null;
         }
 
-        public Operador GetOperadorPorEmail(string email)
+        public List<Usuario> FiltrarTipoUsuario(string tipo)
         {
-            foreach (Operador o in _operadores)
+            List<Usuario> aux = new List<Usuario>();
+            foreach (Usuario item in Usuarios)
             {
-                if (o.Email == email)
+                if (tipo == "PERIODISTA" && item is Periodista)
                 {
-                    return o;
+                    aux.Add(item);
                 }
-            }
 
-            return null;
+                if (tipo == "OPERADOR" && item is Operador)
+                {
+                    aux.Add(item);
+                }
+
+            }
+            return aux;
         }
 
         //-------------------------------------------------------------------------------------------------------------//
@@ -159,14 +133,19 @@ namespace Dominio
 
         private void PrecargaUsuarios()
         {
-            Periodista unPer1 = new Periodista("Pepito Garcia", "pepito@gmail.com", "qwertyui");
-            AltaPeriodista(unPer1);
+            Periodista unPer1 = new Periodista("Pepito","Garcia", "pepito@gmail.com", "qwertyui");
+            AltaUsuario(unPer1);
             unPer1.AgregarResena(new Reseña("Titulo 1", "BlaBla", new DateTime(2022, 11, 10),unPer1, GetPartido(1)));
-            Periodista unPer2 = new Periodista("Ana Perez", "ana@gmail.com", "dfsdfsdfs");
-            unPer2.AgregarResena(new Reseña("Titulo 2", "BlaBla", new DateTime(2022, 11, 10), unPer1, GetPartido(2)));
-            AltaPeriodista(unPer2);
+            unPer1.AgregarResena(new Reseña("Titulo 2", "blablabla", new DateTime(2022, 11, 12), unPer1, GetPartido(2)));
 
-            AltaOperador(new Operador("Juan Lopez", "juan@gmail.com", "hgfhfghdf", new DateTime(2022, 11, 10)));
+            Periodista unPer2 = new Periodista("Ana","Perez", "ana@gmail.com", "dfsdfsdfs");
+            AltaUsuario(unPer2);
+            unPer2.AgregarResena(new Reseña("Titulo 3", "BlaBla", new DateTime(2022, 11, 13), unPer1, GetPartido(3)));
+            unPer2.AgregarResena(new Reseña("Titulo 4", "BlaBla", new DateTime(2022, 11, 14), unPer1, GetPartido(4)));
+            
+
+            AltaUsuario(new Operador("Juan","Lopez", "juan@gmail.com", "hgfhfghdf", new DateTime(2022, 11, 10)));
+            AltaUsuario(new Operador("Maria", "Hernandez", "maria@gmail.com", "645645ghf", new DateTime(2021,08, 10)));
         }
       
         //----------------------------------------------------------------------------------------------------------//
@@ -229,12 +208,12 @@ namespace Dominio
             _partidos.Add(partido);
         }
 
-        public void ArmarPeriodista(string nombreCompleto, string email, string password)
+        public void ArmarPeriodista(string nombre, string apellido, string email, string password)
         {
             try
             {
-                Periodista nuevoPeriodista = new Periodista(nombreCompleto, email, password);
-                AltaPeriodista(nuevoPeriodista);
+                Periodista nuevoPeriodista = new Periodista(nombre, apellido, email, password);
+                AltaUsuario(nuevoPeriodista);
             }
             catch (Exception e)
             {
@@ -243,33 +222,19 @@ namespace Dominio
             }
         }
 
-        public void AltaPeriodista(Periodista periodista)
+        public void AltaUsuario(Usuario usuario)
         {
-            if (periodista == null)
+            if (usuario == null)
             {
-                throw new Exception("Faltan datos del periodista");
+                throw new Exception("Faltan datos del usuario");
             }
-            if (_periodistas.Contains(periodista)) //--> evaluar que no exista ya en la lista según email
+            if (_usuarios.Contains(usuario)) //--> evaluar que no exista ya en la lista según email
             {
-                throw new Exception($"El mail {periodista.Email} ya existe en el sistema");
+                throw new Exception($"El mail {usuario.Email} ya existe en el sistema");
             }
-            _periodistas.Add(periodista);
+            _usuarios.Add(usuario);
         }
 
-        public void AltaOperador(Operador operador)
-        {
-            if (operador == null)
-            {
-                throw new Exception("Faltan datos del operador");
-            }
-            //if (_operadores.Contains(operador)) //--> evaluar que no exista ya en la lista según email
-            //{
-            //    throw new Exception($"El mail {operador.Email} ya existe en el sistema");
-            //}
-            _operadores.Add(operador);
-        }
-
-        
 
         //----------------------------------------------------------------------------------------------------------//
         //-------------------------------FUNCIONALIDAD PAISES------------------------------------------------------//
@@ -447,7 +412,6 @@ namespace Dominio
                 {
                     partido.AgregarJugador(partido.SeleccionA.Jugadores[i]);
                 }
-                
            }
 
             for (int i = 0; i < 11; i++)
@@ -456,7 +420,6 @@ namespace Dominio
                 {
                     partido.AgregarJugador(partido.SeleccionB.Jugadores[i]);
                 }
-
             }
         }
 
@@ -498,6 +461,30 @@ namespace Dominio
                 {
                     item.FinalizarPartido();
                 }
+            }
+        }
+
+        public List<Partido> FinalizadosEntreFechas(DateTime fecha1, DateTime fecha2)
+        {
+            try
+            {
+                List<Partido> aux = new List<Partido>();
+                foreach (Partido item in _partidos)
+                {
+                    if (item.Finalizado)
+                    {
+                        if (item.FechaPartido >= fecha1 && item.FechaPartido <= fecha2)
+                        {
+                            aux.Add(item);
+                        }
+                    }
+                }
+                return aux;
+            }
+            catch (Exception)
+            {
+
+                throw new Exception("Hubo un error en las fechas ingresadas");
             }
         }
 
@@ -1440,12 +1427,12 @@ namespace Dominio
         private void PrecargaPartidos()
         {
             //PARTIDOS GRUPO G (Brasil, Serbia, Suiza, Camerún)
-            Partido unP1_G = new FaseGrupos('G', new DateTime(2022, 11, 24), GetSeleccion("Brasil"), GetSeleccion("Serbia"));
-            Partido unP2_G = new FaseGrupos('G', new DateTime(2022, 11, 24), GetSeleccion("Suiza"), GetSeleccion("Camerún"));
-            Partido unP3_G = new FaseGrupos('G', new DateTime(2022, 11, 28), GetSeleccion("Brasil"), GetSeleccion("Suiza"));
-            Partido unP4_G = new FaseGrupos('G', new DateTime(2022, 11, 28), GetSeleccion("Serbia"), GetSeleccion("Camerún"));
-            Partido unP5_G = new FaseGrupos('G', new DateTime(2022, 12, 2), GetSeleccion("Brasil"), GetSeleccion("Camerún"));
-            Partido unP6_G = new FaseGrupos('G', new DateTime(2022, 12, 2), GetSeleccion("Serbia"), GetSeleccion("Suiza"));
+            Partido unP1_G = new FaseGrupos('G', new DateTime(2022, 11, 24), GetSeleccion("Brasil"), GetSeleccion("Serbia"), true);
+            Partido unP2_G = new FaseGrupos('G', new DateTime(2022, 11, 24), GetSeleccion("Suiza"), GetSeleccion("Camerún"), false);
+            Partido unP3_G = new FaseGrupos('G', new DateTime(2022, 11, 28), GetSeleccion("Brasil"), GetSeleccion("Suiza"),false);
+            Partido unP4_G = new FaseGrupos('G', new DateTime(2022, 11, 28), GetSeleccion("Serbia"), GetSeleccion("Camerún"), false);
+            Partido unP5_G = new FaseGrupos('G', new DateTime(2022, 12, 2), GetSeleccion("Brasil"), GetSeleccion("Camerún"), false);
+            Partido unP6_G = new FaseGrupos('G', new DateTime(2022, 12, 2), GetSeleccion("Serbia"), GetSeleccion("Suiza"), false);
             AltaPartido(unP1_G);
             AltaPartido(unP2_G);
             AltaPartido(unP3_G);
@@ -1454,12 +1441,12 @@ namespace Dominio
             AltaPartido(unP6_G);
 
             //PARTIDOS GRUPO H (Portugal, Gana, Uruguay, Corea)
-            Partido unP1_H = new FaseGrupos('H', new DateTime(2022, 11, 24), GetSeleccion("Portugal"), GetSeleccion("Ghana"));
-            Partido unP2_H = new FaseGrupos('H', new DateTime(2022, 11, 24), GetSeleccion("Uruguay"), GetSeleccion("Corea del Sur"));
-            Partido unP3_H = new FaseGrupos('H', new DateTime(2022, 11, 28), GetSeleccion("Uruguay"), GetSeleccion("Portugal"));
-            Partido unP4_H = new FaseGrupos('H', new DateTime(2022, 11, 28), GetSeleccion("Ghana"), GetSeleccion("Corea del Sur"));
-            Partido unP5_H = new FaseGrupos('H', new DateTime(2022, 12, 2), GetSeleccion("Portugal"), GetSeleccion("Corea del Sur"));
-            Partido unP6_H = new FaseGrupos('H', new DateTime(2022, 12, 2), GetSeleccion("Uruguay"), GetSeleccion("Ghana"));
+            Partido unP1_H = new FaseGrupos('H', new DateTime(2022, 11, 24), GetSeleccion("Portugal"), GetSeleccion("Ghana"), false);
+            Partido unP2_H = new FaseGrupos('H', new DateTime(2022, 11, 24), GetSeleccion("Uruguay"), GetSeleccion("Corea del Sur"), false);
+            Partido unP3_H = new FaseGrupos('H', new DateTime(2022, 11, 28), GetSeleccion("Uruguay"), GetSeleccion("Portugal"), false);
+            Partido unP4_H = new FaseGrupos('H', new DateTime(2022, 11, 28), GetSeleccion("Ghana"), GetSeleccion("Corea del Sur"), false);
+            Partido unP5_H = new FaseGrupos('H', new DateTime(2022, 12, 2), GetSeleccion("Portugal"), GetSeleccion("Corea del Sur"), false);
+            Partido unP6_H = new FaseGrupos('H', new DateTime(2022, 12, 2), GetSeleccion("Uruguay"), GetSeleccion("Ghana"), false);
             AltaPartido(unP1_H);
             AltaPartido(unP2_H);
             AltaPartido(unP3_H);
@@ -1468,8 +1455,8 @@ namespace Dominio
             AltaPartido(unP6_H);
 
             // FASE ELIMINATORIAS----- URUGUAY vs CAMERUN y PORTUGAL vs BRASIL
-            Partido unPE_1 = new FaseEliminatorias(new DateTime(2022, 12, 6), GetSeleccion("Uruguay"), GetSeleccion("Camerún"));
-            Partido unPE_2 = new FaseEliminatorias(new DateTime(2022, 12, 6), GetSeleccion("Portugal"), GetSeleccion("Brasil"));
+            Partido unPE_1 = new FaseEliminatorias(new DateTime(2022, 12, 6), GetSeleccion("Uruguay"), GetSeleccion("Camerún"), false);
+            Partido unPE_2 = new FaseEliminatorias(new DateTime(2022, 12, 6), GetSeleccion("Portugal"), GetSeleccion("Brasil"), false);
             AltaPartido(unPE_1);
             AltaPartido(unPE_2);
 

@@ -10,7 +10,7 @@ namespace Obligatorio.Controllers
 
         public IActionResult Index(Periodista periodista)
         {
-            ViewBag.Periodistas = unS.Periodistas;
+            ViewBag.Periodistas = unS.FiltrarTipoUsuario("PERIODISTA");
             return View();
         }
 
@@ -20,17 +20,18 @@ namespace Obligatorio.Controllers
         }
 
         [HttpPost]
-        public IActionResult CrearPeriodista(string nombreCompleto, string email, string password)
+        public IActionResult CrearPeriodista(string nombre, string apellido, string email, string password)
         {
             try
             {
-                unS.ArmarPeriodista(nombreCompleto, email, password);
+                unS.ArmarPeriodista(nombre, apellido, email, password);
                 return RedirectToAction("index");
             }
             catch (Exception e)
             {
                 ViewBag.Error = e.Message;
-                ViewBag.NombreCompleto = nombreCompleto;
+                ViewBag.Nombre = nombre;
+                ViewBag.Apellido = apellido;
                 ViewBag.Email = email;
                 ViewBag.Password = password;
                 return View();

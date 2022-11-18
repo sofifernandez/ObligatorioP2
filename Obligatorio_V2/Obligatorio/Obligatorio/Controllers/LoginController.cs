@@ -24,10 +24,11 @@ namespace Obligatorio.Controllers
         {
             try
             {
-                unS.Login(email, password);
-                string rol = unS.GetRol(email);
+                string rol= unS.Login(email, password);
+                Usuario usuario = unS.GetUsuarioPorEmail(email);
                 HttpContext.Session.SetString("email", email);
                 HttpContext.Session.SetString("rol", rol);
+                HttpContext.Session.SetString("nombre", usuario.Nombre);
                 return Redirect("/Home/Index");
             }
             catch (Exception e)

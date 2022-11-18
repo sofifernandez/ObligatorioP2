@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Dominio
 {
-    public class Reseña
+    public class Reseña: IComparable<Reseña>
     {
         public string Titulo { get; set; }
         public string Contenido { get; set; }
@@ -20,6 +21,11 @@ namespace Dominio
             UnPeriodista = periodista;
             PartidoRes = partido;
             //ValidarReseña();
+        }
+
+        public int CompareTo([AllowNull] Reseña other)
+        {
+            return FechaPubli.CompareTo(other.FechaPubli) * -1;
         }
     }
 }

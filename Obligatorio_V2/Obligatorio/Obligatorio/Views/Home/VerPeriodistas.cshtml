@@ -1,0 +1,16 @@
+﻿@using Dominio;
+
+
+<div>
+    @foreach (Usuario item in ViewBag.periodistas)
+    {
+        <div>@item.IDUsuario</div>
+        <div>@item.Nombre</div>
+        <div>@item.Apellido</div>
+        <div>@item.Email</div>
+        <div>
+            <a href="/resenia/VerResenias?email=@item.Email">Ver reseñas</a>
+        </div>
+    }
+</div>
+

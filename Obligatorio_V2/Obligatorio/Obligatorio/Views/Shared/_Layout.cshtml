@@ -19,27 +19,30 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="VerSelecciones">Selecciones</a>
-                        </li>
+                        @if (string.IsNullOrEmpty(Context.Session.GetString("rol")))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="VerSelecciones">Selecciones</a>
+                            </li>
+                        }
+
                         @if (Context.Session.GetString("rol") != null)
                         {
                             <li class="nav-item">
+                                <a class="nav-link text-white bg-info " asp-area="" asp-controller="Home" asp-action="Index">@Context.Session.GetString("nombre")</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Partido" asp-action="VerPartidos">Partidos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Salir</a>
                             </li>
 
                         }
 
-
-
-
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Salir</a>
-                        </li>
                     </ul>
                 </div>
             </div>

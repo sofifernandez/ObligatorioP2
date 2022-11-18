@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sofia\\OneDrive\\ORT\\Semestre2\\P2\\Obligatorio\\Obligatorio_V2\\Obligatorio\\Dominio\\Dominio.csproj": {}
+    "C:\\Users\\sofia\\Desktop\\Obligatorio\\Dominio\\Dominio.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sofia\\OneDrive\\ORT\\Semestre2\\P2\\Obligatorio\\Obligatorio_V2\\Obligatorio\\Dominio\\Dominio.csproj": {
+    "C:\\Users\\sofia\\Desktop\\Obligatorio\\Dominio\\Dominio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sofia\\OneDrive\\ORT\\Semestre2\\P2\\Obligatorio\\Obligatorio_V2\\Obligatorio\\Dominio\\Dominio.csproj",
+        "projectUniqueName": "C:\\Users\\sofia\\Desktop\\Obligatorio\\Dominio\\Dominio.csproj",
         "projectName": "Dominio",
-        "projectPath": "C:\\Users\\sofia\\OneDrive\\ORT\\Semestre2\\P2\\Obligatorio\\Obligatorio_V2\\Obligatorio\\Dominio\\Dominio.csproj",
+        "projectPath": "C:\\Users\\sofia\\Desktop\\Obligatorio\\Dominio\\Dominio.csproj",
         "packagesPath": "C:\\Users\\sofia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sofia\\OneDrive\\ORT\\Semestre2\\P2\\Obligatorio\\Obligatorio_V2\\Obligatorio\\Dominio\\obj\\",
+        "outputPath": "C:\\Users\\sofia\\Desktop\\Obligatorio\\Dominio\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\sofia\\AppData\\Roaming\\NuGet\\NuGet.Config",

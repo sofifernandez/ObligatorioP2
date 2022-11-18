@@ -15,11 +15,17 @@
         {
             if (item.Finalizado)
             {
-                <div class="mt-4">
-                    <h3>@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</h3>
-                    <p>@item.FechaPartido.ToShortDateString()</p>
-                    <p>@item.Resultado</p>
-                    <hr />
+                <div class="card text-center my-3 col-6">
+                    <div class="card-header">
+                        <h5 class="card-title bg-dark text-white">@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</h5>
+                    </div>
+                    <div class="card-body">
+                        
+                        <p class="card-text">@item.Resultado</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        @item.FechaPartido.ToShortDateString()
+                    </div>
                 </div>
             }
         }
@@ -34,12 +40,19 @@
             {
                 if (!item.Finalizado)
                 {
-                    <div class="mt-4">
-                        <h3>@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</h3>
-                        <p>@item.FechaPartido.ToShortDateString()</p>
-                        <button class="btn-info"><a href="/Partido/FinalizarPartido?id=@item.IDPartido">Finalizar</a></button>
-                        <hr />
+                    <div class="card text-center my-3 col-6">
+                        <div class="card-header">
+                            <h5 class="card-title bg-success text-white">@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</h5>
+                        </div>
+                        <div class="card-body">
+
+                            <a class="btn btn-primary" href="/Partido/FinalizarPartido?id=@item.IDPartido">Finalizar</a>
+                        </div>
+                        <div class="card-footer text-muted">
+                            @item.FechaPartido.ToShortDateString()
+                        </div>
                     </div>
+
                 }
             }
         }
@@ -55,11 +68,17 @@
         {
             if (item.Finalizado)
             {
-                <div class="mt-4">
-                    <h3>@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</h3>
-                    <p>@item.FechaPartido.ToShortDateString()</p>
-                    <p>@item.Resultado</p>
-                    <hr />
+                <div class="card text-center my-3 col-6">
+                    <div class="card-header">
+                        <h5 class="card-title bg-dark text-white">@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</h5>
+                    </div>
+                    <div class="card-body">
+
+                        <p class="card-text">@item.Resultado</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        @item.FechaPartido.ToShortDateString()
+                    </div>
                 </div>
             }
         }
@@ -73,12 +92,19 @@
             {
                 if (!item.Finalizado)
                 {
-                    <div class="mt-4">
-                        <h3>@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</h3>
-                        <p>@item.FechaPartido.ToShortDateString()</p>
-                        <button class="btn-info"><a href="/Partido/FinalizarPartido?id=@item.IDPartido">Finalizar</a></button>
-                        <hr />
+                    <div class="card text-center my-3 col-6">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="card-title">@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</h5>
+                        </div>
+                        <div class="card-body">
+
+                            <a class="btn btn-primary" href="/Partido/FinalizarPartido?id=@item.IDPartido">Finalizar</a>
+                        </div>
+                        <div class="card-footer text-muted">
+                            @item.FechaPartido.ToShortDateString()
+                        </div>
                     </div>
+
                 }
             }
         }

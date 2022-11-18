@@ -28,9 +28,9 @@ namespace Obligatorio.Controllers
             {
                 return Redirect("/login/index");
             }
-            string email = HttpContext.Session.GetString("email");
+            string nombre = HttpContext.Session.GetString("nombre");
             string rol = HttpContext.Session.GetString("rol");
-            ViewBag.email = email;
+            ViewBag.nombre = nombre;
             ViewBag.rol = rol;
             return View();
         }
@@ -43,7 +43,22 @@ namespace Obligatorio.Controllers
             return View();
         }
 
-       
+        //SOLO OPERADORES---------------------------------------------------------------------------------
+        public IActionResult VerPeriodistas()
+        {
+            if (HttpContext.Session.GetString("rol") != "OPERADOR")
+            {
+                return Redirect("/login/index");
+            }
+            List<Usuario> aux= unS.FiltrarTipoUsuario("PERIODISTA");
+            aux.Sort();
+            ViewBag.periodistas = aux;
+            return View();
+
+        }
+
+
+
 
         public IActionResult Privacy()
         {

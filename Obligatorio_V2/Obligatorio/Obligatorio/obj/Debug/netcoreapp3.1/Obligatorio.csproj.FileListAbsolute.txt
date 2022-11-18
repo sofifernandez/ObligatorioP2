@@ -129,3 +129,11 @@ C:\Users\sofia\OneDrive\ORT\Semestre2\P2\Obligatorio\Obligatorio_V2\Obligatorio\
 C:\Users\sofia\OneDrive\ORT\Semestre2\P2\Obligatorio\Obligatorio_V2\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Partido\VerPartidos.cshtml.g.cs
 C:\Users\sofia\OneDrive\ORT\Semestre2\P2\Obligatorio\Obligatorio_V2\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Periodista\CrearPeriodista.cshtml.g.cs
 C:\Users\sofia\OneDrive\ORT\Semestre2\P2\Obligatorio\Obligatorio_V2\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Periodista\Index.cshtml.g.cs
+C:\Users\sofia\OneDrive\ORT\Semestre2\P2\Obligatorio\Obligatorio_V2\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Home\VerPeriodistas.cshtml.g.cs
+C:\Users\sofia\OneDrive\ORT\Semestre2\P2\Obligatorio\Obligatorio_V2\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Resenia\VerResenias.cshtml.g.cs
+C:\Users\sofia\Desktop\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Home\VerPeriodistas.cshtml.g.cs
+C:\Users\sofia\Desktop\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Login\Index.cshtml.g.cs
+C:\Users\sofia\Desktop\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Periodista\CrearPeriodista.cshtml.g.cs
+C:\Users\sofia\Desktop\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Periodista\Index.cshtml.g.cs
+C:\Users\sofia\Desktop\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Resenia\VerResenias.cshtml.g.cs
+C:\Users\sofia\Desktop\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Partido\InfoPartidos.cshtml.g.cs

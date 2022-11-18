@@ -36,12 +36,12 @@ namespace Dominio
             IDPartido = uldId++;
         }
 
-        public Partido(DateTime fechaPartido, Seleccion seleccionA, Seleccion seleccionB)
+        public Partido(DateTime fechaPartido, Seleccion seleccionA, Seleccion seleccionB, bool finalizado)
         {
             IDPartido = uldId++;
             FechaPartido = fechaPartido;
             Resultado = "Pendiente";
-            Finalizado = false;
+            Finalizado = finalizado;
             SeleccionA = seleccionA;
             SeleccionB = seleccionB;
             ValidarPartido();
