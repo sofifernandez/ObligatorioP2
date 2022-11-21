@@ -8,8 +8,6 @@ namespace Dominio
     {
         private static Sistema _instancia;
         private List<Partido> _partidos = new List<Partido>();
-        //private List<Periodista> _periodistas = new List<Periodista>();
-        //private List<Operador> _operadores = new List<Operador>();
         private List<Usuario> _usuarios = new List<Usuario>();
         private List<Jugador> _jugadores = new List<Jugador>();
         private List<Pais> _paises = new List<Pais>();
@@ -64,7 +62,7 @@ namespace Dominio
 
 
         //-------------------------------------------------------------------------------------------------------------//
-        //-------------------------------FUNCIONALIDAD USUARIOS---------------------------------------------------------------------//
+        //-------------------------------FUNCIONALIDAD USUARIOS-------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
         public string Login(string email, string password)
         {
@@ -119,6 +117,24 @@ namespace Dominio
             return aux;
         }
 
+        //-------------------------------FUNCIONALIDAD PERIODISTA-------------------------------------------------------//
+        public List<Partido> ReseniasConRojas(string email)
+        {
+            Usuario periodista = GetUsuarioPorEmail(email);
+            List<Partido> aux = new List<Partido>();
+            List<Reseña> resenias = periodista.GetResenias();
+            foreach (Reseña item in resenias)
+            {
+                List<Incidencia> inci = item.PartidoRes.FiltrarIncidencias("Roja");
+                if (inci.Count>0)
+                {
+                    aux.Add(item.PartidoRes);
+                }
+            }
+            return aux;
+        }
+
+
         //-------------------------------------------------------------------------------------------------------------//
         //-------------------------------PRECARGA---------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
@@ -135,13 +151,13 @@ namespace Dominio
         {
             Periodista unPer1 = new Periodista("Pepito","Garcia", "pepito@gmail.com", "qwertyui");
             AltaUsuario(unPer1);
-            unPer1.AgregarResena(new Reseña("Titulo 1", "BlaBla", new DateTime(2022, 11, 10),unPer1, GetPartido(1)));
-            unPer1.AgregarResena(new Reseña("Titulo 2", "blablabla", new DateTime(2022, 11, 12), unPer1, GetPartido(2)));
+            unPer1.AgregarResena(new Reseña("Titulo 1", "BlaBla", new DateTime(2022, 11, 10),unPer1, GetPartido(0)));
+            unPer1.AgregarResena(new Reseña("Titulo 2", "blablabla", new DateTime(2022, 11, 12), unPer1, GetPartido(1)));
 
             Periodista unPer2 = new Periodista("Ana","Perez", "ana@gmail.com", "dfsdfsdfs");
             AltaUsuario(unPer2);
-            unPer2.AgregarResena(new Reseña("Titulo 3", "BlaBla", new DateTime(2022, 11, 13), unPer1, GetPartido(3)));
-            unPer2.AgregarResena(new Reseña("Titulo 4", "BlaBla", new DateTime(2022, 11, 14), unPer1, GetPartido(4)));
+            unPer2.AgregarResena(new Reseña("Titulo 3", "BlaBla", new DateTime(2022, 11, 13), unPer2, GetPartido(2)));
+            unPer2.AgregarResena(new Reseña("Titulo 4", "BlaBla", new DateTime(2022, 11, 14), unPer2, GetPartido(3)));
             
 
             AltaUsuario(new Operador("Juan","Lopez", "juan@gmail.com", "hgfhfghdf", new DateTime(2022, 11, 10)));
@@ -399,6 +415,39 @@ namespace Dominio
             return (_partidoGoles, masGoles);
         }
 
+        public int GolesTotales(Seleccion seleccion)
+        {
+            int golesSeleccion = 0;
+            foreach (Partido item in Partidos)
+            {
+                List<Incidencia> _golesPais = item.FiltrarIncidencias("Gol", seleccion.Pais.Nombre);
+                golesSeleccion += _golesPais.Count;
+            }
+            return golesSeleccion;
+        }
+
+        public (List<Seleccion>, int) SeleccionMasGoles()
+        {
+            List<Seleccion> aux = new List<Seleccion>();
+            int cantGoles = 1;
+            foreach (Seleccion item in Selecciones)
+            {
+                int golesSeleccion = GolesTotales(item);
+                if(golesSeleccion> cantGoles)
+                {
+                    aux.Clear();
+                    aux.Add(item);
+                    cantGoles = golesSeleccion;
+                }
+
+                if(golesSeleccion == cantGoles)
+                {
+                    aux.Add(item);
+                }
+            }
+            return (aux, cantGoles);
+        }
+
         //------------------------------------------------------------------------------------------------------------//
         //-------------------------------FUNCIONALIDAD PARTIDOS---------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
@@ -491,6 +540,197 @@ namespace Dominio
         //----------------------------------------------------------------------------------------------------------//
         //-------------------------------DATOS---------------------------------------------------------------------//
         //--------------------------------------------------------------------------------------------------------//
+        private void PrecargaPaises()
+        {
+            AltaPais(new Pais("Catar", "QAT"));
+            AltaPais(new Pais("Alemania", "DEU"));
+            AltaPais(new Pais("Dinamarca", "DNK"));
+            AltaPais(new Pais("Brasil", "BRA"));
+            AltaPais(new Pais("Francia", "FRA"));
+            AltaPais(new Pais("Bélgica", "BEL"));
+            AltaPais(new Pais("Croacia", "HRV"));
+            AltaPais(new Pais("España", "ESP"));
+            AltaPais(new Pais("Serbia", "SRB"));
+            AltaPais(new Pais("Inglaterra", "GBR"));
+            AltaPais(new Pais("Suiza", "CHE"));
+            AltaPais(new Pais("Países Bajos", "NLD"));
+            AltaPais(new Pais("Argentina", "ARG"));
+            AltaPais(new Pais("Irán", "IRN"));
+            AltaPais(new Pais("Corea del Sur", "KOR"));
+            AltaPais(new Pais("Japón", "JPN"));
+            AltaPais(new Pais("Arabia Saudita", "SAU"));
+            AltaPais(new Pais("Ecuador", "ECU"));
+            AltaPais(new Pais("Uruguay", "URY"));
+            AltaPais(new Pais("Canadá", "CAN"));
+            AltaPais(new Pais("Ghana", "GHA"));
+            AltaPais(new Pais("Senegal", "SEN"));
+            AltaPais(new Pais("Marruecos", "MAR"));
+            AltaPais(new Pais("Túnez", "TUN"));
+            AltaPais(new Pais("Portugal", "PRT"));
+            AltaPais(new Pais("Polonia", "POL"));
+            AltaPais(new Pais("Camerún", "CMR"));
+            AltaPais(new Pais("México", "MEX"));
+            AltaPais(new Pais("Estados Unidos", "USA"));
+            AltaPais(new Pais("Gales", "WLS"));
+            AltaPais(new Pais("Australia", "AUS"));
+            AltaPais(new Pais("Costa Rica", "CRI"));
+        }
+
+        private void PrecargaSelecciones()
+        {
+            foreach (Pais p in _paises)
+            {
+
+                List<Jugador> misjugadores = JugadoresDe(p);
+                Seleccion selnueva = new Seleccion(p, misjugadores);
+                AltaSeleccion(selnueva);
+            }
+        }
+
+
+        private void PrecargaPartidos()
+        {
+            //PARTIDOS GRUPO G (Brasil, Serbia, Suiza, Camerún)
+            Partido unP1_G = new FaseGrupos('G', new DateTime(2022, 11, 24), GetSeleccion("Brasil"), GetSeleccion("Serbia"), true, "Ganador: Brasil");
+            Partido unP2_G = new FaseGrupos('G', new DateTime(2022, 11, 24), GetSeleccion("Suiza"), GetSeleccion("Camerún"), true, "Empate");
+            Partido unP3_G = new FaseGrupos('G', new DateTime(2022, 11, 28), GetSeleccion("Brasil"), GetSeleccion("Suiza"),true, "Ganador: Brasil");
+            Partido unP4_G = new FaseGrupos('G', new DateTime(2022, 11, 28), GetSeleccion("Serbia"), GetSeleccion("Camerún"), true, "Ganador: Camerún");
+            Partido unP5_G = new FaseGrupos('G', new DateTime(2022, 12, 2), GetSeleccion("Brasil"), GetSeleccion("Camerún"), false, "Pendiente");
+            Partido unP6_G = new FaseGrupos('G', new DateTime(2022, 12, 2), GetSeleccion("Serbia"), GetSeleccion("Suiza"), false, "Pendiente");
+            AltaPartido(unP1_G);
+            AltaPartido(unP2_G);
+            AltaPartido(unP3_G);
+            AltaPartido(unP4_G);
+            AltaPartido(unP5_G);
+            AltaPartido(unP6_G);
+
+            //PARTIDOS GRUPO H (Portugal, Gana, Uruguay, Corea)
+            Partido unP1_H = new FaseGrupos('H', new DateTime(2022, 11, 24), GetSeleccion("Portugal"), GetSeleccion("Ghana"), false, "Pendiente");
+            Partido unP2_H = new FaseGrupos('H', new DateTime(2022, 11, 24), GetSeleccion("Uruguay"), GetSeleccion("Corea del Sur"), false, "Pendiente");
+            Partido unP3_H = new FaseGrupos('H', new DateTime(2022, 11, 28), GetSeleccion("Uruguay"), GetSeleccion("Portugal"), false, "Pendiente");
+            Partido unP4_H = new FaseGrupos('H', new DateTime(2022, 11, 28), GetSeleccion("Ghana"), GetSeleccion("Corea del Sur"), false, "Pendiente");
+            Partido unP5_H = new FaseGrupos('H', new DateTime(2022, 12, 2), GetSeleccion("Portugal"), GetSeleccion("Corea del Sur"), false, "Pendiente");
+            Partido unP6_H = new FaseGrupos('H', new DateTime(2022, 12, 2), GetSeleccion("Uruguay"), GetSeleccion("Ghana"), false, "Pendiente");
+            AltaPartido(unP1_H);
+            AltaPartido(unP2_H);
+            AltaPartido(unP3_H);
+            AltaPartido(unP4_H);
+            AltaPartido(unP5_H);
+            AltaPartido(unP6_H);
+
+            // FASE ELIMINATORIAS----- URUGUAY vs CAMERUN y PORTUGAL vs BRASIL
+            Partido unPE_1 = new FaseEliminatorias(new DateTime(2022, 12, 6), GetSeleccion("Uruguay"), GetSeleccion("Camerún"), false, "Pendiente");
+            Partido unPE_2 = new FaseEliminatorias(new DateTime(2022, 12, 6), GetSeleccion("Portugal"), GetSeleccion("Brasil"), false, "Pendiente");
+            AltaPartido(unPE_1);
+            AltaPartido(unPE_2);
+
+            //----------------------------JUGADORES----------------------------------------//
+            AgregarJugadoresPartido(unP1_G);
+            AgregarJugadoresPartido(unP2_G);
+            AgregarJugadoresPartido(unP3_G);
+            AgregarJugadoresPartido(unP4_G);
+            AgregarJugadoresPartido(unP5_G);
+            AgregarJugadoresPartido(unP6_G);
+
+            AgregarJugadoresPartido(unP1_H);
+            AgregarJugadoresPartido(unP2_H);
+            AgregarJugadoresPartido(unP3_H);
+            AgregarJugadoresPartido(unP4_H);
+            AgregarJugadoresPartido(unP5_H);
+            AgregarJugadoresPartido(unP6_H);
+
+            AgregarJugadoresPartido(unPE_1);
+            AgregarJugadoresPartido(unPE_2);
+
+
+
+
+            //------------------------------INCIDENCIAS------------------------------------//
+
+            //PARTIDO 1_G
+            unP1_G.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(113)));
+            unP1_G.AgregarIncidencia(new Incidencia("Gol", 50, GetJugador(114)));
+            unP1_G.AgregarIncidencia(new Incidencia("Roja", 70, GetJugador(114)));
+            unP1_G.AgregarIncidencia(new Incidencia("Amarilla", 87, GetJugador(236)));
+           
+            //PARTIDO 2_G
+            unP2_G.AgregarIncidencia(new Incidencia("Roja", 25, GetJugador(289)));
+            unP2_G.AgregarIncidencia(new Incidencia("Gol", 49, GetJugador(299)));
+            unP2_G.AgregarIncidencia(new Incidencia("Gol", 70, GetJugador(721)));
+
+            //PARTIDO 3_G
+            unP3_G.AgregarIncidencia(new Incidencia("Amarilla", 15, GetJugador(297)));
+            unP3_G.AgregarIncidencia(new Incidencia("Gol", 20, GetJugador(112)));
+            unP3_G.AgregarIncidencia(new Incidencia("Gol", 80, GetJugador(113)));
+            unP3_G.AgregarIncidencia(new Incidencia("Roja", 81, GetJugador(297)));
+
+            ////PARTIDO 4_G
+            unP4_G.AgregarIncidencia(new Incidencia("Amarilla", 60, GetJugador(716)));
+            unP4_G.AgregarIncidencia(new Incidencia("Gol", 75, GetJugador(720)));
+            unP4_G.AgregarIncidencia(new Incidencia("Amarilla", 81, GetJugador(728)));
+            unP4_G.AgregarIncidencia(new Incidencia("Roja", 89, GetJugador(728)));
+
+            ////PARTIDO 5_G 
+            unP5_G.AgregarIncidencia(new Incidencia("Amarilla", 10, GetJugador(110)));
+            unP5_G.AgregarIncidencia(new Incidencia("Gol", 50, GetJugador(111)));
+            unP5_G.AgregarIncidencia(new Incidencia("Gol", 60, GetJugador(113)));
+            unP5_G.AgregarIncidencia(new Incidencia("Gol", 85, GetJugador(721)));
+
+            ////PARTIDO 6_G 
+            unP6_G.AgregarIncidencia(new Incidencia("Amarilla", 32, GetJugador(238)));
+            unP6_G.AgregarIncidencia(new Incidencia("Roja", 55, GetJugador(307)));
+
+            //PARTIDO 1_H
+            unP1_H.AgregarIncidencia(new Incidencia("Gol", 50, GetJugador(542)));
+            unP1_H.AgregarIncidencia(new Incidencia("Gol", 87, GetJugador(605)));
+            unP1_H.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(605)));
+
+            //PARTIDO 2_H
+            unP2_H.AgregarIncidencia(new Incidencia("Amarilla", 89, GetJugador(388)));
+            unP2_H.AgregarIncidencia(new Incidencia("Gol", 15, GetJugador(489)));
+            unP2_H.AgregarIncidencia(new Incidencia("Gol", 49, GetJugador(488)));
+
+            //PARTIDO 3_H
+            unP3_H.AgregarIncidencia(new Incidencia("Amarilla", 20, GetJugador(598)));
+            unP3_H.AgregarIncidencia(new Incidencia("Gol", 88, GetJugador(488)));
+            unP3_H.AgregarIncidencia(new Incidencia("Amarilla", 53, GetJugador(498)));
+
+            //PARTIDO 4_H
+            unP4_H.AgregarIncidencia(new Incidencia("Roja", 20, GetJugador(393)));
+            unP4_H.AgregarIncidencia(new Incidencia("Gol", 40, GetJugador(383)));
+            unP4_H.AgregarIncidencia(new Incidencia("Gol", 53, GetJugador(383)));
+
+            //PARTIDO 5_H
+            unP5_H.AgregarIncidencia(new Incidencia("Amarilla", 23, GetJugador(375)));
+            unP5_H.AgregarIncidencia(new Incidencia("Amarilla", 88, GetJugador(378)));
+            unP5_H.AgregarIncidencia(new Incidencia("Gol", 34, GetJugador(605)));// check
+
+            //PARTIDO 6_H
+            unP6_H.AgregarIncidencia(new Incidencia("Gol", 37, GetJugador(484)));
+            unP6_H.AgregarIncidencia(new Incidencia("Gol", 67, GetJugador(485)));
+            unP6_H.AgregarIncidencia(new Incidencia("Gol", 80, GetJugador(489)));
+
+            // PARTIDO PE_1
+            unPE_1.AgregarIncidencia(new Incidencia("Gol", 60, GetJugador(487)));
+            unPE_1.AgregarIncidencia(new Incidencia("Gol", 75, GetJugador(488)));
+            unPE_1.AgregarIncidencia(new Incidencia("Amarilla", 80, GetJugador(501)));
+
+            // PARTIDO PE_2 (Empate y definición por penales)
+            unPE_2.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(112))); //brasil
+            unPE_2.AgregarIncidencia(new Incidencia("Gol", 64, GetJugador(603))); //portugal
+            unPE_2.AgregarIncidencia(new Incidencia("Roja", 70, GetJugador(601)));
+            //penalesBrasil:
+            unPE_2.AgregarIncidencia(new Incidencia("Gol", -1, GetJugador(109)));
+            unPE_2.AgregarIncidencia(new Incidencia("Gol", -1, GetJugador(110)));
+            unPE_2.AgregarIncidencia(new Incidencia("Gol", -1, GetJugador(111)));
+            unPE_2.AgregarIncidencia(new Incidencia("Gol", -1, GetJugador(112)));
+            //penalesPortugal:
+            unPE_2.AgregarIncidencia(new Incidencia("Gol", -1, GetJugador(600)));
+            unPE_2.AgregarIncidencia(new Incidencia("Gol", -1, GetJugador(602)));
+
+
+
+        }
 
         private void PrecargaJugadores()
         {
@@ -1375,195 +1615,6 @@ namespace Dominio
                 throw new Exception("Error en la precarga de jugadores");
             }
         }
-
-        private void PrecargaPaises()
-        {
-            AltaPais(new Pais("Catar", "QAT"));
-            AltaPais(new Pais("Alemania", "DEU"));
-            AltaPais(new Pais("Dinamarca", "DNK"));
-            AltaPais(new Pais("Brasil", "BRA"));
-            AltaPais(new Pais("Francia", "FRA"));
-            AltaPais(new Pais("Bélgica", "BEL"));
-            AltaPais(new Pais("Croacia", "HRV"));
-            AltaPais(new Pais("España", "ESP"));
-            AltaPais(new Pais("Serbia", "SRB"));
-            AltaPais(new Pais("Inglaterra", "GBR"));
-            AltaPais(new Pais("Suiza", "CHE"));
-            AltaPais(new Pais("Países Bajos", "NLD"));
-            AltaPais(new Pais("Argentina", "ARG"));
-            AltaPais(new Pais("Irán", "IRN"));
-            AltaPais(new Pais("Corea del Sur", "KOR"));
-            AltaPais(new Pais("Japón", "JPN"));
-            AltaPais(new Pais("Arabia Saudita", "SAU"));
-            AltaPais(new Pais("Ecuador", "ECU"));
-            AltaPais(new Pais("Uruguay", "URY"));
-            AltaPais(new Pais("Canadá", "CAN"));
-            AltaPais(new Pais("Ghana", "GHA"));
-            AltaPais(new Pais("Senegal", "SEN"));
-            AltaPais(new Pais("Marruecos", "MAR"));
-            AltaPais(new Pais("Túnez", "TUN"));
-            AltaPais(new Pais("Portugal", "PRT"));
-            AltaPais(new Pais("Polonia", "POL"));
-            AltaPais(new Pais("Camerún", "CMR"));
-            AltaPais(new Pais("México", "MEX"));
-            AltaPais(new Pais("Estados Unidos", "USA"));
-            AltaPais(new Pais("Gales", "WLS"));
-            AltaPais(new Pais("Australia", "AUS"));
-            AltaPais(new Pais("Costa Rica", "CRI"));
-        }
-
-        private void PrecargaSelecciones()
-        {
-            foreach (Pais p in _paises)
-            {
-
-                List<Jugador> misjugadores = JugadoresDe(p);
-                Seleccion selnueva = new Seleccion(p, misjugadores);
-                AltaSeleccion(selnueva);
-            }
-        }
-
-
-        private void PrecargaPartidos()
-        {
-            //PARTIDOS GRUPO G (Brasil, Serbia, Suiza, Camerún)
-            Partido unP1_G = new FaseGrupos('G', new DateTime(2022, 11, 24), GetSeleccion("Brasil"), GetSeleccion("Serbia"), true);
-            Partido unP2_G = new FaseGrupos('G', new DateTime(2022, 11, 24), GetSeleccion("Suiza"), GetSeleccion("Camerún"), false);
-            Partido unP3_G = new FaseGrupos('G', new DateTime(2022, 11, 28), GetSeleccion("Brasil"), GetSeleccion("Suiza"),false);
-            Partido unP4_G = new FaseGrupos('G', new DateTime(2022, 11, 28), GetSeleccion("Serbia"), GetSeleccion("Camerún"), false);
-            Partido unP5_G = new FaseGrupos('G', new DateTime(2022, 12, 2), GetSeleccion("Brasil"), GetSeleccion("Camerún"), false);
-            Partido unP6_G = new FaseGrupos('G', new DateTime(2022, 12, 2), GetSeleccion("Serbia"), GetSeleccion("Suiza"), false);
-            AltaPartido(unP1_G);
-            AltaPartido(unP2_G);
-            AltaPartido(unP3_G);
-            AltaPartido(unP4_G);
-            AltaPartido(unP5_G);
-            AltaPartido(unP6_G);
-
-            //PARTIDOS GRUPO H (Portugal, Gana, Uruguay, Corea)
-            Partido unP1_H = new FaseGrupos('H', new DateTime(2022, 11, 24), GetSeleccion("Portugal"), GetSeleccion("Ghana"), false);
-            Partido unP2_H = new FaseGrupos('H', new DateTime(2022, 11, 24), GetSeleccion("Uruguay"), GetSeleccion("Corea del Sur"), false);
-            Partido unP3_H = new FaseGrupos('H', new DateTime(2022, 11, 28), GetSeleccion("Uruguay"), GetSeleccion("Portugal"), false);
-            Partido unP4_H = new FaseGrupos('H', new DateTime(2022, 11, 28), GetSeleccion("Ghana"), GetSeleccion("Corea del Sur"), false);
-            Partido unP5_H = new FaseGrupos('H', new DateTime(2022, 12, 2), GetSeleccion("Portugal"), GetSeleccion("Corea del Sur"), false);
-            Partido unP6_H = new FaseGrupos('H', new DateTime(2022, 12, 2), GetSeleccion("Uruguay"), GetSeleccion("Ghana"), false);
-            AltaPartido(unP1_H);
-            AltaPartido(unP2_H);
-            AltaPartido(unP3_H);
-            AltaPartido(unP4_H);
-            AltaPartido(unP5_H);
-            AltaPartido(unP6_H);
-
-            // FASE ELIMINATORIAS----- URUGUAY vs CAMERUN y PORTUGAL vs BRASIL
-            Partido unPE_1 = new FaseEliminatorias(new DateTime(2022, 12, 6), GetSeleccion("Uruguay"), GetSeleccion("Camerún"), false);
-            Partido unPE_2 = new FaseEliminatorias(new DateTime(2022, 12, 6), GetSeleccion("Portugal"), GetSeleccion("Brasil"), false);
-            AltaPartido(unPE_1);
-            AltaPartido(unPE_2);
-
-            //----------------------------JUGADORES----------------------------------------//
-            AgregarJugadoresPartido(unP1_G);
-            AgregarJugadoresPartido(unP2_G);
-            AgregarJugadoresPartido(unP3_G);
-            AgregarJugadoresPartido(unP4_G);
-            AgregarJugadoresPartido(unP5_G);
-            AgregarJugadoresPartido(unP6_G);
-
-            AgregarJugadoresPartido(unP1_H);
-            AgregarJugadoresPartido(unP2_H);
-            AgregarJugadoresPartido(unP3_H);
-            AgregarJugadoresPartido(unP4_H);
-            AgregarJugadoresPartido(unP5_H);
-            AgregarJugadoresPartido(unP6_H);
-
-            AgregarJugadoresPartido(unPE_1);
-            AgregarJugadoresPartido(unPE_2);
-
-
-
-
-            //------------------------------INCIDENCIAS------------------------------------//
-
-            //PARTIDO 1_G
-            unP1_G.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(113)));
-            unP1_G.AgregarIncidencia(new Incidencia("Gol", 50, GetJugador(114)));
-            unP1_G.AgregarIncidencia(new Incidencia("Amarilla", 87, GetJugador(236)));
-            //PARTIDO 2_G
-            unP2_G.AgregarIncidencia(new Incidencia("Roja", 25, GetJugador(289)));
-            unP2_G.AgregarIncidencia(new Incidencia("Gol", 49, GetJugador(299)));
-            unP2_G.AgregarIncidencia(new Incidencia("Gol", 70, GetJugador(721)));
-
-            //PARTIDO 3_G
-            unP3_G.AgregarIncidencia(new Incidencia("Amarilla", 15, GetJugador(297)));
-            unP3_G.AgregarIncidencia(new Incidencia("Gol", 20, GetJugador(112)));
-            unP3_G.AgregarIncidencia(new Incidencia("Gol", 80, GetJugador(113)));
-
-            ////PARTIDO 4_G
-            unP4_G.AgregarIncidencia(new Incidencia("Amarilla", 60, GetJugador(716)));
-            unP4_G.AgregarIncidencia(new Incidencia("Gol", 75, GetJugador(720)));
-            unP4_G.AgregarIncidencia(new Incidencia("Amarilla", 85, GetJugador(728)));
-
-            ////PARTIDO 5_G 
-            unP5_G.AgregarIncidencia(new Incidencia("Amarilla", 10, GetJugador(110)));
-            unP5_G.AgregarIncidencia(new Incidencia("Gol", 50, GetJugador(111)));
-            unP5_G.AgregarIncidencia(new Incidencia("Gol", 60, GetJugador(113)));
-            unP5_G.AgregarIncidencia(new Incidencia("Gol", 85, GetJugador(721)));
-
-            ////PARTIDO 6_G 
-            unP6_G.AgregarIncidencia(new Incidencia("Amarilla", 32, GetJugador(238)));
-            unP6_G.AgregarIncidencia(new Incidencia("Roja", 55, GetJugador(307)));
-
-            //PARTIDO 1_H
-            unP1_H.AgregarIncidencia(new Incidencia("Gol", 50, GetJugador(542)));
-            unP1_H.AgregarIncidencia(new Incidencia("Gol", 87, GetJugador(605)));
-            unP1_H.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(605)));
-
-            //PARTIDO 2_H
-            unP2_H.AgregarIncidencia(new Incidencia("Amarilla", 89, GetJugador(388)));
-            unP2_H.AgregarIncidencia(new Incidencia("Gol", 15, GetJugador(489)));
-            unP2_H.AgregarIncidencia(new Incidencia("Gol", 49, GetJugador(488)));
-
-            //PARTIDO 3_H
-            unP3_H.AgregarIncidencia(new Incidencia("Amarilla", 20, GetJugador(598)));
-            unP3_H.AgregarIncidencia(new Incidencia("Gol", 88, GetJugador(488)));
-            unP3_H.AgregarIncidencia(new Incidencia("Amarilla", 53, GetJugador(498)));
-
-            //PARTIDO 4_H
-            unP4_H.AgregarIncidencia(new Incidencia("Roja", 20, GetJugador(393)));
-            unP4_H.AgregarIncidencia(new Incidencia("Gol", 40, GetJugador(383)));
-            unP4_H.AgregarIncidencia(new Incidencia("Gol", 53, GetJugador(383)));
-
-            //PARTIDO 5_H
-            unP5_H.AgregarIncidencia(new Incidencia("Amarilla", 23, GetJugador(375)));
-            unP5_H.AgregarIncidencia(new Incidencia("Amarilla", 88, GetJugador(378)));
-            unP5_H.AgregarIncidencia(new Incidencia("Gol", 34, GetJugador(605)));// check
-
-            //PARTIDO 6_H
-            unP6_H.AgregarIncidencia(new Incidencia("Gol", 37, GetJugador(484)));
-            unP6_H.AgregarIncidencia(new Incidencia("Gol", 67, GetJugador(485)));
-            unP6_H.AgregarIncidencia(new Incidencia("Gol", 80, GetJugador(489)));
-
-            // PARTIDO PE_1
-            unPE_1.AgregarIncidencia(new Incidencia("Gol", 60, GetJugador(487)));
-            unPE_1.AgregarIncidencia(new Incidencia("Gol", 75, GetJugador(488)));
-            unPE_1.AgregarIncidencia(new Incidencia("Amarilla", 80, GetJugador(501)));
-
-            // PARTIDO PE_2 (Empate y definición por penales)
-            unPE_2.AgregarIncidencia(new Incidencia("Gol", 30, GetJugador(112))); //brasil
-            unPE_2.AgregarIncidencia(new Incidencia("Gol", 64, GetJugador(603))); //portugal
-            unPE_2.AgregarIncidencia(new Incidencia("Roja", 70, GetJugador(601)));
-            //penalesBrasil:
-            unPE_2.AgregarIncidencia(new Incidencia("Gol", -1, GetJugador(109)));
-            unPE_2.AgregarIncidencia(new Incidencia("Gol", -1, GetJugador(110)));
-            unPE_2.AgregarIncidencia(new Incidencia("Gol", -1, GetJugador(111)));
-            unPE_2.AgregarIncidencia(new Incidencia("Gol", -1, GetJugador(112)));
-            //penalesPortugal:
-            unPE_2.AgregarIncidencia(new Incidencia("Gol", -1, GetJugador(600)));
-            unPE_2.AgregarIncidencia(new Incidencia("Gol", -1, GetJugador(602)));
-
-
-
-        }
-
     }
 
 }

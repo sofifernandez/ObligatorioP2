@@ -8,7 +8,7 @@ namespace Dominio
     {
         public char Grupo { get; set; }
 
-        public FaseGrupos(char grupo, DateTime fechaPartido, Seleccion seleccionA, Seleccion seleccionB, bool finalizado) : base(fechaPartido, seleccionA, seleccionB, finalizado)
+        public FaseGrupos(char grupo, DateTime fechaPartido, Seleccion seleccionA, Seleccion seleccionB, bool finalizado, string resultado) : base(fechaPartido, seleccionA, seleccionB, finalizado, resultado)
         {
             Grupo = grupo;
             ValidarGrupo();

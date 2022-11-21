@@ -57,6 +57,43 @@ namespace Obligatorio.Controllers
 
         }
 
+        public IActionResult VerEstadisticas()
+        {
+            if (HttpContext.Session.GetString("rol") != "OPERADOR")
+            {
+                return Redirect("/login/index");
+            }
+            (List<Seleccion> SeleccionMasGoles, int masGoles) = unS.SeleccionMasGoles();
+            ViewBag.SeleccionMasGoles = SeleccionMasGoles;
+            ViewBag.MasGoles = masGoles;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult VerEstadisticas(string email)
+        {
+            if (HttpContext.Session.GetString("rol") != "OPERADOR")
+            {
+                return Redirect("/login/index");
+            }
+            try
+            {
+                ViewBag.Partidos = unS.ReseniasConRojas(email);
+                (List<Seleccion> SeleccionMasGoles, int masGoles) = unS.SeleccionMasGoles();
+                ViewBag.SeleccionMasGoles = SeleccionMasGoles;
+                ViewBag.MasGoles = masGoles;
+                return View();
+            }
+            catch (Exception e)
+            {
+                (List<Seleccion> SeleccionMasGoles, int masGoles) = unS.SeleccionMasGoles();
+                ViewBag.SeleccionMasGoles = SeleccionMasGoles;
+                ViewBag.MasGoles = masGoles;
+                ViewBag.Error = e.Message;
+                return View();
+            }
+            
+        }
 
 
 

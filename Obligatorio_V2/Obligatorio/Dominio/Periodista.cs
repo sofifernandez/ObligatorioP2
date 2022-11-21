@@ -20,14 +20,15 @@ namespace Dominio
             Apellido = apellido;
             Email = email;
             Password = password;
+            //Reseñas = new List<Reseña>();
         }
 
 
         
-        //-------------------------------RESEÑAS (no implementado)--------------------------------------------------//
+        //-------------------------------RESEÑAS --------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
 
-        public void AgregarResena(Reseña resena) //--> no implementado en esta entrega
+        public void AgregarResena(Reseña resena) 
         {
             Reseñas.Add(resena);
         }

@@ -36,11 +36,11 @@ namespace Dominio
             IDPartido = uldId++;
         }
 
-        public Partido(DateTime fechaPartido, Seleccion seleccionA, Seleccion seleccionB, bool finalizado)
+        public Partido(DateTime fechaPartido, Seleccion seleccionA, Seleccion seleccionB, bool finalizado, string resultado)
         {
             IDPartido = uldId++;
             FechaPartido = fechaPartido;
-            Resultado = "Pendiente";
+            Resultado = resultado;
             Finalizado = finalizado;
             SeleccionA = seleccionA;
             SeleccionB = seleccionB;
@@ -139,9 +139,6 @@ namespace Dominio
             return aux;
 
         }
-
-
-
 
 
         //-------------------------------FUNCIONES GENERALES---------------------------------------------------------//

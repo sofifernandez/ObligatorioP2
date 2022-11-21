@@ -1,0 +1,29 @@
+- UML		<<<---------------------------------
+- CASOS DE USO	<<<---------------------------------
+- DOCUMENTACION 	<<<---------------------------------
+
+- USUARIO NO REGISTRADO
+	-(CHECK) LOGIN
+	-(CHECK) Listado de todas las selecciones ordenadas por nombre, con los nombres de susjugadores.
+	-(CHECK) Registrarse como periodista
+
+- PERIODISTA
+	- (CHECK) Mínimo un periodista precargado
+	- (CHECK) Ver partidos CERRADOS
+
+	- Realizar reseña de partido CERRADO	<<<---------------------------------
+	- Ver reseñas propias	<<<<------------------------------------
+
+-OPERADOR
+	- (CHECK) Dos operadores precargados
+	- (CHECK) Ver TODOS los partidos
+	- (CHECK) Finalizar un partido
+	- (CHECK) Visualizar todos los partidos jugados entre dos fechas que estén cerrados con sus selecciones, goles de cada una, cantidad de tarjetas amarillas y rojas de cada uno.
+	- (CHECK) Visualizar Periodistas (ordenados alfabeticamente por apellido y luego nombre)
+	- (CHECK) Ver reseñas de un periodista en particular (ordenados por fecha decreciente)
+
+	- ESTADISTICAS:		
+		- (CHECK) Dado el email de un periodista, mostrar los partidos con tarjeta roja que reseñó.
+		- (CASI, ME MUESTRA DOS VECES BRASIL) Mostrar la selección que hizo más goles. Si hay más de una selección con el número máximo de goles mostrar las empatadas. <<<<---------------------------------------------
+
+

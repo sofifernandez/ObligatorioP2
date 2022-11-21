@@ -1,0 +1,41 @@
+﻿@using Dominio;
+
+<h1>Estadísticas</h1>
+<div>
+    <h2> Reseñas de partidos con rojas</h2>
+    <form method="post">
+        <div class="form-group">
+            <label for="email">Email de periodista</label>
+            <input type="text" name="email" class="form-control" value="@ViewBag.Email" />
+        </div>
+        <button type="submit" class="btn btn-primary">Ver</button>
+    </form>
+    @if (ViewBag.Partidos != null)
+    {
+        foreach (Partido item in ViewBag.Partidos)
+        {
+            <div class="card text-center my-3 col-6">
+                <div class="card-header">
+                    <h5 class="card-title bg-dark text-white">@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</h5>
+                </div>
+                <div class="card-body">
+
+                    <p class="card-text">@item.Resultado</p>
+                </div>
+                <div class="card-footer text-muted">
+                    @item.FechaPartido.ToShortDateString()
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<div>
+    <h2>Selección/es con más goles: @ViewBag.MasGoles goles</h2>
+    <div>
+        @foreach (Seleccion item in ViewBag.SeleccionMasGoles)
+        {
+            <div>@item.Pais.Nombre</div>
+        }
+    </div>
+</div>
