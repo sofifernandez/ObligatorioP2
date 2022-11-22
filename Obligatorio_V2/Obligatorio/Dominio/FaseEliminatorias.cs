@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Dominio
 {
@@ -95,6 +96,9 @@ namespace Dominio
 
         //-------------------------------FUNCIONES GENERALES---------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
+
+        public override char GetGrupo() { return 'z'; }
+
         public override string ToString()
         {
             return $" -- FASE DE ELIMINATORIAS --\n" + base.ToString();

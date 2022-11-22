@@ -3,13 +3,18 @@
 <div>
     @foreach (Reseña item in ViewBag.resenias)
     {
-        <div>Fecha: @item.PartidoRes.FechaPartido</div>
-        @if (item.PartidoRes is FaseGrupos)
-        {
-            <div>Grupo: ver cómo</div>
-        }
-        <div>Selección A: @item.PartidoRes.SeleccionA.Pais.Nombre</div>
-        <div>Selección B: @item.PartidoRes.SeleccionB.Pais.Nombre</div>
-        <div>Contenido: @item.Contenido</div>
+        <div class="card" style="margin-bottom: 10px;">
+            <div class="card-body">
+                <div class="card-text">Fecha: @item.PartidoRes.FechaPartido</div>
+                @if (item.PartidoRes is FaseGrupos)
+                {
+                    <div class="card-text">Grupo: @item.PartidoRes.GetGrupo()</div>
+                }
+                <div class="card-text">Selección A: @item.PartidoRes.SeleccionA.Pais.Nombre</div>
+                <div class="card-text">Selección B: @item.PartidoRes.SeleccionB.Pais.Nombre</div>
+                <div class="card-text">Contenido: @item.Contenido</div>
+            </div>
+
+        </div>
     }
 </div>

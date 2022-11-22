@@ -26,6 +26,11 @@
                     <div class="card-footer text-muted">
                         @item.FechaPartido.ToShortDateString()
                     </div>
+                    @if (Context.Session.GetString("rol") == "PERIODISTA") {
+                        <div class="card-footer text-muted">
+                            <a href="/Resenia/CrearResenia/?id=@item.IDPartido">Agregar reseña</a>
+                        </div>
+                    }
                 </div>
             }
         }

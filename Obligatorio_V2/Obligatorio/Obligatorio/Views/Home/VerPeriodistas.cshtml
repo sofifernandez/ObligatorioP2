@@ -4,12 +4,16 @@
 <div>
     @foreach (Usuario item in ViewBag.periodistas)
     {
-        <div>@item.IDUsuario</div>
-        <div>@item.Nombre</div>
-        <div>@item.Apellido</div>
-        <div>@item.Email</div>
-        <div>
-            <a href="/resenia/VerResenias?email=@item.Email">Ver reseñas</a>
+        <div class="card" style="margin-bottom: 10px;">
+            <div class="card-body">
+                <p class="card-text">@item.IDUsuario</p>
+                <p class="card-text">@item.Nombre</p>
+                <p class="card-text">@item.Apellido</p>
+                <p class="card-text">@item.Email</p>
+                <div>
+                    <a class="card-text" href="/resenia/VerResenias?email=@item.Email">Ver reseñas</a>
+                </div>
+            </div>
         </div>
     }
 </div>

@@ -28,9 +28,9 @@ namespace Dominio
         //-------------------------------RESEÑAS --------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
 
-        public void AgregarResena(Reseña resena) 
+        public override void AgregarResenia(Reseña resenia) 
         {
-            Reseñas.Add(resena);
+            Reseñas.Add(resenia);
         }
 
         public override List<Reseña> GetResenias()

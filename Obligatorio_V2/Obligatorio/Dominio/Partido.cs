@@ -143,6 +143,8 @@ namespace Dominio
 
         //-------------------------------FUNCIONES GENERALES---------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
+        public abstract char GetGrupo();
+
         public bool Equals([AllowNull] Partido other)
         {
             return SeleccionA.Pais.Nombre.Equals(other.SeleccionA.Pais.Nombre) && SeleccionB.Pais.Nombre.Equals(other.SeleccionB.Pais.Nombre) && FechaPartido.Equals(other.FechaPartido);
@@ -158,7 +160,6 @@ namespace Dominio
             respuesta += $"Seleccion B: {SeleccionB.Pais.Nombre} \n";
             respuesta += $"Finalizado: {Finalizado} \n";
             respuesta += $"Resultado: {Resultado} \n";
-            respuesta += "------------------------------------ \n";
             if (_incidencias.Count > 0)
             {
                 respuesta += "Incidencias del partido:\n";

@@ -7,10 +7,10 @@
 @if (Context.Session.GetString("rol") == "OPERADOR")
 {
     <div>
-        <a href="/Partido/VerPartidos">Todos los partidos</a>
-        <a href="/Partido/InfoPartidos">Información de partidos</a>
-        <a href="/Home/VerPeriodistas">Periodistas</a>
-        <a href="/Home/VerEstadisticas">Estadísticas</a>
+        <a href="/Partido/VerPartidos" class="btn btn-primary">Todos los partidos</a>
+        <a href="/Partido/InfoPartidos" class="btn btn-primary">Información de partidos</a>
+        <a href="/Home/VerPeriodistas" class="btn btn-primary">Periodistas</a>
+        <a href="/Home/VerEstadisticas" class="btn btn-primary">Estadísticas</a>
     </div>
 }
 
@@ -18,7 +18,7 @@
 @if (Context.Session.GetString("rol") == "PERIODISTA")
 {
     <div>
-        <a  href="/Partido/VerPartidos">Partidos finalizados</a>
-        <a href="/Resenia/VerResenias">Reseñas anteriores</a>
+        <a  href="/Partido/VerPartidos" class="btn btn-primary" style="margin-right: 20px">Partidos finalizados</a>
+        <a href="/Resenia/VerReseniasPersonales" class="btn btn-primary">Mis reseñas</a>
     </div>
 }

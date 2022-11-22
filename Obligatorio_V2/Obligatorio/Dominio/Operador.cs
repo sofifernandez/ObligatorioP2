@@ -28,5 +28,7 @@ namespace Dominio
         {
             return null;
         }
+
+        public override void AgregarResenia(Reseña resenia) { }
     }
 }

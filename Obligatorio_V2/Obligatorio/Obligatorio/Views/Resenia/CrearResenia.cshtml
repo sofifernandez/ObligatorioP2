@@ -1,0 +1,28 @@
+﻿<h1>Nueva reseña</h1>
+<h2>@ViewBag.Partido.SeleccionA.Pais.Nombre vs @ViewBag.Partido.SeleccionB.Pais.Nombre</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label for="titulo">Titulo</label>
+        <input type="text" name="titulo" class="form-control" value="" />
+    </div>
+    <div class="form-group">
+        <label for="contenido">Contenido</label>
+        <input type="text" name="contenido" class="form-control" value="" />
+    </div>
+    <div class="form-group">
+        <label for="fecha">Fecha de publicación</label>
+        <input type="date" name="fecha" class="form-control" value="" />
+    </div>
+    <div class="form-group">
+        <label for="partido">Partido</label>
+        <input type="number" name="partido" class="form-control" value="@ViewBag.IDPartido" disabled />
+    </div>
+    <div class="form-group">
+        <label for="periodista">Periodista</label>
+        <input type="text" name="periodista" class="form-control" value="@ViewBag.Periodista.Nombre @ViewBag.Periodista.Apellido" disabled />
+    </div>
+    <button type="submit" class="btn btn-primary">Reseñar</button>
+</form>
+<a href="/Partido/VerPartidos">Volver.</a>
+</div>

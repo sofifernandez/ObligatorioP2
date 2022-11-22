@@ -139,3 +139,9 @@ C:\Users\sofia\Desktop\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Vie
 C:\Users\sofia\Desktop\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Partido\InfoPartidos.cshtml.g.cs
 C:\Users\sofia\OneDrive\ORT\Semestre2\P2\Obligatorio\Obligatorio_V2\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Partido\InfoPartidos.cshtml.g.cs
 C:\Users\sofia\OneDrive\ORT\Semestre2\P2\Obligatorio\Obligatorio_V2\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Home\VerEstadisticas.cshtml.g.cs
+C:\Users\santi\Desktop\developORT\ObligatorioP2\Obligatorio_V2\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Home\VerEstadisticas.cshtml.g.cs
+C:\Users\santi\Desktop\developORT\ObligatorioP2\Obligatorio_V2\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Home\VerPeriodistas.cshtml.g.cs
+C:\Users\santi\Desktop\developORT\ObligatorioP2\Obligatorio_V2\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Partido\InfoPartidos.cshtml.g.cs
+C:\Users\santi\Desktop\developORT\ObligatorioP2\Obligatorio_V2\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Resenia\VerResenias.cshtml.g.cs
+C:\Users\santi\Desktop\developORT\ObligatorioP2\Obligatorio_V2\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Resenia\VerReseniasPersonales.cshtml.g.cs
+C:\Users\santi\Desktop\developORT\ObligatorioP2\Obligatorio_V2\Obligatorio\Obligatorio\obj\Debug\netcoreapp3.1\Razor\Views\Resenia\CrearResenia.cshtml.g.cs

@@ -85,6 +85,12 @@ namespace Dominio
 
         //-------------------------------FUNCIONES GENERALES---------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
+
+        public override char GetGrupo()
+        {
+            return Grupo;
+        }
+
         public override string ToString()
         {
             return $" -- FASE DE GRUPOS -- {Grupo}\n" + base.ToString();

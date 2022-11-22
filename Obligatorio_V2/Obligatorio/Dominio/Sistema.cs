@@ -98,6 +98,19 @@ namespace Dominio
             return null;
         }
 
+        public Periodista GetPeriodistaPorEmail(string email)
+        {
+            foreach (Periodista p in FiltrarTipoUsuario("PERIODISTA"))
+            {
+                if (p.Email == email)
+                {
+                    return p;
+                }
+            }
+
+            return null;
+        }
+
         public List<Usuario> FiltrarTipoUsuario(string tipo)
         {
             List<Usuario> aux = new List<Usuario>();
@@ -151,13 +164,13 @@ namespace Dominio
         {
             Periodista unPer1 = new Periodista("Pepito","Garcia", "pepito@gmail.com", "qwertyui");
             AltaUsuario(unPer1);
-            unPer1.AgregarResena(new Reseña("Titulo 1", "BlaBla", new DateTime(2022, 11, 10),unPer1, GetPartido(0)));
-            unPer1.AgregarResena(new Reseña("Titulo 2", "blablabla", new DateTime(2022, 11, 12), unPer1, GetPartido(1)));
+            unPer1.AgregarResenia(new Reseña("Titulo 1", "BlaBla", new DateTime(2022, 11, 10),unPer1, GetPartido(0)));
+            unPer1.AgregarResenia(new Reseña("Titulo 2", "blablabla", new DateTime(2022, 11, 12), unPer1, GetPartido(1)));
 
             Periodista unPer2 = new Periodista("Ana","Perez", "ana@gmail.com", "dfsdfsdfs");
             AltaUsuario(unPer2);
-            unPer2.AgregarResena(new Reseña("Titulo 3", "BlaBla", new DateTime(2022, 11, 13), unPer2, GetPartido(2)));
-            unPer2.AgregarResena(new Reseña("Titulo 4", "BlaBla", new DateTime(2022, 11, 14), unPer2, GetPartido(3)));
+            unPer2.AgregarResenia(new Reseña("Titulo 3", "BlaBla", new DateTime(2022, 11, 13), unPer2, GetPartido(2)));
+            unPer2.AgregarResenia(new Reseña("Titulo 4", "BlaBla", new DateTime(2022, 11, 14), unPer2, GetPartido(3)));
             
 
             AltaUsuario(new Operador("Juan","Lopez", "juan@gmail.com", "hgfhfghdf", new DateTime(2022, 11, 10)));
