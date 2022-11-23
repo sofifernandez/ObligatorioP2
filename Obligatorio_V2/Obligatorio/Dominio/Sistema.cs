@@ -615,13 +615,9 @@ namespace Dominio
             Partido unP5_G = new FaseGrupos('G', new DateTime(2022, 12, 2), GetSeleccion("Brasil"), GetSeleccion("Camerún"), false, "Pendiente");
             Partido unP6_G = new FaseGrupos('G', new DateTime(2022, 12, 2), GetSeleccion("Serbia"), GetSeleccion("Suiza"), false, "Pendiente");
             AltaPartido(unP1_G);
-            unP1_G.FinalizarPartido();
             AltaPartido(unP2_G);
-            unP2_G.FinalizarPartido();
             AltaPartido(unP3_G);
-            unP3_G.FinalizarPartido();
             AltaPartido(unP4_G);
-            unP4_G.FinalizarPartido();
             AltaPartido(unP5_G);
             AltaPartido(unP6_G);
 
@@ -673,23 +669,26 @@ namespace Dominio
             unP1_G.AgregarIncidencia(new Incidencia("Gol", 50, GetJugador(114)));
             unP1_G.AgregarIncidencia(new Incidencia("Roja", 70, GetJugador(114)));
             unP1_G.AgregarIncidencia(new Incidencia("Amarilla", 87, GetJugador(236)));
-           
+            unP1_G.FinalizarPartido();
             //PARTIDO 2_G
             unP2_G.AgregarIncidencia(new Incidencia("Roja", 25, GetJugador(289)));
             unP2_G.AgregarIncidencia(new Incidencia("Gol", 49, GetJugador(299)));
             unP2_G.AgregarIncidencia(new Incidencia("Gol", 70, GetJugador(721)));
+            unP2_G.FinalizarPartido();
 
             //PARTIDO 3_G
             unP3_G.AgregarIncidencia(new Incidencia("Amarilla", 15, GetJugador(297)));
             unP3_G.AgregarIncidencia(new Incidencia("Gol", 20, GetJugador(112)));
             unP3_G.AgregarIncidencia(new Incidencia("Gol", 80, GetJugador(113)));
             unP3_G.AgregarIncidencia(new Incidencia("Roja", 81, GetJugador(297)));
+            unP3_G.FinalizarPartido();
 
             ////PARTIDO 4_G
             unP4_G.AgregarIncidencia(new Incidencia("Amarilla", 60, GetJugador(716)));
             unP4_G.AgregarIncidencia(new Incidencia("Gol", 75, GetJugador(720)));
             unP4_G.AgregarIncidencia(new Incidencia("Amarilla", 81, GetJugador(728)));
             unP4_G.AgregarIncidencia(new Incidencia("Roja", 89, GetJugador(728)));
+            unP4_G.FinalizarPartido();
 
             ////PARTIDO 5_G 
             unP5_G.AgregarIncidencia(new Incidencia("Amarilla", 10, GetJugador(110)));
