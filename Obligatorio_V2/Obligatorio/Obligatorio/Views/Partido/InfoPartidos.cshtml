@@ -2,13 +2,20 @@
 @model Partido;
 
 <h1>Ingrese rango de fechas</h1>
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.Mensaje
+    </div>
+}
+
 <form method="post">
     <div class="mb-3">
-        <label for="fecha1" class="form-label">Nombre</label>
+        <label for="fecha1" class="form-label">Fecha 1</label>
         <input type="date" name="fecha1" id="fecha1" class="form-control">
     </div>
     <div class="mb-3">
-        <label for="fecha2" class="form-label">Descripcion</label>
+        <label for="fecha2" class="form-label">Fecha 2</label>
         <input type="date" name="fecha2" class="form-control">
     </div>
     <button type="submit" class="btn btn-primary">Enviar</button>
@@ -25,22 +32,18 @@
             <h2>@item.SeleccionA.Pais.Nombre vs. @item.SeleccionB.Pais.Nombre</h2>
             <div>@item.FechaPartido.ToShortDateString()</div>
             <h3>@item.SeleccionA.Pais.Nombre:</h3>
-             <ul>
-                    <li> Goles: @item.FiltrarIncidencias("Gol", item.SeleccionA.Pais.Nombre).Count() </li>
-                    <li> Amarillas: @item.FiltrarIncidencias("Amarilla", item.SeleccionA.Pais.Nombre).Count()</li>
-                    <li> Rojas: @item.FiltrarIncidencias("Roja", item.SeleccionA.Pais.Nombre).Count()</li>
-                </ul>
+            <ul>
+                <li> Goles: @item.FiltrarIncidencias("Gol", item.SeleccionA.Pais.Nombre).Count() </li>
+                <li> Amarillas: @item.FiltrarIncidencias("Amarilla", item.SeleccionA.Pais.Nombre).Count()</li>
+                <li> Rojas: @item.FiltrarIncidencias("Roja", item.SeleccionA.Pais.Nombre).Count()</li>
+            </ul>
 
-                <h3>@item.SeleccionB.Pais.Nombre:</h3>
-                <ul>
-                    <li> Goles: @item.FiltrarIncidencias("Gol", item.SeleccionB.Pais.Nombre).Count()</li>
-                    <li> Amarillas:@item.FiltrarIncidencias("Amarilla", item.SeleccionB.Pais.Nombre).Count()</li>
-                    <li> Rojas: @item.FiltrarIncidencias("Roja", item.SeleccionB.Pais.Nombre).Count()</li>
-                </ul>
+            <h3>@item.SeleccionB.Pais.Nombre:</h3>
+            <ul>
+                <li> Goles: @item.FiltrarIncidencias("Gol", item.SeleccionB.Pais.Nombre).Count()</li>
+                <li> Amarillas:@item.FiltrarIncidencias("Amarilla", item.SeleccionB.Pais.Nombre).Count()</li>
+                <li> Rojas: @item.FiltrarIncidencias("Roja", item.SeleccionB.Pais.Nombre).Count()</li>
+            </ul>
         }
     }
-            else
-            {
-                <div> No hay partidos entre las fechas seleccionadas</div>
-            }
 </div>

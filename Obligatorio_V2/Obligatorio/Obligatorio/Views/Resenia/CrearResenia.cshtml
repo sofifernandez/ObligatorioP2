@@ -1,6 +1,13 @@
 ﻿<h1>Nueva reseña</h1>
 <h2>@ViewBag.Partido.SeleccionA.Pais.Nombre vs @ViewBag.Partido.SeleccionB.Pais.Nombre</h2>
 
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.Error
+    </div>
+}
+
 <form method="post">
     <div class="form-group">
         <label for="titulo">Titulo</label>
@@ -25,4 +32,3 @@
     <button type="submit" class="btn btn-primary">Reseñar</button>
 </form>
 <a href="/Partido/VerPartidos">Volver.</a>
-</div>

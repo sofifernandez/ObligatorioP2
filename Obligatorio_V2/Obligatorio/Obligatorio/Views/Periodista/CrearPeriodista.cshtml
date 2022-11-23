@@ -3,30 +3,41 @@
 <h1>Periodista</h1>
 
 <div>
-    @if (@ViewBag.Error != null)
+    @if (ViewBag.Error != null)
     {
-            <div class="alert alert-danger" role="alert">
+        <div class="alert alert-danger" role="alert">
             @ViewBag.Error
-            </div>
+        </div>
     }
-<form method="post">
-    <div class="form-group">
-        <label for="nombre">Nombre</label>
-        <input type="text" name="nombre" class="form-control" value="@ViewBag.Nombre" />
-    </div>
-    <div class="form-group">
-        <label for="apellido">Nombre</label>
-        <input type="text" name="apellido" class="form-control" value="@ViewBag.Apellido" />
-    </div>
-    <div class="form-group">
-        <label for="Email">Email</label>
-        <input type="text" name="email" class="form-control" value="@ViewBag.Email" />
-    </div>
-    <div class="form-group">
-        <label for="Password">Contraseña</label>
-        <input type="text" name="password" class="form-control" value="@ViewBag.Password" />
-    </div>
-    <button type="submit" class="btn btn-primary">Registrarse</button>
-</form>
+
+    @if (ViewBag.MensajeExito != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @ViewBag.MensajeExito <a href="/">aquí</a>
+        </div>
+    }
+    
+
+
+
+    <form method="post">
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" class="form-control" value="@ViewBag.Nombre" />
+        </div>
+        <div class="form-group">
+            <label for="apellido">Apellido</label>
+            <input type="text" name="apellido" class="form-control" value="@ViewBag.Apellido" />
+        </div>
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <input type="text" name="email" class="form-control" value="@ViewBag.Email" />
+        </div>
+        <div class="form-group">
+            <label for="Password">Contraseña</label>
+            <input type="text" name="password" class="form-control" value="@ViewBag.Password" />
+        </div>
+        <button type="submit" class="btn btn-primary">Registrarse</button>
+    </form>
     <a href="/">Volver.</a>
 </div>

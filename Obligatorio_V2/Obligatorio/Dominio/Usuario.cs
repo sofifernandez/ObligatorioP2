@@ -28,12 +28,13 @@ namespace Dominio
             Apellido = apellido;
             Email = email;
             Password = password;
+            ValidarUsuario();
 
         }
 
         //-------------------------------VALIDACIONES----------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
-        public void ValidarPeriodista()
+        public void ValidarUsuario()
         {
 
             ValidarNombre();
@@ -44,9 +45,14 @@ namespace Dominio
 
         private void ValidarNombre()
         {
-            if (string.IsNullOrEmpty(Nombre) || string.IsNullOrEmpty(Apellido))
+            if (string.IsNullOrEmpty(Nombre))
             {
-                throw new Exception("Faltan el nombre");
+                throw new Exception("Debe ingresar un nombre");
+            }
+
+            if (string.IsNullOrEmpty(Apellido))
+            {
+                throw new Exception("Debe ingresar un apellido");
             }
         }
 
@@ -54,7 +60,7 @@ namespace Dominio
         {
             if (string.IsNullOrEmpty(Email))
             {
-                throw new Exception("No ingresó mail");
+                throw new Exception("Debe ingresar un email");
             }
             int indice = Email.IndexOf('@'); //--> chequear que el @ no esté al comienzo o al final
             if (indice <= 0 || indice >= Email.Length - 1)
@@ -78,7 +84,7 @@ namespace Dominio
         }
         private void ValidarPassword()
         {
-            if (Password.Length < 8)
+            if (string.IsNullOrEmpty(Password) || Password.Length < 8)
             {
                 throw new Exception("Contraseña con insuficiente cantidad de caracteres");
             }
@@ -90,9 +96,9 @@ namespace Dominio
         }
 
         // FUNCIONES ABSTRACTAS
-        public abstract List<Reseña> GetResenias();
+        //public abstract List<Reseña> GetResenias();
 
-        public abstract void AgregarResenia(Reseña resenia);
+        //public abstract void AgregarResenia(Reseña resenia);
 
         public int CompareTo([AllowNull] Usuario other)
         {

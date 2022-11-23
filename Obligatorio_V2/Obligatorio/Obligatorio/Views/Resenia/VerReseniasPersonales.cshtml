@@ -2,13 +2,22 @@
 <h1>@ViewBag.Periodista.Nombre @ViewBag.Periodista.Apellido</h1>
 
 <h2>Reseñas propias</h2>
-@foreach (Reseña item in ViewBag.Resenias) {
-    <div class="card" style="margin-bottom: 30px">
-        <div class="card-body">
-            <h4 class="card-title">@item.Titulo</h4>
-            <p class="card-text">@item.PartidoRes.SeleccionA.Pais.Nombre</p>
-            <p class="card-text">@item.PartidoRes.SeleccionB.Pais.Nombre</p>
-            <p class="card-text">@item.Contenido</p>
-        </div>
-    </div>
-}
+<div>
+    @if (ViewBag.Resenias.Count > 0)
+    {
+        @foreach (Reseña item in ViewBag.Resenias)
+        {
+            <div class="card" style="margin-bottom: 30px">
+                <div class="card-body">
+                    <h4 class="card-title">@item.Titulo</h4>
+                    <p class="card-text">@item.PartidoRes.SeleccionA.Pais.Nombre</p>
+                    <p class="card-text">@item.PartidoRes.SeleccionB.Pais.Nombre</p>
+                    <p class="card-text">@item.Contenido</p>
+                </div>
+            </div>
+        }      }
+            else
+            {
+                <div>Aún no tienes reseñas</div>
+            }
+</div>

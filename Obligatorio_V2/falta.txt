@@ -2,6 +2,11 @@
 - CASOS DE USO	<<<---------------------------------
 - DOCUMENTACION 	<<<---------------------------------
 
+
+
+
+
+
 - USUARIO NO REGISTRADO
 	-(CHECK) LOGIN
 	-(CHECK) Listado de todas las selecciones ordenadas por nombre, con los nombres de susjugadores.
@@ -11,8 +16,8 @@
 	- (CHECK) Mínimo un periodista precargado
 	- (CHECK) Ver partidos CERRADOS
 
-	- Realizar reseña de partido CERRADO	<<<---------------------------------
-	- Ver reseñas propias	<<<<------------------------------------
+	- (CHECK) Realizar reseña de partido CERRADO 
+	- (CHECK) Ver reseñas propias	
 
 -OPERADOR
 	- (CHECK) Dos operadores precargados
@@ -24,6 +29,21 @@
 
 	- ESTADISTICAS:		
 		- (CHECK) Dado el email de un periodista, mostrar los partidos con tarjeta roja que reseñó.
-		- (CASI, ME MUESTRA DOS VECES BRASIL) Mostrar la selección que hizo más goles. Si hay más de una selección con el número máximo de goles mostrar las empatadas. <<<<---------------------------------------------
+		- (CHECK) Mostrar la selección que hizo más goles. Si hay más de una selección con el número máximo de goles mostrar las empatadas. 
 
 
+Si hay tiempo:
+- ponerle cariño
+- cambiar que no se pueda hacer reseña sobre partido ya reseñado
+- agregarle fecha a las reseñas
+- poner que todavía no hay reseñas (en propias y desde un operador)
+
+FALTA
+- LISTAS PRIVADAS DENTRO DE CLASES!
+- PROBAR QUE NO PUEDA ENTRAR CON LA URL A LOS LUGARES
+
+
+
+
+PREGUNTAS
+- Solamente se incluirá el código fuente de las clases del dominio (SOLO CLASES DEL DOMINIO??)

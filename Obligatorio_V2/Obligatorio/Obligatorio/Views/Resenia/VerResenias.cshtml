@@ -1,20 +1,27 @@
 ﻿@using Dominio;
 
 <div>
-    @foreach (Reseña item in ViewBag.resenias)
+    
+    @if (ViewBag.resenias.Count > 0)
     {
-        <div class="card" style="margin-bottom: 10px;">
-            <div class="card-body">
-                <div class="card-text">Fecha: @item.PartidoRes.FechaPartido</div>
-                @if (item.PartidoRes is FaseGrupos)
-                {
-                    <div class="card-text">Grupo: @item.PartidoRes.GetGrupo()</div>
-                }
-                <div class="card-text">Selección A: @item.PartidoRes.SeleccionA.Pais.Nombre</div>
-                <div class="card-text">Selección B: @item.PartidoRes.SeleccionB.Pais.Nombre</div>
-                <div class="card-text">Contenido: @item.Contenido</div>
-            </div>
+        @foreach (Reseña item in ViewBag.resenias)
+        {
+            <div class="card" style="margin-bottom: 10px;">
+                <div class="card-body">
+                    <div class="card-text">Fecha: @item.PartidoRes.FechaPartido</div>
+                    @if (item.PartidoRes is FaseGrupos)
+                    {
+                        <div class="card-text">Grupo: @item.PartidoRes.GetGrupo()</div>
+                    }
+                    <div class="card-text">Selección A: @item.PartidoRes.SeleccionA.Pais.Nombre</div>
+                    <div class="card-text">Selección B: @item.PartidoRes.SeleccionB.Pais.Nombre</div>
+                    <div class="card-text">Contenido: @item.Contenido</div>
+                </div>
 
-        </div>
-    }
+            </div>
+        }      }
+            else
+            {
+                <div>Aún no existen reseñas</div>
+            }
 </div>

@@ -23,7 +23,7 @@ namespace Obligatorio.Controllers
                 return Redirect("/login/index");
             }
 
-            Usuario periodista = unS.GetUsuarioPorEmail(email);
+            Periodista periodista = unS.GetPeriodistaPorEmail(email);
             ViewBag.resenias = periodista.GetResenias();
             return View();
 
@@ -39,7 +39,7 @@ namespace Obligatorio.Controllers
             else
             {
                 string email = HttpContext.Session.GetString("email");
-                Usuario periodista = unS.GetUsuarioPorEmail(email);
+                Periodista periodista = unS.GetPeriodistaPorEmail(email);
                 ViewBag.Periodista = periodista;
                 ViewBag.Resenias = periodista.GetResenias();
                 return View();
@@ -47,7 +47,7 @@ namespace Obligatorio.Controllers
         }
 
         [HttpGet]
-        public IActionResult CrearResenia(int id)
+        public IActionResult CrearResenia(int id, string mensajeError)
         {
             if (HttpContext.Session.GetString("rol") != "PERIODISTA")
             {
@@ -59,6 +59,7 @@ namespace Obligatorio.Controllers
                 ViewBag.IDPartido = id;
                 ViewBag.Periodista = periodista;
                 ViewBag.Partido = unS.GetPartido(id);
+                ViewBag.Error = mensajeError;
                 return View();
             }
         }
@@ -81,7 +82,7 @@ namespace Obligatorio.Controllers
                 } catch (Exception e)
                 {
                     ViewBag.Error = e.Message;
-                    return View();
+                    return RedirectToAction("CrearResenia", new { mensajeError = e.Message });
                 }
             }
         }

@@ -24,11 +24,11 @@ namespace Dominio
         }
 
 
-        public override List<Reseña> GetResenias()
-        {
-            return null;
-        }
+        //public override List<Reseña> GetResenias()
+        //{
+        //    return null;
+        //}
 
-        public override void AgregarResenia(Reseña resenia) { }
+        //public override void AgregarResenia(Reseña resenia) { }
     }
 }

@@ -20,7 +20,6 @@ namespace Dominio
             Apellido = apellido;
             Email = email;
             Password = password;
-            //Reseñas = new List<Reseña>();
         }
 
 
@@ -28,12 +27,12 @@ namespace Dominio
         //-------------------------------RESEÑAS --------------------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
 
-        public override void AgregarResenia(Reseña resenia) 
+        public void AgregarResenia(Reseña resenia) 
         {
             Reseñas.Add(resenia);
         }
 
-        public override List<Reseña> GetResenias()
+        public  List<Reseña> GetResenias()
         {
             return Reseñas;
         }

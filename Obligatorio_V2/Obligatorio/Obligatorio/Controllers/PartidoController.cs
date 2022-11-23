@@ -49,7 +49,14 @@ namespace Obligatorio.Controllers
         {
             try
             {
-                ViewBag.partidos = unS.FinalizadosEntreFechas(fecha1, fecha2);
+                
+                List<Partido> aux= unS.FinalizadosEntreFechas(fecha1, fecha2);
+                ViewBag.partidos = aux;
+               
+                if (aux.Count==0)
+                {
+                    ViewBag.Mensaje = "No hay partidos entre las fechas seleccionadas";
+                }
                 return View();
             }
             catch (Exception e)

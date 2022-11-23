@@ -133,13 +133,17 @@ namespace Dominio
         //-------------------------------FUNCIONALIDAD PERIODISTA-------------------------------------------------------//
         public List<Partido> ReseniasConRojas(string email)
         {
-            Usuario periodista = GetUsuarioPorEmail(email);
+            Periodista periodista = GetPeriodistaPorEmail(email);
+            if (periodista == null)
+            {
+                throw new Exception("El periodista ingresado es incorrecto");
+            }
             List<Partido> aux = new List<Partido>();
             List<Reseña> resenias = periodista.GetResenias();
             foreach (Reseña item in resenias)
             {
                 List<Incidencia> inci = item.PartidoRes.FiltrarIncidencias("Roja");
-                if (inci.Count>0)
+                if (inci.Count > 0)
                 {
                     aux.Add(item.PartidoRes);
                 }
@@ -169,11 +173,11 @@ namespace Dominio
 
             Periodista unPer2 = new Periodista("Ana","Perez", "ana@gmail.com", "dfsdfsdfs");
             AltaUsuario(unPer2);
-            unPer2.AgregarResenia(new Reseña("Titulo 3", "BlaBla", new DateTime(2022, 11, 13), unPer2, GetPartido(2)));
-            unPer2.AgregarResenia(new Reseña("Titulo 4", "BlaBla", new DateTime(2022, 11, 14), unPer2, GetPartido(3)));
+            //unPer2.AgregarResenia(new Reseña("Titulo 3", "BlaBla", new DateTime(2022, 11, 13), unPer2, GetPartido(2)));
+            //unPer2.AgregarResenia(new Reseña("Titulo 4", "BlaBla", new DateTime(2022, 11, 14), unPer2, GetPartido(3)));
             
 
-            AltaUsuario(new Operador("Juan","Lopez", "juan@gmail.com", "hgfhfghdf", new DateTime(2022, 11, 10)));
+            AltaUsuario(new Operador("Juan","Lopez", "juan@gmail.com", "qwertyui", new DateTime(2022, 11, 10)));
             AltaUsuario(new Operador("Maria", "Hernandez", "maria@gmail.com", "645645ghf", new DateTime(2021,08, 10)));
         }
       
@@ -442,20 +446,20 @@ namespace Dominio
         public (List<Seleccion>, int) SeleccionMasGoles()
         {
             List<Seleccion> aux = new List<Seleccion>();
-            int cantGoles = 1;
+            int cantGoles = 0;
             foreach (Seleccion item in Selecciones)
             {
                 int golesSeleccion = GolesTotales(item);
-                if(golesSeleccion> cantGoles)
+                if (golesSeleccion == cantGoles)
+                {
+                    aux.Add(item);
+                }
+
+                if (golesSeleccion> cantGoles)
                 {
                     aux.Clear();
                     aux.Add(item);
                     cantGoles = golesSeleccion;
-                }
-
-                if(golesSeleccion == cantGoles)
-                {
-                    aux.Add(item);
                 }
             }
             return (aux, cantGoles);
@@ -604,16 +608,20 @@ namespace Dominio
         private void PrecargaPartidos()
         {
             //PARTIDOS GRUPO G (Brasil, Serbia, Suiza, Camerún)
-            Partido unP1_G = new FaseGrupos('G', new DateTime(2022, 11, 24), GetSeleccion("Brasil"), GetSeleccion("Serbia"), true, "Ganador: Brasil");
-            Partido unP2_G = new FaseGrupos('G', new DateTime(2022, 11, 24), GetSeleccion("Suiza"), GetSeleccion("Camerún"), true, "Empate");
-            Partido unP3_G = new FaseGrupos('G', new DateTime(2022, 11, 28), GetSeleccion("Brasil"), GetSeleccion("Suiza"),true, "Ganador: Brasil");
-            Partido unP4_G = new FaseGrupos('G', new DateTime(2022, 11, 28), GetSeleccion("Serbia"), GetSeleccion("Camerún"), true, "Ganador: Camerún");
+            Partido unP1_G = new FaseGrupos('G', new DateTime(2022, 11, 24), GetSeleccion("Brasil"), GetSeleccion("Serbia"), false, "Pendiente");
+            Partido unP2_G = new FaseGrupos('G', new DateTime(2022, 11, 24), GetSeleccion("Suiza"), GetSeleccion("Camerún"), false, "Pendiente");
+            Partido unP3_G = new FaseGrupos('G', new DateTime(2022, 11, 28), GetSeleccion("Brasil"), GetSeleccion("Suiza"), false, "Pendiente");
+            Partido unP4_G = new FaseGrupos('G', new DateTime(2022, 11, 28), GetSeleccion("Serbia"), GetSeleccion("Camerún"), false, "Pendiente");
             Partido unP5_G = new FaseGrupos('G', new DateTime(2022, 12, 2), GetSeleccion("Brasil"), GetSeleccion("Camerún"), false, "Pendiente");
             Partido unP6_G = new FaseGrupos('G', new DateTime(2022, 12, 2), GetSeleccion("Serbia"), GetSeleccion("Suiza"), false, "Pendiente");
             AltaPartido(unP1_G);
+            unP1_G.FinalizarPartido();
             AltaPartido(unP2_G);
+            unP2_G.FinalizarPartido();
             AltaPartido(unP3_G);
+            unP3_G.FinalizarPartido();
             AltaPartido(unP4_G);
+            unP4_G.FinalizarPartido();
             AltaPartido(unP5_G);
             AltaPartido(unP6_G);
 

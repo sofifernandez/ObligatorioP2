@@ -68,19 +68,24 @@ namespace Dominio
 
         public override void FinalizarPartido()
         {
-            List<Incidencia> golesA = FiltrarIncidencias("Gol", SeleccionA.Pais.Nombre);
-            List<Incidencia> golesB = FiltrarIncidencias("Gol", SeleccionB.Pais.Nombre);
-            if(golesA.Count== golesB.Count)
+            if (!Finalizado)
             {
-                Resultado = "Empate";
-            } else if (golesA.Count > golesB.Count)
-            {
-                Resultado = $"Ganador: {SeleccionA.Pais.Nombre}";
-            } else
-            {
-                Resultado = $"Ganador: {SeleccionB.Pais.Nombre}";
+                List<Incidencia> golesA = FiltrarIncidencias("Gol", SeleccionA.Pais.Nombre);
+                List<Incidencia> golesB = FiltrarIncidencias("Gol", SeleccionB.Pais.Nombre);
+                if (golesA.Count == golesB.Count)
+                {
+                    Resultado = "Empate";
+                }
+                else if (golesA.Count > golesB.Count)
+                {
+                    Resultado = $"Ganador: {SeleccionA.Pais.Nombre}";
+                }
+                else
+                {
+                    Resultado = $"Ganador: {SeleccionB.Pais.Nombre}";
+                }
+                Finalizado = true;
             }
-            Finalizado = true;
         }
 
         //-------------------------------FUNCIONES GENERALES---------------------------------------------------------//

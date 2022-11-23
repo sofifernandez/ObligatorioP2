@@ -2,7 +2,13 @@
 
 <h1>Estadísticas</h1>
 <div>
-    <h2> Reseñas de partidos con rojas</h2>
+    <h2> Partidos con tarjeta roja reseñados</h2>
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.Error
+        </div>
+    }
     <form method="post">
         <div class="form-group">
             <label for="email">Email de periodista</label>
@@ -12,22 +18,30 @@
     </form>
     @if (ViewBag.Partidos != null)
     {
-        foreach (Partido item in ViewBag.Partidos)
+        if (ViewBag.Partidos.Count > 0)
         {
-            <div class="card text-center my-3 col-6">
-                <div class="card-header">
-                    <h5 class="card-title bg-dark text-white">@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</h5>
-                </div>
-                <div class="card-body">
+            foreach (Partido item in ViewBag.Partidos)
+            {
+                <div class="card text-center my-3 col-6">
+                    <div class="card-header">
+                        <h5 class="card-title bg-dark text-white">@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</h5>
+                    </div>
+                    <div class="card-body">
 
-                    <p class="card-text">@item.Resultado</p>
+                        <p class="card-text">@item.Resultado</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        @item.FechaPartido.ToShortDateString()
+                    </div>
                 </div>
-                <div class="card-footer text-muted">
-                    @item.FechaPartido.ToShortDateString()
-                </div>
-            </div>
-        }
+            }
+                }
+                else
+                {
+                    <div>No hay partidos reseñados con tarjetas rojas</div>
+                }
     }
+
 </div>
 
 <div>

@@ -26,7 +26,8 @@ namespace Obligatorio.Controllers
             try
             {
                 unS.ArmarPeriodista(nombre, apellido, email, password);
-                return RedirectToAction("index");
+                ViewBag.MensajeExito = "Usuario creado con éxito. Inicie sesión";
+                return View();
             }
             catch (Exception e)
             {
