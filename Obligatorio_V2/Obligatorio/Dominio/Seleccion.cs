@@ -8,7 +8,12 @@ namespace Dominio
     public class Seleccion: IEquatable<Seleccion>, IComparable<Seleccion>
     {
         public Pais Pais { get; private set; }
-        public List<Jugador> Jugadores = new List<Jugador>();
+        private List<Jugador> _jugadores = new List<Jugador>();
+
+        public List<Jugador> Jugadores
+        {
+            get { return _jugadores; }
+        }
 
         public Seleccion(Pais pais)
         {
@@ -19,7 +24,7 @@ namespace Dominio
         public Seleccion(Pais pais, List<Jugador> jugadores)
         {
             Pais = pais;
-            Jugadores = jugadores;
+            _jugadores = jugadores;
             Validar();
         }
 

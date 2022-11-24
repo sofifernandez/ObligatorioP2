@@ -7,8 +7,13 @@ namespace Dominio
 {
     public class Periodista: Usuario
     {
-       
-        public List<Reseña> Reseñas = new List<Reseña>();      
+
+        private List<Reseña> _reseñas = new List<Reseña>();
+
+        public List<Reseña> Reseñas
+        {
+            get { return _reseñas; }
+        }
 
         public Periodista()
         {
