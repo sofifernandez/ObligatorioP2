@@ -24,7 +24,10 @@ namespace Obligatorio.Controllers
             }
 
             Periodista periodista = unS.GetPeriodistaPorEmail(email);
-            ViewBag.resenias = periodista.GetResenias();
+            List<Reseña> aux = periodista.GetResenias();
+            aux.Sort();
+            ViewBag.resenias = aux;
+            ViewBag.emailPerio = periodista.Email;
             return View();
 
 
@@ -81,8 +84,10 @@ namespace Obligatorio.Controllers
                     return Redirect("/Resenia/VerReseniasPersonales");
                 } catch (Exception e)
                 {
+                    ViewBag.IDPartido = partido;
+                    ViewBag.Partido = unS.GetPartido(partido);
                     ViewBag.Error = e.Message;
-                    return RedirectToAction("CrearResenia", new { mensajeError = e.Message });
+                    return RedirectToAction("CrearResenia", new { mensajeError = e.Message, id = partido });
                 }
             }
         }

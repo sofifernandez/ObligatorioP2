@@ -11,11 +11,11 @@
 
 <form method="post">
     <div class="mb-3">
-        <label for="fecha1" class="form-label">Fecha 1</label>
+        <label for="fecha1" class="form-label">Fecha inicial</label>
         <input type="date" name="fecha1" id="fecha1" class="form-control">
     </div>
     <div class="mb-3">
-        <label for="fecha2" class="form-label">Fecha 2</label>
+        <label for="fecha2" class="form-label">Fecha final</label>
         <input type="date" name="fecha2" class="form-control">
     </div>
     <button type="submit" class="btn btn-primary">Enviar</button>
@@ -23,27 +23,102 @@
 
 
 
-<div>
+<div class="container-fluid row justify-content-around">
     @if (ViewBag.partidos != null)
     {
         foreach (Partido item in ViewBag.partidos)
 
         {
-            <h2>@item.SeleccionA.Pais.Nombre vs. @item.SeleccionB.Pais.Nombre</h2>
-            <div>@item.FechaPartido.ToShortDateString()</div>
-            <h3>@item.SeleccionA.Pais.Nombre:</h3>
-            <ul>
-                <li> Goles: @item.FiltrarIncidencias("Gol", item.SeleccionA.Pais.Nombre).Count() </li>
-                <li> Amarillas: @item.FiltrarIncidencias("Amarilla", item.SeleccionA.Pais.Nombre).Count()</li>
-                <li> Rojas: @item.FiltrarIncidencias("Roja", item.SeleccionA.Pais.Nombre).Count()</li>
-            </ul>
+    <div class="card my-3 col-5 prueba">
+        <div class="card-header text-center">
+            <h5 class="card-title bg-dark text-white">@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</h5>
+        </div>
+        <div class="card-body">
+            <p class="card-text text-center fs-2">@item.Resultado</p>
 
-            <h3>@item.SeleccionB.Pais.Nombre:</h3>
-            <ul>
-                <li> Goles: @item.FiltrarIncidencias("Gol", item.SeleccionB.Pais.Nombre).Count()</li>
-                <li> Amarillas:@item.FiltrarIncidencias("Amarilla", item.SeleccionB.Pais.Nombre).Count()</li>
-                <li> Rojas: @item.FiltrarIncidencias("Roja", item.SeleccionB.Pais.Nombre).Count()</li>
-            </ul>
+            <div>
+                @*-------------------------------SELECCION A------------------------------------------------------*@
+                <h3 class="text-center">@item.SeleccionA.Pais.Nombre</h3>
+                <div class="mb-2">
+                    <div class="p-2 bg-info rounded font-weight-bold">GOLES: @item.FiltrarIncidencias("Gol", item.SeleccionA.Pais.Nombre).Count()</div>
+                    @if (@item.FiltrarIncidencias("Gol", item.SeleccionA.Pais.Nombre).Count() > 0)
+                    {
+                        <ul class="list-group list-group-flush">
+                            @foreach (Incidencia incid in item.FiltrarIncidencias("Gol", item.SeleccionA.Pais.Nombre))
+                            {
+                                <li class="list-group-item">Minuto: @incid.Minuto</li>
+                            }
+                        </ul>
+                    }
+                </div>
+                <div class="mb-2">
+                    <div class="p-2 bg-warning rounded font-weight-bold bg-opacity-25">AMARILLAS: @item.FiltrarIncidencias("Amarilla", item.SeleccionA.Pais.Nombre).Count()</div>
+                    @if (@item.FiltrarIncidencias("Amarilla", item.SeleccionA.Pais.Nombre).Count() > 0)
+                    {
+                        <ul class="list-group list-group-flush">
+                            @foreach (Incidencia incid in item.FiltrarIncidencias("Amarilla", item.SeleccionA.Pais.Nombre))
+                            {
+                                <li class="list-group-item">Minuto: @incid.Minuto</li>
+                            }
+                        </ul>
+                    }
+                </div>
+                <div class="mb-2">
+                    <div class="p-2 bg-danger rounded font-weight-bold bg-opacity-25">ROJAS: @item.FiltrarIncidencias("Roja", item.SeleccionA.Pais.Nombre).Count()</div>
+                    @if (@item.FiltrarIncidencias("Roja", item.SeleccionA.Pais.Nombre).Count() > 0)
+                    {
+                        <ul class="list-group list-group-flush">
+                            @foreach (Incidencia incid in item.FiltrarIncidencias("Roja", item.SeleccionA.Pais.Nombre))
+                            {
+                                <li class="list-group-item">Minuto: @incid.Minuto</li>
+                            }
+                        </ul>
+                    }
+                </div>
+                @*--------------------SELECCION B--------------------------------------------------------------*@
+                <h3 class="text-center">@item.SeleccionB.Pais.Nombre</h3>
+                <div class="mb-2">
+                    <div class="p-2 bg-info  rounded font-weight-bold bg-opacity-25">GOLES: @item.FiltrarIncidencias("Gol", item.SeleccionB.Pais.Nombre).Count()</div>
+                    @if (@item.FiltrarIncidencias("Gol", item.SeleccionB.Pais.Nombre).Count() > 0)
+                    {
+                        <ul class="list-group list-group-flush">
+                            @foreach (Incidencia incid in item.FiltrarIncidencias("Gol", item.SeleccionB.Pais.Nombre))
+                            {
+                                <li class="list-group-item">Minuto: @incid.Minuto</li>
+                            }
+                        </ul>
+                    }
+                </div>
+                <div class="mb-2">
+                    <div class="p-2 bg-warning  rounded font-weight-bold bg-opacity-25">AMARILLAS: @item.FiltrarIncidencias("Amarilla", item.SeleccionB.Pais.Nombre).Count()</div>
+                    @if (@item.FiltrarIncidencias("Amarilla", item.SeleccionB.Pais.Nombre).Count() > 0)
+                    {
+                        <ul class="list-group list-group-flush">
+                            @foreach (Incidencia incid in item.FiltrarIncidencias("Amarilla", item.SeleccionB.Pais.Nombre))
+                            {
+                                <li class="list-group-item">Minuto: @incid.Minuto</li>
+                            }
+                        </ul>
+                    }
+                </div>
+                <div class="mb-2">
+                    <div class="p-2 bg-danger rounded font-weight-bold bg-opacity-25">ROJAS: @item.FiltrarIncidencias("Roja", item.SeleccionB.Pais.Nombre).Count()</div>
+                    @if (@item.FiltrarIncidencias("Roja", item.SeleccionB.Pais.Nombre).Count() > 0)
+                    {
+                        <ul class="list-group list-group-flush">
+                            @foreach (Incidencia incid in item.FiltrarIncidencias("Roja", item.SeleccionB.Pais.Nombre))
+                            {
+                                <li class="list-group-item">Minuto: @incid.Minuto</li>
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            @item.FechaPartido.ToShortDateString()
+        </div>
+    </div>
         }
     }
 </div>

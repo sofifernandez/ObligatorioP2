@@ -95,10 +95,6 @@ namespace Dominio
             return Email.Equals(other.Email);
         }
 
-        // FUNCIONES ABSTRACTAS
-        //public abstract List<Reseña> GetResenias();
-
-        //public abstract void AgregarResenia(Reseña resenia);
 
         public int CompareTo([AllowNull] Usuario other)
         {

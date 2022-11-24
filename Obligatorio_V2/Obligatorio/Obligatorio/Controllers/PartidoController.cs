@@ -28,7 +28,7 @@ namespace Obligatorio.Controllers
         {
             if (HttpContext.Session.GetString("rol") != "OPERADOR")
             {
-                return View("VerPartidos");
+                return Redirect("/login/index");
             }
             unS.FinalizarPartido(id);
             return RedirectToAction("VerPartidos");
@@ -39,7 +39,7 @@ namespace Obligatorio.Controllers
         {
             if (HttpContext.Session.GetString("rol") != "OPERADOR")
             {
-                return RedirectToAction("/login/index");
+                return Redirect("/login/index");
             }
             return View();
         }

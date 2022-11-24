@@ -5,19 +5,39 @@
 <div>
     @if (ViewBag.Resenias.Count > 0)
     {
-        @foreach (Reseña item in ViewBag.Resenias)
+        @foreach (Reseña item in ViewBag.resenias)
         {
-            <div class="card" style="margin-bottom: 30px">
-                <div class="card-body">
-                    <h4 class="card-title">@item.Titulo</h4>
-                    <p class="card-text">@item.PartidoRes.SeleccionA.Pais.Nombre</p>
-                    <p class="card-text">@item.PartidoRes.SeleccionB.Pais.Nombre</p>
-                    <p class="card-text">@item.Contenido</p>
+            <div class="container-fluid row justify-content-around">
+
+                <div class="card prueba bg-light mb-3 col-3" style="max-width: 18rem;">
+                    <div class="card-header">Partido</div>
+                    <div class="card-body">
+                        <h5 class="card-title">@item.PartidoRes.SeleccionA.Pais.Nombre vs @item.PartidoRes.SeleccionB.Pais.Nombre</h5>
+                        @if (item.PartidoRes is FaseGrupos)
+                        {
+                            <p class="card-text">Grupo: @item.PartidoRes.GetGrupo()</p>
+                        }
+                        <p class="card-text">@item.PartidoRes.FechaPartido.ToShortDateString().</p>
+                        <p class="card-text">@item.PartidoRes.Resultado</p>
+                    </div>
                 </div>
+
+                <div class="card prueba bg-info mb-3 col-3" style="max-width: 18rem;">
+                    <div class="card-header">Reseña</div>
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Titulo</h5>
+                        <p class="card-text">@item.Contenido</p>
+                        <p class="card-text"> Publicación: @item.FechaPubli.ToShortDateString()</p>
+
+                    </div>
+                </div>
+
+                <hr />
             </div>
-        }      }
-            else
-            {
-                <div>Aún no tienes reseñas</div>
-            }
+        }
+    }
+    else
+    {
+        <div>Aún no tienes reseñas</div>
+    }
 </div>

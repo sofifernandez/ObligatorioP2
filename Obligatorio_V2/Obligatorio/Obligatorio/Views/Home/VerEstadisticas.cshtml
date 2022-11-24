@@ -1,7 +1,7 @@
 ﻿@using Dominio;
 
 <h1>Estadísticas</h1>
-<div>
+<div class="mb-3">
     <h2> Partidos con tarjeta roja reseñados</h2>
     @if (ViewBag.Error != null)
     {
@@ -45,11 +45,12 @@
 </div>
 
 <div>
-    <h2>Selección/es con más goles: @ViewBag.MasGoles goles</h2>
+    <h2>Selección/es con más goles hasta el momento:</h2>
     <div>
         @foreach (Seleccion item in ViewBag.SeleccionMasGoles)
         {
             <div>@item.Pais.Nombre</div>
         }
     </div>
+    <div>Máximo goles: @ViewBag.MasGoles goles</div>
 </div>

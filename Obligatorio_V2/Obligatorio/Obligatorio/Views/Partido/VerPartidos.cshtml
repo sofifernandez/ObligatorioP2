@@ -7,26 +7,27 @@
 }
 
 <h1>Partidos</h1>
+@*FASE DE GRUPOS--------------------------------------------------------------------------------------------------------------------------------------------------------------*@
 <div>
-    <h2>Partidos Fase de Grupos</h2>
-    <div>
-        <h3>Finalizados</h3>
+    <h2>Partidos Fase de Grupos ----------------------------------------------------</h2>
+    <h3>Finalizados</h3>
+    <div class="container-fluid row justify-content-around">
         @foreach (Partido item in ViewBag.PartidosGrupo)
         {
             if (item.Finalizado)
             {
-                <div class="card my-3 col-6">
+                <div class="card my-3 col-5 prueba">
                     <div class="card-header text-center">
                         <h5 class="card-title bg-dark text-white">@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</h5>
                     </div>
                     <div class="card-body">
                         <p class="card-text text-center fs-2">@item.Resultado</p>
-                       
+
                         <div>
                             @*-------------------------------SELECCION A------------------------------------------------------*@
-                            <h3>@item.SeleccionA.Pais.Nombre</h3>
+                            <h3 class="text-center">@item.SeleccionA.Pais.Nombre</h3>
                             <div class="mb-2">
-                                <div class="p-2 bg-info bg-opacity-25 border border-info border-start-0 rounded font-weight-bold">GOLES: @item.FiltrarIncidencias("Gol", item.SeleccionA.Pais.Nombre).Count()</div>
+                                <div class="p-2 bg-info rounded font-weight-bold">GOLES: @item.FiltrarIncidencias("Gol", item.SeleccionA.Pais.Nombre).Count()</div>
                                 @if (@item.FiltrarIncidencias("Gol", item.SeleccionA.Pais.Nombre).Count() > 0)
                                 {
                                     <ul class="list-group list-group-flush">
@@ -38,7 +39,7 @@
                                 }
                             </div>
                             <div class="mb-2">
-                                <div class="p-2 bg-warning border border-info border-start-0 rounded font-weight-bold bg-opacity-25">AMARILLAS: @item.FiltrarIncidencias("Amarilla", item.SeleccionA.Pais.Nombre).Count()</div>
+                                <div class="p-2 bg-warning rounded font-weight-bold bg-opacity-25">AMARILLAS: @item.FiltrarIncidencias("Amarilla", item.SeleccionA.Pais.Nombre).Count()</div>
                                 @if (@item.FiltrarIncidencias("Amarilla", item.SeleccionA.Pais.Nombre).Count() > 0)
                                 {
                                     <ul class="list-group list-group-flush">
@@ -50,7 +51,7 @@
                                 }
                             </div>
                             <div class="mb-2">
-                                <div class="p-2 bg-danger border border-info border-start-0 rounded font-weight-bold bg-opacity-25">ROJAS: @item.FiltrarIncidencias("Roja", item.SeleccionA.Pais.Nombre).Count()</div>
+                                <div class="p-2 bg-danger rounded font-weight-bold bg-opacity-25">ROJAS: @item.FiltrarIncidencias("Roja", item.SeleccionA.Pais.Nombre).Count()</div>
                                 @if (@item.FiltrarIncidencias("Roja", item.SeleccionA.Pais.Nombre).Count() > 0)
                                 {
                                     <ul class="list-group list-group-flush">
@@ -62,9 +63,9 @@
                                 }
                             </div>
                             @*--------------------SELECCION B--------------------------------------------------------------*@
-                            <h3>@item.SeleccionB.Pais.Nombre</h3>
+                            <h3 class="text-center">@item.SeleccionB.Pais.Nombre</h3>
                             <div class="mb-2">
-                                <div class="p-2 bg-info border border-info border-start-0 rounded font-weight-bold bg-opacity-25">GOLES: @item.FiltrarIncidencias("Gol", item.SeleccionB.Pais.Nombre).Count()</div>
+                                <div class="p-2 bg-info  rounded font-weight-bold bg-opacity-25">GOLES: @item.FiltrarIncidencias("Gol", item.SeleccionB.Pais.Nombre).Count()</div>
                                 @if (@item.FiltrarIncidencias("Gol", item.SeleccionB.Pais.Nombre).Count() > 0)
                                 {
                                     <ul class="list-group list-group-flush">
@@ -76,7 +77,7 @@
                                 }
                             </div>
                             <div class="mb-2">
-                                <div class="p-2 bg-warning border border-info border-start-0 rounded font-weight-bold bg-opacity-25">AMARILLAS: @item.FiltrarIncidencias("Amarilla", item.SeleccionB.Pais.Nombre).Count()</div>
+                                <div class="p-2 bg-warning  rounded font-weight-bold bg-opacity-25">AMARILLAS: @item.FiltrarIncidencias("Amarilla", item.SeleccionB.Pais.Nombre).Count()</div>
                                 @if (@item.FiltrarIncidencias("Amarilla", item.SeleccionB.Pais.Nombre).Count() > 0)
                                 {
                                     <ul class="list-group list-group-flush">
@@ -88,7 +89,7 @@
                                 }
                             </div>
                             <div class="mb-2">
-                                <div class="p-2 bg-danger border border-info border-start-0 rounded font-weight-bold bg-opacity-25">ROJAS: @item.FiltrarIncidencias("Roja", item.SeleccionB.Pais.Nombre).Count()</div>
+                                <div class="p-2 bg-danger rounded font-weight-bold bg-opacity-25">ROJAS: @item.FiltrarIncidencias("Roja", item.SeleccionB.Pais.Nombre).Count()</div>
                                 @if (@item.FiltrarIncidencias("Roja", item.SeleccionB.Pais.Nombre).Count() > 0)
                                 {
                                     <ul class="list-group list-group-flush">
@@ -116,16 +117,15 @@
         }
     </div>
 
-    <div>
-
+    <h3>Por finalizar</h3>
+    <div class="container-fluid row justify-content-around">
         @if (Context.Session.GetString("rol") == "OPERADOR")
         {
-            <h3>Por finalizar</h3>
             @foreach (Partido item in ViewBag.PartidosGrupo)
             {
                 if (!item.Finalizado)
                 {
-                    <div class="card text-center my-3 col-6">
+                    <div class="card text-center my-3 col-5">
                         <div class="card-header">
                             <h5 class="card-title bg-success text-white">@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</h5>
                         </div>
@@ -145,15 +145,18 @@
     </div>
 </div>
 
+
+
+@*FASE DE ELIMINATORIAS--------------------------------------------------------------------------------------------------------------------------------------------------------------*@
 <div>
-    <h2>Partidos Fase Eliminatorias</h2>
-    <div>
-        <h3>Finalizados</h3>
+    <h2>Partidos Fase de Grupos ----------------------------------------------------</h2>
+    <h3>Finalizados</h3>
+    <div class="container-fluid row justify-content-around">
         @foreach (Partido item in ViewBag.PartidosEliminatoria)
         {
             if (item.Finalizado)
             {
-                <div class="card my-3 col-6">
+                <div class="card my-3 col-5 prueba">
                     <div class="card-header text-center">
                         <h5 class="card-title bg-dark text-white">@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</h5>
                     </div>
@@ -162,9 +165,9 @@
 
                         <div>
                             @*-------------------------------SELECCION A------------------------------------------------------*@
-                            <h3>@item.SeleccionA.Pais.Nombre</h3>
+                            <h3 class="text-center">@item.SeleccionA.Pais.Nombre</h3>
                             <div class="mb-2">
-                                <div class="p-2 bg-info bg-opacity-25 border border-info border-start-0 rounded font-weight-bold">GOLES: @item.FiltrarIncidencias("Gol", item.SeleccionA.Pais.Nombre).Count()</div>
+                                <div class="p-2 bg-info rounded font-weight-bold">GOLES: @item.FiltrarIncidencias("Gol", item.SeleccionA.Pais.Nombre).Count()</div>
                                 @if (@item.FiltrarIncidencias("Gol", item.SeleccionA.Pais.Nombre).Count() > 0)
                                 {
                                     <ul class="list-group list-group-flush">
@@ -176,7 +179,7 @@
                                 }
                             </div>
                             <div class="mb-2">
-                                <div class="p-2 bg-warning border border-info border-start-0 rounded font-weight-bold bg-opacity-25">AMARILLAS: @item.FiltrarIncidencias("Amarilla", item.SeleccionA.Pais.Nombre).Count()</div>
+                                <div class="p-2 bg-warning rounded font-weight-bold bg-opacity-25">AMARILLAS: @item.FiltrarIncidencias("Amarilla", item.SeleccionA.Pais.Nombre).Count()</div>
                                 @if (@item.FiltrarIncidencias("Amarilla", item.SeleccionA.Pais.Nombre).Count() > 0)
                                 {
                                     <ul class="list-group list-group-flush">
@@ -188,7 +191,7 @@
                                 }
                             </div>
                             <div class="mb-2">
-                                <div class="p-2 bg-danger border border-info border-start-0 rounded font-weight-bold bg-opacity-25">ROJAS: @item.FiltrarIncidencias("Roja", item.SeleccionA.Pais.Nombre).Count()</div>
+                                <div class="p-2 bg-danger rounded font-weight-bold bg-opacity-25">ROJAS: @item.FiltrarIncidencias("Roja", item.SeleccionA.Pais.Nombre).Count()</div>
                                 @if (@item.FiltrarIncidencias("Roja", item.SeleccionA.Pais.Nombre).Count() > 0)
                                 {
                                     <ul class="list-group list-group-flush">
@@ -200,9 +203,9 @@
                                 }
                             </div>
                             @*--------------------SELECCION B--------------------------------------------------------------*@
-                            <h3>@item.SeleccionB.Pais.Nombre</h3>
+                            <h3 class="text-center">@item.SeleccionB.Pais.Nombre</h3>
                             <div class="mb-2">
-                                <div class="p-2 bg-info border border-info border-start-0 rounded font-weight-bold bg-opacity-25">GOLES: @item.FiltrarIncidencias("Gol", item.SeleccionB.Pais.Nombre).Count()</div>
+                                <div class="p-2 bg-info  rounded font-weight-bold bg-opacity-25">GOLES: @item.FiltrarIncidencias("Gol", item.SeleccionB.Pais.Nombre).Count()</div>
                                 @if (@item.FiltrarIncidencias("Gol", item.SeleccionB.Pais.Nombre).Count() > 0)
                                 {
                                     <ul class="list-group list-group-flush">
@@ -214,7 +217,7 @@
                                 }
                             </div>
                             <div class="mb-2">
-                                <div class="p-2 bg-warning border border-info border-start-0 rounded font-weight-bold bg-opacity-25">AMARILLAS: @item.FiltrarIncidencias("Amarilla", item.SeleccionB.Pais.Nombre).Count()</div>
+                                <div class="p-2 bg-warning  rounded font-weight-bold bg-opacity-25">AMARILLAS: @item.FiltrarIncidencias("Amarilla", item.SeleccionB.Pais.Nombre).Count()</div>
                                 @if (@item.FiltrarIncidencias("Amarilla", item.SeleccionB.Pais.Nombre).Count() > 0)
                                 {
                                     <ul class="list-group list-group-flush">
@@ -226,7 +229,7 @@
                                 }
                             </div>
                             <div class="mb-2">
-                                <div class="p-2 bg-danger border border-info border-start-0 rounded font-weight-bold bg-opacity-25">ROJAS: @item.FiltrarIncidencias("Roja", item.SeleccionB.Pais.Nombre).Count()</div>
+                                <div class="p-2 bg-danger rounded font-weight-bold bg-opacity-25">ROJAS: @item.FiltrarIncidencias("Roja", item.SeleccionB.Pais.Nombre).Count()</div>
                                 @if (@item.FiltrarIncidencias("Roja", item.SeleccionB.Pais.Nombre).Count() > 0)
                                 {
                                     <ul class="list-group list-group-flush">
@@ -254,17 +257,17 @@
         }
     </div>
 
-    <div>
+    <h3>Por finalizar</h3>
+    <div class="container-fluid row justify-content-around">
         @if (Context.Session.GetString("rol") == "OPERADOR")
         {
-            <h3>Por finalizar</h3>
             @foreach (Partido item in ViewBag.PartidosEliminatoria)
             {
                 if (!item.Finalizado)
                 {
-                    <div class="card text-center my-3 col-6">
-                        <div class="card-header bg-success text-white">
-                            <h5 class="card-title">@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</h5>
+                    <div class="card text-center my-3 col-5">
+                        <div class="card-header">
+                            <h5 class="card-title bg-secondary text-white">@item.SeleccionA.Pais.Nombre vs @item.SeleccionB.Pais.Nombre</h5>
                         </div>
                         <div class="card-body">
 
@@ -281,3 +284,4 @@
 
     </div>
 </div>
+

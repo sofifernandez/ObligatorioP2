@@ -16,7 +16,6 @@ namespace Dominio
         public Seleccion SeleccionB { get; set; }
 
         private List<Incidencia> _incidencias = new List<Incidencia>();
-        private List<Reseña> _reseñas = new List<Reseña>();
         private List<Jugador> _jugadores = new List<Jugador>();
 
         public List<Incidencia> Incidencias
@@ -143,7 +142,7 @@ namespace Dominio
 
         //-------------------------------FUNCIONES GENERALES---------------------------------------------------------//
         //----------------------------------------------------------------------------------------------------------//
-        public abstract char GetGrupo();
+        public abstract char GetGrupo(); //--> esta función es útil solo para los partidos de Fase de Grupos, porque como estaba planteada la vista no podíamos acceder a los hijos para ejecutarla solo en caso de ser FaseGrupos
 
         public bool Equals([AllowNull] Partido other)
         {

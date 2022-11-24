@@ -289,13 +289,8 @@ namespace Dominio
         //-------------------------------FUNCIONALIDAD JUGADORES---------------------------------------------------//
         //--------------------------------------------------------------------------------------------------------//
 
-        public void AgregarCategoria(decimal MontoRef) //--> agregar categoría a los jugadores
-        {
-            foreach (Jugador item in Jugadores)
-            {
-                item.DetCategoria(MontoRef);
-            }
-        }
+        
+
         private List<Jugador> JugadoresDe(Pais p) //--> lista de jugadores de un determinado país
         {
             List<Jugador> _misJugadores = new List<Jugador>();
@@ -322,65 +317,6 @@ namespace Dominio
             return null;
         }
 
-        public List<Partido> PartidosJugador(int IDJugador) //--> Obtener todos los partidos que jugó un jugador
-        {
-            List<Partido> _misPartidos = new List<Partido>();
-            foreach (Partido p in Partidos) //--> buscarlo en la lista de jugadores de cada partido
-            {
-                if (p.Jugadores.Contains(GetJugador(IDJugador)))
-                {
-                    _misPartidos.Add(p);
-                }
-
-            }
-            return _misPartidos; ;
-        }
-
-        public List<Jugador> JugadoresExpulsados() //--> todos los jugadores que han sigo expulsado
-        {
-            List<Jugador> _misJugadores = new List<Jugador>();
-            foreach (Partido p in Partidos) //--> buscarlo en las rojas de cada partido
-            {
-                foreach(Incidencia i in p.Incidencias)
-                {
-                    if (i.Tipo == "Roja")
-                    {
-                        if (!_misJugadores.Contains(i.UnJugador)) //--> chequear que no exista ya en la lista
-                        {
-                            _misJugadores.Add(i.UnJugador);
-                        }
-                    }
-                }
-            }
-            _misJugadores.Sort(); //--> ordenar según valor de mercado (descendente) y nombre (ascendente)
-            return _misJugadores;
-        }
-
-        public List<Jugador> JugadoresGoles(int IDPartido) //--> listar los jugadores que han hecho goles
-        {
-            List<Jugador> _misJugadores = new List<Jugador>();
-            
-            Partido partido = GetPartido(IDPartido);
-            if (partido != null)
-            {
-                List<Incidencia> _misIncidencias = partido.FiltrarIncidencias("Gol");
-                foreach (Incidencia i in _misIncidencias)
-                {
-                    if (!_misJugadores.Contains(i.UnJugador)) //--> chequear que no exista en la lista
-                    {
-                        _misJugadores.Add(i.UnJugador);
-                    }
-                }
-            }
-            else
-            {
-                throw new Exception("El partido ingresado no existe");
-            }
-            
-
-            return _misJugadores;
-        }
-
 
         //------------------------------------------------------------------------------------------------------------//
         //-------------------------------FUNCIONALIDAD SELECCIONES---------------------------------------------------//
@@ -398,47 +334,18 @@ namespace Dominio
             return null;
         }
 
-        public (List <Partido>, int) PartidoMasGoles(string nombreSelec) //-> Partido en el cuál hizo más goles una selección
-        {
-            if (GetSeleccion(nombreSelec)==null)
-            {
-                throw new Exception("La selección ingresada no existe");
-            }
-
-            int masGoles = 1;
-            List<Partido> _partidoGoles = new List<Partido>();
-            foreach (Partido p in Partidos) //--> Lógica: buscar los partidos en los cuales la selección jugó, sumar la cantidad de goles e ir comparando de a uno
-            {
-                int cantGoles = 0;
-                List<Incidencia> _misIncidencias= p.FiltrarIncidencias("Gol", nombreSelec);
-                foreach(Incidencia i in _misIncidencias)
-                {
-                   
-                       cantGoles++;
-                    
-                }
-                if (cantGoles == masGoles)
-                {
-                    _partidoGoles.Add(p);
-                }
-
-                if (cantGoles > masGoles)
-                {
-                    masGoles = cantGoles;
-                    _partidoGoles.Clear();
-                    _partidoGoles.Add(p);
-                }
-            }
-            return (_partidoGoles, masGoles);
-        }
+       
 
         public int GolesTotales(Seleccion seleccion)
         {
             int golesSeleccion = 0;
             foreach (Partido item in Partidos)
             {
-                List<Incidencia> _golesPais = item.FiltrarIncidencias("Gol", seleccion.Pais.Nombre);
-                golesSeleccion += _golesPais.Count;
+                if (item.Finalizado)
+                {
+                    List<Incidencia> _golesPais = item.FiltrarIncidencias("Gol", seleccion.Pais.Nombre);
+                    golesSeleccion += _golesPais.Count;
+                }
             }
             return golesSeleccion;
         }
@@ -709,6 +616,10 @@ namespace Dominio
             unP2_H.AgregarIncidencia(new Incidencia("Amarilla", 89, GetJugador(388)));
             unP2_H.AgregarIncidencia(new Incidencia("Gol", 15, GetJugador(489)));
             unP2_H.AgregarIncidencia(new Incidencia("Gol", 49, GetJugador(488)));
+            //PRUEBA PARA SELECCION CON MÁS GOLES
+            //unP2_H.AgregarIncidencia(new Incidencia("Gol", 50, GetJugador(488)));
+            //unP2_H.AgregarIncidencia(new Incidencia("Gol", 51, GetJugador(488)));
+            //unP2_H.FinalizarPartido();
 
             //PARTIDO 3_H
             unP3_H.AgregarIncidencia(new Incidencia("Amarilla", 20, GetJugador(598)));
@@ -1635,6 +1546,113 @@ namespace Dominio
                 throw new Exception("Error en la precarga de jugadores");
             }
         }
+
+        //----------------------------------------------------------------------------------------------------------//
+        //-------------------------------FUNCIONES DE LA ENTREGA ANTERIOR EN DESUSO---------------------------//
+        //--------------------------------------------------------------------------------------------------------//
+
+        public void AgregarCategoria(decimal MontoRef) //--> agregar categoría a los jugadores
+        {
+            foreach (Jugador item in Jugadores)
+            {
+                item.DetCategoria(MontoRef);
+            }
+        }
+
+        public List<Partido> PartidosJugador(int IDJugador) //--> Obtener todos los partidos que jugó un jugador
+        {
+            List<Partido> _misPartidos = new List<Partido>();
+            foreach (Partido p in Partidos) //--> buscarlo en la lista de jugadores de cada partido
+            {
+                if (p.Jugadores.Contains(GetJugador(IDJugador)))
+                {
+                    _misPartidos.Add(p);
+                }
+
+            }
+            return _misPartidos; ;
+        }
+
+        public List<Jugador> JugadoresExpulsados() //--> todos los jugadores que han sigo expulsado
+        {
+            List<Jugador> _misJugadores = new List<Jugador>();
+            foreach (Partido p in Partidos) //--> buscarlo en las rojas de cada partido
+            {
+                foreach (Incidencia i in p.Incidencias)
+                {
+                    if (i.Tipo == "Roja")
+                    {
+                        if (!_misJugadores.Contains(i.UnJugador)) //--> chequear que no exista ya en la lista
+                        {
+                            _misJugadores.Add(i.UnJugador);
+                        }
+                    }
+                }
+            }
+            _misJugadores.Sort(); //--> ordenar según valor de mercado (descendente) y nombre (ascendente)
+            return _misJugadores;
+        }
+
+        public List<Jugador> JugadoresGoles(int IDPartido) //--> listar los jugadores que han hecho goles
+        {
+            List<Jugador> _misJugadores = new List<Jugador>();
+
+            Partido partido = GetPartido(IDPartido);
+            if (partido != null)
+            {
+                List<Incidencia> _misIncidencias = partido.FiltrarIncidencias("Gol");
+                foreach (Incidencia i in _misIncidencias)
+                {
+                    if (!_misJugadores.Contains(i.UnJugador)) //--> chequear que no exista en la lista
+                    {
+                        _misJugadores.Add(i.UnJugador);
+                    }
+                }
+            }
+            else
+            {
+                throw new Exception("El partido ingresado no existe");
+            }
+
+
+            return _misJugadores;
+        }
+
+        public (List<Partido>, int) PartidoMasGoles(string nombreSelec) //-> Partido en el cuál hizo más goles una selección
+        {
+            if (GetSeleccion(nombreSelec) == null)
+            {
+                throw new Exception("La selección ingresada no existe");
+            }
+
+            int masGoles = 1;
+            List<Partido> _partidoGoles = new List<Partido>();
+            foreach (Partido p in Partidos) //--> Lógica: buscar los partidos en los cuales la selección jugó, sumar la cantidad de goles e ir comparando de a uno
+            {
+                int cantGoles = 0;
+                List<Incidencia> _misIncidencias = p.FiltrarIncidencias("Gol", nombreSelec);
+                foreach (Incidencia i in _misIncidencias)
+                {
+
+                    cantGoles++;
+
+                }
+                if (cantGoles == masGoles)
+                {
+                    _partidoGoles.Add(p);
+                }
+
+                if (cantGoles > masGoles)
+                {
+                    masGoles = cantGoles;
+                    _partidoGoles.Clear();
+                    _partidoGoles.Add(p);
+                }
+            }
+            return (_partidoGoles, masGoles);
+        }
+
+
     }
 
 }

@@ -23,12 +23,5 @@ namespace Dominio
             FechaEmpTrabajar = fechaEmpTrabajar;
         }
 
-
-        //public override List<Reseña> GetResenias()
-        //{
-        //    return null;
-        //}
-
-        //public override void AgregarResenia(Reseña resenia) { }
     }
 }
